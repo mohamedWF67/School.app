@@ -7,6 +7,8 @@ import java.util.Scanner;
 
 public class CLI_interface {
 
+    private static SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+
     //Method for Adding a new Admin object to the Arraylist in School
     public static void addAdmin(School school, String name, String email, String password) {
         if (!school.emailExists(email)) {
@@ -157,7 +159,7 @@ public class CLI_interface {
                     break;
                 case 2:
                     System.out.println("Enter Module id to modify");
-                    int id = in.nextInt();
+                    id = in.nextInt();
                     System.out.println("Enter New Module name");
                     in.nextLine();
                     name = in.nextLine();
@@ -230,7 +232,6 @@ public class CLI_interface {
                     classId = in.nextInt();
                     System.out.println("Enter Student Section");
                     section = in.next();
-                    SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
                     try {
                         addStudent(school, name, email, password, parentName, formatter.parse(dateOfBirth), gender, mobileNo, classId, section);
                     } catch (ParseException e) {
@@ -242,8 +243,7 @@ public class CLI_interface {
                     id = in.nextInt();
                     User user = school.getUser(id);
                     if (user instanceof Student ) {
-                        formatter = new SimpleDateFormat("dd-MM-yyyy");
-                        String checklist = "";
+                        String checklist;
                         System.out.println("type the numbers of what you want to modify");
                         System.out.println("1. Name");
                         System.out.println("2. Email");
