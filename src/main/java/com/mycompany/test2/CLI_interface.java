@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class CLI_interface {
 
-    private static SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+    private static final SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 
     //Method for Adding a new Admin object to the Arraylist in School
     public static void addAdmin(School school, String name, String email, String password) {

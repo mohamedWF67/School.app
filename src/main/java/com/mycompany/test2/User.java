@@ -27,7 +27,7 @@ public abstract class User {
     }
 
     public User(String name, String email, String password) {
-        id = counter++;
+        id = ++counter;
         this.name = name;
         this.email = email;
         try {
