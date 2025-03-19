@@ -140,15 +140,19 @@ public class CLI_interface {
             System.out.println("-1. Exit");
             Scanner in = new Scanner(System.in);
             choice = in.nextInt();
+            String name;
+            char section;
+            int maxstudents;
+            int id;
             switch (choice) {
                 case 1:
                     System.out.println("Enter Module name");
-                    String name = in.nextLine();
+                    in.nextLine();
                     name = in.nextLine();
                     System.out.println("Enter Module section as char");
-                    char section = in.next().charAt(0);
+                    section = in.next().charAt(0);
                     System.out.println("Enter Module maxstudents");
-                    int maxstudents = in.nextInt();
+                    maxstudents = in.nextInt();
                     addModule(school, name, section, maxstudents);
                     break;
                 case 2:
@@ -195,7 +199,7 @@ public class CLI_interface {
             System.out.println("-1. Exit");
             Scanner in = new Scanner(System.in);
             choice = in.nextInt();
-            Integer id;
+            int id;
             String name;
             String email;
             String password;
@@ -203,7 +207,7 @@ public class CLI_interface {
             String dateOfBirth;
             String gender;
             String mobileNo;
-            Integer classId;
+            int classId;
             String section;
             switch (choice) {
                 case 1:
