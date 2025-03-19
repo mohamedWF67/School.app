@@ -5,6 +5,7 @@
 package com.mycompany.test2;
 
 import java.io.IOException;
+import java.util.Date;
 
 /**
  *
@@ -19,6 +20,7 @@ public class Test2 {
         Student[] students = {new Student(),new Student(),new Student(),new Student()};
         school.addModule(M);
         school.addModule(M2);
+        school.addUser(new Student("Waleed","mdxx","1234","waleed",new Date(),"M","01024983385",1,"A"));
         school.GenerateReport(1);
         school.GenerateReport(2);
         CLI_interface.CLI_selection(school);
