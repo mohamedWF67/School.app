@@ -195,16 +195,16 @@ public class CLI_interface {
             System.out.println("-1. Exit");
             Scanner in = new Scanner(System.in);
             choice = in.nextInt();
-            Integer id = null;
-            String name = null;
-            String email = null;
-            String password = null;
-            String parentName = null;
-            String dateOfBirth = null;
-            String gender = null;
-            String mobileNo = null;
-            Integer classId = null;
-            String section = null;
+            Integer id;
+            String name;
+            String email;
+            String password;
+            String parentName;
+            String dateOfBirth;
+            String gender;
+            String mobileNo;
+            Integer classId;
+            String section;
             switch (choice) {
                 case 1:
                     System.out.println("Enter Student name");
