@@ -87,7 +87,8 @@ public class CLI_interface {
     public static void modifyTeacher(School school,int id,String name, String email, String password, String qualification, int salary, String mobileNo, String address){
         User user = school.getUser(id);
         if (!school.emailExists(email) && user instanceof Student) {
-            Teacher teacher = (Teacher) user;
+            try {
+                Teacher teacher = (Teacher) user;
             teacher.setName(name);
             teacher.setEmail(email);
             teacher.setPassword(password);
@@ -96,6 +97,9 @@ public class CLI_interface {
             teacher.setMobileNo(mobileNo);
             teacher.setAddress(address);
             System.out.println("Modified teacher");
+            }catch (ClassCastException e) {
+                System.out.println("Failed to modify teacher");
+            }
         }
     }
 
