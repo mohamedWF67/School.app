@@ -119,7 +119,7 @@ public class School {
     public void GenerateReport(int id) {
         Module module = getModule(id);
         if (module != null) {
-            System.out.println("Number of Students in module \'"+ module.getName() +"\' : "  + "/" + module.getMaxstudents());
+            System.out.println("Number of Students in module \'"+ module.getName() +"\' : " + module.getTotalEnrolled()  + "/" + module.getMaxstudents());
         }else {
             System.out.println("Module not found");
         }
@@ -138,5 +138,33 @@ public class School {
             }
         }
         return false;
+    }
+
+    public void enrollStudent(int studentId,int moduleId) {
+        User user = getUser(studentId);
+        Module module = getModule(moduleId);
+        if (modules.contains(module)) {
+            if (user instanceof Student) {
+                ((Student) user).enroll(module);
+            }else{
+                System.out.println("User not found");
+            }
+        }else{
+            System.out.println("Module not found");
+        }
+    }
+
+    public void cancelEnrollment(int studentId,int moduleId) {
+        User user = getUser(studentId);
+        Module module = getModule(moduleId);
+        if (modules.contains(module) && ((Student) user).getEnrolledModules().contains(module) ) {
+            if (user instanceof Student) {
+                ((Student) user).cancelEnrollment(module);
+            }else{
+                System.out.println("User not found");
+            }
+        }else{
+            System.out.println("Module not found");
+        }
     }
 }

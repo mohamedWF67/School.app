@@ -2,6 +2,8 @@ package com.mycompany.test2;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Student extends User {
     private String parentName;
@@ -11,11 +13,13 @@ public class Student extends User {
     private String address;
     private int classId;
     private String section;
+    private Set<Module> enrolledModules;
 
     public Student() {
         super();
+        this.enrolledModules = new HashSet<>();
     }
-    public Student(int id, String name, String email, String password, String parentName, Date DOB, String gender, String mobileNo, int classId, String section) {
+    public Student(int id, String name, String email, String password, String parentName, Date DOB, String gender, String mobileNo, int classId, String section, Set<Module> modules) {
         super(id, name, email, password);
         this.parentName = parentName;
         this.DOB = DOB;
@@ -23,6 +27,7 @@ public class Student extends User {
         this.mobileNo = mobileNo;
         this.classId = classId;
         this.section = section;
+        this.enrolledModules = modules;
     }
 
     public Student(String name, String email, String password, String parentName, Date DOB, String gender, String mobileNo, int classId, String section) {
@@ -33,6 +38,7 @@ public class Student extends User {
         this.mobileNo = mobileNo;
         this.classId = classId;
         this.section = section;
+        this.enrolledModules = new HashSet<>();
     }
 
     public String getParentName() {
@@ -81,6 +87,38 @@ public class Student extends User {
 
     public void setSection(String section) {
         this.section = section;
+    }
+
+    public Set<Module> getEnrolledModules() {
+        return enrolledModules;
+    }
+
+    public void setEnrolledModules(Set<Module> enrolledModules) {
+        this.enrolledModules = enrolledModules;
+    }
+
+    public void enroll(Module module) {
+        if (enrolledModules.add(module)) {
+            module.addStudent(this);
+        }else{
+            System.out.println("Failed to add student " + getName() + " in module " + module.getName());
+        }
+    }
+
+    public void cancelEnrollment(Module module) {
+        if (enrolledModules.remove(module)) {
+            module.removeStudent(this);
+        }else{
+            System.out.println("Failed to remove student " + getName() + " from module " + module.getName());
+        }
+    }
+
+    public void viewCourses() {
+        if (!enrolledModules.isEmpty()) {
+            System.out.println("Enrolled Modules: " + enrolledModules);
+        }else{
+            System.out.println("No Enrolled Modules");
+        }
     }
 
     @Override

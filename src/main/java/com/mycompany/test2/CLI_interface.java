@@ -51,7 +51,9 @@ public class CLI_interface {
             Student student = (Student) user;
             student.setName(name);
             student.setEmail(email);
-            student.setPassword(password);
+            if (password != null) {
+                student.setPassword(password);
+            }
             student.setParentName(parentName);
             student.setDOB(DOB);
             student.setGender(gender);
@@ -146,36 +148,66 @@ public class CLI_interface {
             System.out.println("-1. Exit");
             Scanner in = new Scanner(System.in);
             choice = in.nextInt();
+            in.nextLine();
             String name;
             char section;
             int maxstudents;
             int id;
             switch (choice) {
                 case 1:
-                    System.out.println("Enter Module name");
-                    in.nextLine();
+                    System.out.println("Enter Module Name:");
                     name = in.nextLine();
-                    System.out.println("Enter Module section as char");
+                    System.out.println("Enter Module section as char:");
                     section = in.next().charAt(0);
-                    System.out.println("Enter Module maxstudents");
+                    System.out.println("Enter Module Student limit:");
                     maxstudents = in.nextInt();
+                    in.nextLine();
                     addModule(school, name, section, maxstudents);
                     break;
                 case 2:
                     System.out.println("Enter Module id to modify");
                     id = in.nextInt();
-                    System.out.println("Enter New Module name");
                     in.nextLine();
-                    name = in.nextLine();
-                    System.out.println("Enter New Module section as char");
-                    section = in.next().charAt(0);
-                    System.out.println("Enter New Module maxstudents");
-                    maxstudents = in.nextInt();
-                    modifyModule(school, id, name, section, maxstudents);
+                    Module module = school.getModule(id);
+                    if (module instanceof Module) {
+                        String checklist;
+                        System.out.println("type the numbers of what you want to modify");
+                        System.out.println("1. Name");
+                        System.out.println("2. Section");
+                        System.out.println("3. Student Limit");
+                        System.out.println("0. Cancel");
+                        checklist = in.nextLine();
+                        if(checklist.contains("0")){
+                            System.out.println("Exiting..");
+                            break;
+                        }
+                        if (checklist.contains("1")){
+                            System.out.println("Enter New Name:");
+                            name = in.nextLine();
+                        }else {
+                            name = school.getModule(id).getName();
+                        }
+                        if (checklist.contains("2")){
+                            System.out.println("Enter New section as char:");
+                            section = in.next().charAt(0);
+                        }else{
+                            section = school.getModule(id).getSection();
+                        }
+                        if (checklist.contains("3")){
+                            System.out.println("Enter New student limit:");
+                            maxstudents = in.nextInt();
+                        }else{
+                            maxstudents = school.getModule(id).getMaxstudents();
+                        }
+                        modifyModule(school, id, name, section, maxstudents);
+                    }else{
+                        System.out.println("Module not found");
+                    }
                     break;
                 case 3:
                     System.out.println("Enter Module id to delete");
                     id = in.nextInt();
+                    in.nextLine();
                     deleteModule(school, id);
                     break;
                 case 4:
@@ -184,6 +216,7 @@ public class CLI_interface {
                 case 5:
                     System.out.println("Enter Module id");
                     id = in.nextInt();
+                    in.nextLine();
                     school.GenerateReport(id);
                     break;
                 default:
@@ -205,6 +238,7 @@ public class CLI_interface {
             System.out.println("-1. Exit");
             Scanner in = new Scanner(System.in);
             choice = in.nextInt();
+            in.nextLine();
             int id;
             String name;
             String email;
@@ -217,25 +251,25 @@ public class CLI_interface {
             String section;
             switch (choice) {
                 case 1:
-                    System.out.println("Enter Student name");
-                    in.nextLine();
+                    System.out.println("Enter Student name:");
                     name = in.nextLine();
-                    System.out.println("Enter Student Email");
+                    System.out.println("Enter Student Email:");
                     email = in.nextLine();
-                    System.out.println("Enter Student password");
+                    System.out.println("Enter Student password:");
                     password = in.nextLine();
-                    System.out.println("Enter Student Parent's Name");
+                    System.out.println("Enter Student Parent's Name:");
                     parentName = in.nextLine();
-                    System.out.println("Enter Student Date of Birth");
+                    System.out.println("Enter Student Date of Birth (dd-MM-yyyy):");
                     dateOfBirth = in.nextLine();
-                    System.out.println("Enter Student Gender");
+                    System.out.println("Enter Student Gender (M or F):");
                     gender = in.nextLine();
-                    System.out.println("Enter Student Mobile No");
+                    System.out.println("Enter Student Mobile No:");
                     mobileNo = in.nextLine();
-                    System.out.println("Enter Student Class ID");
+                    System.out.println("Enter Student Class ID:");
                     classId = in.nextInt();
-                    System.out.println("Enter Student Section");
-                    section = in.next();
+                    in.nextLine();
+                    System.out.println("Enter Student Section:");
+                    section = in.nextLine();
                     try {
                         addStudent(school, name, email, password, parentName, formatter.parse(dateOfBirth), gender, mobileNo, classId, section);
                     } catch (ParseException e) {
@@ -243,12 +277,13 @@ public class CLI_interface {
                     }
                     break;
                 case 2:
-                    System.out.println("Enter Student id to modify");
+                    System.out.println("Enter Student id to modify:");
                     id = in.nextInt();
+                    in.nextLine();
                     User user = school.getUser(id);
                     if (user instanceof Student ) {
                         String checklist;
-                        System.out.println("type the numbers of what you want to modify");
+                        System.out.println("type the numbers of what you want to modify:");
                         System.out.println("1. Name");
                         System.out.println("2. Email");
                         System.out.println("3. Password");
@@ -259,62 +294,62 @@ public class CLI_interface {
                         System.out.println("8. Class ID");
                         System.out.println("9. Section");
                         System.out.println("0. Cancel");
-                        checklist = in.next();
+                        checklist = in.nextLine();
                         if (checklist.contains("0")) {
                             System.out.println("Exiting..");
                             break;
                         }
                         if (checklist.contains("1")) {
-                            System.out.println("Enter Student name");
-                            in.nextLine();
+                            System.out.println("Enter Student name:");
                             name = in.nextLine();
                         }else {
                             name = user.getName();
                         }
                         if (checklist.contains("2")) {
-                            System.out.println("Enter Student Email");
+                            System.out.println("Enter Student Email:");
                             email = in.nextLine();
                         }else {
                             email = user.getEmail();
                         }
                         if (checklist.contains("3")) {
-                            System.out.println("Enter Student password");
+                            System.out.println("Enter Student password:");
                             password = in.nextLine();
                         }else {
-                            password = user.getPassword();
+                            password = null;
                         }
                         if (checklist.contains("4")) {
-                            System.out.println("Enter Student Parent's Name");
+                            System.out.println("Enter Student Parent's Name:");
                             parentName = in.nextLine();
                         }else {
                             parentName = ((Student) user).getParentName();
                         }
                         if (checklist.contains("5")) {
-                            System.out.println("Enter Student Date of Birth");
+                            System.out.println("Enter Student Date of Birth:");
                             dateOfBirth = in.nextLine();
                         }else{
                             dateOfBirth = formatter.format(((Student) user).getDOB());
                         }
                         if (checklist.contains("6")) {
-                            System.out.println("Enter Student Gender");
+                            System.out.println("Enter Student Gender:");
                             gender = in.nextLine();
                         }else {
                             gender = ((Student) user).getGender();
                         }
                         if (checklist.contains("7")) {
-                            System.out.println("Enter Student Mobile No");
+                            System.out.println("Enter Student Mobile No:");
                             mobileNo = in.nextLine();
                         }else {
                             mobileNo = ((Student) user).getMobileNo();
                         }
                         if (checklist.contains("8")) {
-                            System.out.println("Enter Student Class ID");
+                            System.out.println("Enter Student Class ID:");
                             classId = in.nextInt();
+                            in.nextLine();
                         }else {
                             classId = ((Student) user).getClassId();
                         }
                         if (checklist.contains("9")) {
-                            System.out.println("Enter Student Section");
+                            System.out.println("Enter Student Section:");
                             section = in.nextLine();
                         }else {
                             section = ((Student) user).getSection();
@@ -329,20 +364,100 @@ public class CLI_interface {
                     }
                     break;
                 case 3:
-                    System.out.println("Enter Module id to delete");
+                    System.out.println("Enter Student id to delete:");
                     id = in.nextInt();
+                    in.nextLine();
                     deleteStudent(school, id);
                     break;
                 case 4:
                     school.printStudents();
                     break;
                 case 5:
-                    System.out.println("Enter Student id");
+                    System.out.println("Enter Student id:");
                     id = in.nextInt();
+                    in.nextLine();
                     school.printStudent(id);
                     break;
                 default:
                     System.out.println("Invalid choice");
+            }
+        }
+    }
+    public static void Cli_Enrollment(School school) {
+        int choice = 0;
+        while(choice != -1) {
+            System.out.println("Choose your choice");
+            System.out.println("1. Enroll Student");
+            System.out.println("2. Cancel Enrollment");
+            System.out.println("3. Switch Modules");
+            System.out.println("4. View Enrolled Courses");
+            System.out.println("-1. Exit");
+            Scanner in = new Scanner(System.in);
+            choice = Integer.parseInt(in.nextLine());
+            int studentId;
+            int moduleId;
+            switch (choice){
+                case 1 -> {
+                    System.out.println("Enter Student id:");
+                    studentId = in.nextInt();
+                    in.nextLine();
+                    User user = school.getUser(studentId);
+                    if (user instanceof Student) {
+                        System.out.println("Enter Module id:");
+                        moduleId = in.nextInt();
+                        in.nextLine();
+                        school.enrollStudent(studentId, moduleId);
+                    }else{
+                        System.out.println("User not found");
+                    }
+                }
+                case 2 ->{
+                    System.out.println("Enter Student id:");
+                    studentId = in.nextInt();
+                    in.nextLine();
+                    User user = school.getUser(studentId);
+                    if (user instanceof Student) {
+                        System.out.println("Enter Module id:");
+                        moduleId = in.nextInt();
+                        in.nextLine();
+                        school.cancelEnrollment(studentId, moduleId);
+                    }else{
+                        System.out.println("User not found");
+                    }
+                }
+                case 3 ->{
+                    System.out.println("Enter Student id:");
+                    studentId = in.nextInt();
+                    in.nextLine();
+                    User user = school.getUser(studentId);
+                    if (user instanceof Student) {
+                        System.out.println("Enter Module id:");
+                        moduleId = in.nextInt();
+                        in.nextLine();
+                        Module module = school.getModule(moduleId);
+                        if (module != null && ((Student) user).getEnrolledModules().contains(module)) {
+                            System.out.println("Enter New Module id:");
+                            int new_moduleId = in.nextInt();
+                            in.nextLine();
+                            Module new_module = school.getModule(new_moduleId);
+                            if (new_module != null) {
+                                ((Student) user).cancelEnrollment(module);
+                                ((Student) user).enroll(new_module);
+                            }
+                        }else{
+                            System.out.println("Module not found");
+                        }
+                    }
+                }
+                case 4 -> {
+                    System.out.println("Enter Student id:");
+                    studentId = in.nextInt();
+                    in.nextLine();
+                    User user = school.getUser(studentId);
+                    if (user instanceof Student) {
+                        ((Student) user).viewCourses();
+                    }
+                }
             }
         }
     }
@@ -354,14 +469,19 @@ public class CLI_interface {
             System.out.println("Choose your choice");
             System.out.println("1. Module");
             System.out.println("2. Student");
+            System.out.println("3. Enrollment");
+            System.out.println("-1. Exit");
             Scanner in = new Scanner(System.in);
-            choice = in.nextInt();
+            choice = Integer.parseInt(in.nextLine());
             switch (choice) {
                 case 1:
                     Cli_module(school);
                     break;
                 case 2:
                     Cli_student(school);
+                    break;
+                case 3:
+                    Cli_Enrollment(school);
                     break;
                 case -1:
                     break;
