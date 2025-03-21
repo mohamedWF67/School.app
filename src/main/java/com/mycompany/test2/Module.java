@@ -1,6 +1,5 @@
 package com.mycompany.test2;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,7 +24,7 @@ public class Module {
         this.name = name;
         this.section = section;
         this.maxstudents = maxstudents;
-        this.enrolledStudents = new HashSet<Student>();
+        this.enrolledStudents = new HashSet<>();
     }
 
     public static int getCount() {

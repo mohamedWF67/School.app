@@ -119,7 +119,7 @@ public class School {
     public void GenerateReport(int id) {
         Module module = getModule(id);
         if (module != null) {
-            System.out.println("Number of Students in module \'"+ module.getName() +"\' : " + module.getTotalEnrolled()  + "/" + module.getMaxstudents());
+            System.out.println("Number of Students in module '"+ module.getName() +"' : " + module.getTotalEnrolled()  + "/" + module.getMaxstudents());
         }else {
             System.out.println("Module not found");
         }

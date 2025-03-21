@@ -169,7 +169,7 @@ public class CLI_interface {
                     id = in.nextInt();
                     in.nextLine();
                     Module module = school.getModule(id);
-                    if (module instanceof Module) {
+                    if (module != null) {
                         String checklist;
                         System.out.println("type the numbers of what you want to modify");
                         System.out.println("1. Name");
