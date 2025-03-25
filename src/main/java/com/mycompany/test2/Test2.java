@@ -3,8 +3,6 @@
  */
 
 package com.mycompany.test2;
-
-import java.io.IOException;
 import java.util.Date;
 
 /**
@@ -13,7 +11,7 @@ import java.util.Date;
  */
 public class Test2 {
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) {
         School school = new School("BUE");
         Module M = new Module("SE",'A',20);
         Module M2 = new Module("DSA",'B',30);

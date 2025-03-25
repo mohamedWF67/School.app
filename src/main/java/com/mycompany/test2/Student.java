@@ -1,8 +1,6 @@
 package com.mycompany.test2;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 public class Student extends User {
     private String parentName;

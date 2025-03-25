@@ -93,7 +93,7 @@ public class Enrollment {
     }
 
     public void printModules() {
-        if(modules.size() > 0) {
+        if(!modules.isEmpty()) {
             System.out.println(modules);
         }else{
             System.err.println("No modules");
