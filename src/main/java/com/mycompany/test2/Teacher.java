@@ -61,10 +61,10 @@ public class Teacher extends User{
     @Override
     public String toString() {
         return super.toString() + " Teacher{" +
-                "qualification='" + qualification + '\'' +
-                ", salary=" + salary +
-                ", mobileNo='" + mobileNo + '\'' +
-                ", address='" + address + '\'' +
+                "Qualification='" + qualification + '\'' +
+                ", Salary=" + salary +
+                ", MobileNo='" + mobileNo + '\'' +
+                ", Address='" + address + '\'' +
                 "}";
     }
 }

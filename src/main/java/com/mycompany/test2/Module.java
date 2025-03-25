@@ -1,7 +1,6 @@
 package com.mycompany.test2;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Objects;
 
 public class Module {
     private static int count = 0;
@@ -9,22 +8,23 @@ public class Module {
     private String name;
     private char section;
     private int maxstudents;
-    private Set<Student> enrolledStudents;
+    private int numstudents;
 
-    public Module(int id, String name, char section, int maxstudents, Set<Student> students) {
+    public Module(int id, String name, char section, int maxstudents) {
         this.id = id;
         this.name = name;
         this.section = section;
         this.maxstudents = maxstudents;
-        this.enrolledStudents = students;
     }
 
     public Module(String name, char section, int maxstudents) {
         id = ++count;
         this.name = name;
         this.section = section;
+        if (maxstudents <= 0) {
+            maxstudents = 1;
+        }
         this.maxstudents = maxstudents;
-        this.enrolledStudents = new HashSet<>();
     }
 
     public static int getCount() {
@@ -64,18 +64,29 @@ public class Module {
     }
 
     public void setMaxstudents(int maxstudents) {
+        if (maxstudents <= 0) {
+            maxstudents = 1;
+        }
         this.maxstudents = maxstudents;
     }
 
     public int getTotalEnrolled() {
-        return enrolledStudents.size();
+        return numstudents;
     }
 
     public boolean isFull() {
-        return enrolledStudents.size() >= maxstudents;
+        return numstudents >= maxstudents;
     }
 
-    public void addStudent(Student student) {
+    public void addEnrolledModule() {
+        numstudents++;
+    }
+
+    public void removeEnrolledModule() {
+        numstudents--;
+    }
+
+    /*public void addStudent(Student student) {
         if (!isFull()) {
             try{
                 enrolledStudents.add(student);
@@ -97,15 +108,26 @@ public class Module {
         }
 
     }
+*/
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Module module)) return false;
+        return id == module.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 
     @Override
     public String toString() {
         return "Module{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", section=" + section +
-                ", EnrolledStudents=" + getTotalEnrolled() +
-                ", maxstudents=" + maxstudents +
+                "ID=" + id +
+                ", Name='" + name + '\'' +
+                ", Section=" + section +
+                ", Enrolled Students=" + getTotalEnrolled() +
+                ", Student Limit=" + maxstudents +
                 '}';
     }
 }

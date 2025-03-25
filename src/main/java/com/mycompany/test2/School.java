@@ -1,26 +1,31 @@
 package com.mycompany.test2;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class School {
     private String name;
     private ArrayList<User> users;
     private ArrayList<Module> modules;
+    private HashSet<Enrollment> enrollments;
 
     public School() {
         modules = new ArrayList<>();
         users = new ArrayList<>();
+        enrollments = new HashSet<>();
     }
 
     public School(String name) {
         this.name = name;
         modules = new ArrayList<>();
         users = new ArrayList<>();
+        enrollments = new HashSet<>();
     }
-    public School(String name, ArrayList<User> users, ArrayList<Module> modules) {
+    public School(String name, ArrayList<User> users, ArrayList<Module> modules, HashSet<Enrollment> enrollments) {
         this.name = name;
         this.users = users;
         this.modules = modules;
+        this.enrollments = enrollments;
     }
 
     public String getName() {
@@ -57,10 +62,7 @@ public class School {
     }
 
     public void addUser(User user) {
-        if (users.contains(user)) {
-            return;
-        }
-        users.add(user);
+        (!users.contains(user)?users:null).add(user);
     }
 
     public void removeUser(int id) {
@@ -78,13 +80,35 @@ public class School {
         }
     }
 
+    public void printTeachers() {
+        for (User user : users) {
+            if (user instanceof Teacher) {
+                System.out.println(user);
+            }
+        }
+    }
+
+    public void printAdmins() {
+        for (User user : users) {
+            if (user instanceof Admin) {
+                System.out.println(user);
+            }
+        }
+    }
+
     public void printStudent(int id) {
         User user = getUser(id);
-        if (user != null) {
-            System.out.println(user);
-        }else{
-            System.out.println("No such user");
-        }
+        System.out.println(user instanceof Student?user:"No such Student");
+    }
+
+    public void printTeacher(int id) {
+        User user = getUser(id);
+        System.out.println(user instanceof Teacher?user:"No such Teacher");
+    }
+
+    public void printAdmin(int id) {
+        User user = getUser(id);
+        System.out.println(user instanceof Admin?user:"No such Admin");
     }
 
     public void addModule(Module module) {
@@ -112,6 +136,7 @@ public class School {
         Module module = getModule(id);
         if (module != null) {
             modules.remove(module);
+            deleteModuleFromEnrollments(module);
             return "Module deleted";
         }
         return "Module not found";
@@ -121,13 +146,13 @@ public class School {
         if (module != null) {
             System.out.println("Number of Students in module '"+ module.getName() +"' : " + module.getTotalEnrolled()  + "/" + module.getMaxstudents());
         }else {
-            System.out.println("Module not found");
+            System.err.println("Module not found");
         }
     }
 
     public void printModules() {
         for (Module module : modules) {
-            System.out.println(module.toString());
+            System.out.println(module);
         }
     }
 
@@ -140,31 +165,120 @@ public class School {
         return false;
     }
 
-    public void enrollStudent(int studentId,int moduleId) {
+    public void setEnrollments(HashSet<Enrollment> enrollments) {
+        this.enrollments = enrollments;
+    }
+
+    public HashSet<Enrollment> getEnrollments() {
+        return enrollments;
+    }
+
+    public void addEnrollment(Student student,Module module) {
+        if (!module.isFull()){
+            enrollments.add(new Enrollment(student,module));
+        }else{
+            System.err.println("Module is Full");
+        }
+    }
+
+    public Enrollment getEnrollmentByStudentId(int id) {
+        if (enrollments != null) {
+            for (Enrollment enrollment : enrollments) {
+                if (enrollment.getStudent().getId() == id) {
+                    return enrollment;
+                }
+            }
+        }
+        return null;
+    }
+
+    public void viewStudentEnrollments(int id) {
+        Enrollment enrollment = getEnrollmentByStudentId(id);
+        if (enrollment != null) {
+            enrollment.printModules();
+        }else{
+            System.err.println("No enrollment for this student");
+        }
+    }
+
+    public void enrollStudent(int studentId, int moduleId) {
         User user = getUser(studentId);
         Module module = getModule(moduleId);
-        if (modules.contains(module)) {
-            if (user instanceof Student) {
-                ((Student) user).enroll(module);
+        if (user instanceof Student) {
+            if (modules.contains(module)){
+                Enrollment enrollment = getEnrollmentByStudentId(studentId);
+                if (enrollment != null) {
+                    if(enrollment.addModule(module)) {
+                        System.out.println("Added module " + module.getName() + " for Student " + user.getName());
+                    }
+                }else{
+                    addEnrollment((Student) user,module);
+                    System.out.println("Added a new enrollment for module " + module.getName() + " for Student " + user.getName());
+                }
             }else{
-                System.out.println("User not found");
+                System.err.println("Module not found");
             }
         }else{
-            System.out.println("Module not found");
+            System.err.println("User not found");
         }
     }
 
     public void cancelEnrollment(int studentId,int moduleId) {
         User user = getUser(studentId);
         Module module = getModule(moduleId);
-        if (modules.contains(module) && ((Student) user).getEnrolledModules().contains(module) ) {
-            if (user instanceof Student) {
-                ((Student) user).cancelEnrollment(module);
+        if (user instanceof Student) {
+            Enrollment enrollment = getEnrollmentByStudentId(studentId);
+            if (enrollment != null && !enrollment.isEmpty()) {
+                if (modules.contains(module)){
+                    if(enrollment.removeModule(module)) {
+                        System.out.println("Removed module " + module.getName() + " from Student " + user.getName());
+                    }
+                }else{
+                    System.err.println("Module not found");
+                }
             }else{
-                System.out.println("User not found");
+                System.err.println("Enrollment not found");
             }
         }else{
-            System.out.println("Module not found");
+            System.err.println("User not found");
+        }
+    }
+
+    public void swapEnrollments(int studentId,int moduleId1,int moduleId2) {
+        User user = getUser(studentId);
+        if (user instanceof Student) {
+            Module module1 = getModule(moduleId1);
+            Module module2 = getModule(moduleId2);
+            if (module1 != null && module2 != null) {
+                Enrollment enrollment = getEnrollmentByStudentId(studentId);
+                if (enrollment != null && !enrollment.isEmpty()) {
+                    if (enrollment.findModule(module1) && moduleId1 != moduleId2) {
+                        enrollment.removeModule(module1);
+                        enrollment.addModule(module2);
+                        System.out.println("Swapped module " + module1.getName() + " with "+ module2.getName() + " for Student " + user.getName());
+                    }else{
+                        System.err.println("Module failed Swap");
+                    }
+                }else{
+                    System.err.println("Enrollment not found");
+                }
+            }else{
+                System.err.println("Module not found");
+            }
+        }else {
+            System.err.println("User not found");
+        }
+    }
+
+    public void deleteModuleFromEnrollments(Module module) {
+        if (enrollments != null) {
+            for (Enrollment enrollment : enrollments) {
+                if (enrollment.findModule(module)) {
+                    enrollment.removeModule(module);
+                }
+            }
+        }else{
+            System.err.println("No enrollments");
         }
     }
 }

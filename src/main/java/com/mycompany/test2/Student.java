@@ -12,13 +12,11 @@ public class Student extends User {
     private String address;
     private int classId;
     private String section;
-    private Set<Module> enrolledModules;
 
     public Student() {
         super();
-        this.enrolledModules = new HashSet<>();
     }
-    public Student(int id, String name, String email, String password, String parentName, Date DOB, String gender, String mobileNo, int classId, String section, Set<Module> modules) {
+    public Student(int id, String name, String email, String password, String parentName, Date DOB, String gender, String mobileNo, int classId, String section) {
         super(id, name, email, password);
         this.parentName = parentName;
         this.DOB = DOB;
@@ -26,7 +24,6 @@ public class Student extends User {
         this.mobileNo = mobileNo;
         this.classId = classId;
         this.section = section;
-        this.enrolledModules = modules;
     }
 
     public Student(String name, String email, String password, String parentName, Date DOB, String gender, String mobileNo, int classId, String section) {
@@ -37,7 +34,6 @@ public class Student extends User {
         this.mobileNo = mobileNo;
         this.classId = classId;
         this.section = section;
-        this.enrolledModules = new HashSet<>();
     }
 
     public String getParentName() {
@@ -88,7 +84,7 @@ public class Student extends User {
         this.section = section;
     }
 
-    public Set<Module> getEnrolledModules() {
+    /*public Set<Module> getEnrolledModules() {
         return enrolledModules;
     }
 
@@ -97,7 +93,7 @@ public class Student extends User {
     }
 
     public void enroll(Module module) {
-        if (enrolledModules.add(module)) {
+        if (!module.isFull() && enrolledModules.add(module)) {
             module.addStudent(this);
         }else{
             System.out.println("Failed to add student " + getName() + " in module " + module.getName());
@@ -118,7 +114,7 @@ public class Student extends User {
         }else{
             System.out.println("No Enrolled Modules");
         }
-    }
+    }*/
 
     @Override
     public String toString() {

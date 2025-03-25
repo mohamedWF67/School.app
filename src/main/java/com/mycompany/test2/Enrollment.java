@@ -1,24 +1,24 @@
 package com.mycompany.test2;
 
+import java.util.HashSet;
+
 public class Enrollment {
     private static int count = 0;
     private int id;
-    private String name;
     private Student student;
-    private Module module;
+    private HashSet<Module> modules;
 
-    public Enrollment(String name, Student student, Module module) {
+    public Enrollment(Student student, Module module) {
         this.id = ++count;
-        this.name = name;
         this.student = student;
-        this.module = module;
+        this.modules = new HashSet<>();
+        addModule(module);
     }
 
-    public Enrollment(int id, String name, Student student, Module module) {
+    public Enrollment(int id, Student student, HashSet<Module> modules) {
         this.id = id;
-        this.name = name;
         this.student = student;
-        this.module = module;
+        this.modules = modules;
     }
 
     public static int getCount() {
@@ -37,14 +37,6 @@ public class Enrollment {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Student getStudent() {
         return student;
     }
@@ -53,15 +45,62 @@ public class Enrollment {
         this.student = student;
     }
 
-    public Module getModule() {
-        return module;
+    public HashSet<Module> getModules() {
+        return modules;
     }
 
-    public void setModule(Module module) {
-        this.module = module;
+    public void setModules(HashSet<Module> modules) {
+        this.modules = modules;
     }
 
-    @Override
+    public boolean isEmpty() {
+        return modules.isEmpty();
+    }
+
+    public boolean findModule(Module module) {
+        return modules.contains(module);
+    }
+
+    public boolean addModule(Module module) {
+        if (!module.isFull()){
+            if (!modules.contains(module)){
+                modules.add(module);
+                module.addEnrolledModule();
+                return true;
+            }else{
+                System.err.println("Module " + module.getName() + " is already enrolled");
+                return false;
+            }
+        }else {
+            System.err.println("Module is Full");
+            return false;
+        }
+    }
+
+    public boolean removeModule(Module module) {
+        try {
+            if (modules.contains(module)) {
+                modules.remove(module);
+                module.removeEnrolledModule();
+                return true;
+            }else {
+                System.err.println("No Enrollment for this module");
+                return false;
+            }
+        }catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void printModules() {
+        if(modules.size() > 0) {
+            System.out.println(modules);
+        }else{
+            System.err.println("No modules");
+        }
+    }
+
+    /*@Override
     public String toString() {
         return "Enrollment{" +
                 "id=" + id +
@@ -69,5 +108,5 @@ public class Enrollment {
                 ", student=" + student +
                 ", module=" + module +
                 '}';
-    }
+    }*/
 }

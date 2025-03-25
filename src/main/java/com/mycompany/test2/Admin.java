@@ -16,6 +16,6 @@ public class Admin extends User {
 
     @Override
     public String toString() {
-        return "Admin{" + "id=" + super.getId() + ", name='" + super.getName() + '\'' + ", email='" + super.getEmail() + '\'' + ", password='" + super.getPassword() + '\'' + '}';
+        return "Admin{" + "ID=" + super.getId() + ", Name='" + super.getName() + '\'' + ", Email='" + super.getEmail() + '\'' + ", Password='" + super.getPassword() + '\'' + '}';
     }
 }

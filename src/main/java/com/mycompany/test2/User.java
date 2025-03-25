@@ -77,8 +77,16 @@ public abstract class User {
         this.password = password;
     }
 
+    public void setHahedPassword(String password) {
+        try {
+            this.password = Encryption.Encrypt(password);
+        }catch (Exception e) {
+            System.err.println(e);
+        }
+    }
+
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", name='" + name + '\'' + ", email='" + email + '\'' + ", password='" + password + '\'' + '}';
+        return "User{" + "ID=" + id + ", Name='" + name + '\'' + ", Email='" + email + '\'' + ", Password='" + password + '\'' + '}';
     }
 }
