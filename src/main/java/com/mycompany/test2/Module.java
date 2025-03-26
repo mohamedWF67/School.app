@@ -6,18 +6,18 @@ public class Module {
     private static int count = 0;
     private int id;
     private String name;
-    private char section;
+    private String section;
     private int maxstudents;
     private int numstudents;
 
-    public Module(int id, String name, char section, int maxstudents) {
+    public Module(int id, String name, String section, int maxstudents) {
         this.id = id;
         this.name = name;
         this.section = section;
         this.maxstudents = maxstudents;
     }
 
-    public Module(String name, char section, int maxstudents) {
+    public Module(String name, String section, int maxstudents) {
         id = ++count;
         this.name = name;
         this.section = section;
@@ -51,11 +51,11 @@ public class Module {
         this.name = name;
     }
 
-    public char getSection() {
+    public String getSection() {
         return section;
     }
 
-    public void setSection(char section) {
+    public void setSection(String section) {
         this.section = section;
     }
 
@@ -86,29 +86,15 @@ public class Module {
         numstudents--;
     }
 
-    /*public void addStudent(Student student) {
-        if (!isFull()) {
-            try{
-                enrolledStudents.add(student);
-                System.out.println("Enrolled student " + student.getName() + " in module " + getName());
-            }catch(Exception e){
-                System.out.println(e);
-            }
-        }else {
-            System.out.println("Module is at full capacity");
+    public boolean checkCompatability(Student student) {
+        if (student.getSection().equals(section)) {
+            //System.out.println("Student " + student.getName() + " is compatible with this module");
+            return true;
         }
+        //System.err.println("Student " + student.getName() + " isn't compatible with this module");
+        return false;
     }
 
-    public void removeStudent(Student student) {
-        try {
-            enrolledStudents.remove(student);
-            System.out.println("Removed student " + student.getName() + " from module " + getName());
-        }catch(Exception e){
-            System.out.println(e);
-        }
-
-    }
-*/
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Module module)) return false;

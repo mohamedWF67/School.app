@@ -64,18 +64,19 @@ public class Enrollment {
 
     public boolean addModule(Module module) {
         if (!module.isFull()){
-            if (!modules.contains(module)){
-                modules.add(module);
-                module.addEnrolledModule();
-                return true;
+            if (!modules.contains(module)) {
+                if (module.checkCompatability(student)) {
+                    modules.add(module);
+                    module.addEnrolledModule();
+                    return true;
+                }
             }else{
                 System.err.println("Module " + module.getName() + " is already enrolled");
-                return false;
             }
         }else {
             System.err.println("Module is Full");
-            return false;
         }
+        return false;
     }
 
     public boolean removeModule(Module module) {
@@ -123,10 +124,13 @@ public class Enrollment {
 
     @Override
     public String toString() {
-        return "Enrollment{" +
-                "id=" + id +
-                ", student=" + student.getName() +
-                ", modules=["+ getModuleNames() +
-                "]}";
+        if (!modules.isEmpty()){
+            return "Enrollment{" +
+                    "id=" + id +
+                    ", student=" + student.getName() +
+                    ", modules=["+ getModuleNames() +
+                    "]}";
+        }
+        return "Not Enrolled in any modules";
     }
 }

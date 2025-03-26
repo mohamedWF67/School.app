@@ -8,29 +8,28 @@ public class Student extends User {
     private String gender;
     private String mobileNo;
     private String address;
-    private int classId;
     private String section;
 
     public Student() {
         super();
     }
-    public Student(int id, String name, String email, String password, String parentName, Date DOB, String gender, String mobileNo, int classId, String section) {
+    public Student(int id, String name, String email, String password, String parentName, Date DOB, String gender, String mobileNo,String address, String section) {
         super(id, name, email, password);
         this.parentName = parentName;
         this.DOB = DOB;
         this.gender = gender;
         this.mobileNo = mobileNo;
-        this.classId = classId;
         this.section = section;
+        this.address = address;
     }
 
-    public Student(String name, String email, String password, String parentName, Date DOB, String gender, String mobileNo, int classId, String section) {
+    public Student(String name, String email, String password, String parentName, Date DOB, String gender, String mobileNo,String address, String section) {
         super(name, email, password);
         this.parentName = parentName;
         this.DOB = DOB;
         this.gender = gender;
         this.mobileNo = mobileNo;
-        this.classId = classId;
+        this.address = address;
         this.section = section;
     }
 
@@ -66,12 +65,12 @@ public class Student extends User {
         this.mobileNo = mobileNo;
     }
 
-    public int getClassId() {
-        return classId;
+    public String getAddress() {
+        return address;
     }
 
-    public void setClassId(int classId) {
-        this.classId = classId;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getSection() {
@@ -116,13 +115,13 @@ public class Student extends User {
 
     @Override
     public String toString() {
-        return super.toString() + " Student{" +
+        return "Student{" +
                 "parentName='" + parentName + '\'' +
                 ", DOB=" + DOB +
                 ", gender='" + gender + '\'' +
                 ", mobileNo='" + mobileNo + '\'' +
-                ", classId=" + classId +
+                ", address='" + address + '\'' +
                 ", section='" + section + '\'' +
-                "}";
+                "} " + super.toString();
     }
 }

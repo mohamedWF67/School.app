@@ -176,12 +176,16 @@ public class School {
     public HashSet<Enrollment> getEnrollments() {
         return enrollments;
     }
-    public void addEnrollment(Student student,Module module) {
+    public boolean addEnrollment(Student student,Module module) {
         if (!module.isFull()){
-            enrollments.add(new Enrollment(student,module));
+            if (module.checkCompatability(student)) {
+                enrollments.add(new Enrollment(student,module));
+                return true;
+            }
         }else{
             System.err.println("Module is Full");
         }
+        return false;
     }
 
     public Enrollment getEnrollmentByStudentId(int id) {
@@ -221,10 +225,15 @@ public class School {
                 if (enrollment != null) {
                     if(enrollment.addModule(module)) {
                         System.out.println("Added module " + module.getName() + " for Student " + user.getName());
+                    }else {
+                        System.err.println("Module " + module.getName() + " is not from the same section");
                     }
                 }else{
-                    addEnrollment((Student) user,module);
-                    System.out.println("Added a new enrollment for module " + module.getName() + " for Student " + user.getName());
+                    if(addEnrollment((Student) user,module)){
+                        System.out.println("Added a new enrollment for module " + module.getName() + " for Student " + user.getName());
+                    }else{
+                        System.err.println("Module " + module.getName() + " is not from the same section");
+                    }
                 }
             }else{
                 System.err.println("Module not found");
@@ -263,7 +272,7 @@ public class School {
             if (module1 != null && module2 != null) {
                 Enrollment enrollment = getEnrollmentByStudentId(studentId);
                 if (enrollment != null && !enrollment.isEmpty()) {
-                    if (enrollment.findModule(module1) && moduleId1 != moduleId2) {
+                    if (enrollment.findModule(module1) && moduleId1 != moduleId2 && module2.checkCompatability((Student) user)) {
                         enrollment.removeModule(module1);
                         enrollment.addModule(module2);
                         System.out.println("Swapped module " + module1.getName() + " with "+ module2.getName() + " for Student " + user.getName());

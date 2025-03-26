@@ -46,9 +46,9 @@ public class CLI_interface {
     }
 
     //Method for Adding a new Student object to the Arraylist in School
-    public static void addStudent(School school,String name, String email, String password, String parentName, Date DOB, String gender, String mobileNo, int classId, String section) {
+    public static void addStudent(School school,String name, String email, String password, String parentName, Date DOB, String gender, String mobileNo,String address, String section) {
         if (!school.emailExists(email)) {
-            school.addUser(new Student(name, email, password, parentName, DOB, gender, mobileNo, classId, section));
+            school.addUser(new Student(name, email, password, parentName, DOB, gender, mobileNo,address, section));
             System.out.println("Added student successfully");
         }else {
             System.err.println("This Email already exists");
@@ -56,7 +56,7 @@ public class CLI_interface {
     }
 
     //Method for Modifying Student using id
-    public static void modifyStudent(School school,int id,String name, String email, String password, String parentName, Date DOB, String gender, String mobileNo, int classId, String section){
+    public static void modifyStudent(School school,int id,String name, String email, String password, String parentName, Date DOB, String gender, String mobileNo,String address, String section){
         User user = school.getUser(id);
         if (!school.emailExists(email) && user instanceof Student || user.getEmail().equals(email) && user instanceof Student) {
             Student student = (Student) user;
@@ -69,7 +69,7 @@ public class CLI_interface {
             student.setDOB(DOB);
             student.setGender(gender);
             student.setMobileNo(mobileNo);
-            student.setClassId(classId);
+            student.setAddress(address);
             student.setSection(section);
             System.out.println("Modified student successfully");
         }else {
@@ -136,13 +136,13 @@ public class CLI_interface {
     }
 
     //Method for Adding a new Module object to the Arraylist in School
-    public static void addModule(School school,String name, char section, int maxstudents){
+    public static void addModule(School school,String name, String section, int maxstudents){
         school.addModule(new Module(name, section, maxstudents));
         System.out.println("Added Module successfully");
     }
 
     //Method for Modifying Module using id
-    public static void modifyModule(School school,int id,String name, char section, int maxstudents){
+    public static void modifyModule(School school,int id,String name, String section, int maxstudents){
         Module module = school.getModule(id);
         if(module != null){
             module.setName(name);
@@ -187,10 +187,16 @@ public class CLI_interface {
                 case 1:
                     System.out.println("Enter Admin Name:");
                     name = in.nextLine();
+                    if (name.equals("")) {System.out.println("Invalid");continue;}
+
                     System.out.println("Enter Admin Email:");
                     Email = in.nextLine();
+                    if (Email.equals("")) {System.out.println("Invalid");continue;}
+
                     System.out.println("Enter Admin Password:");
                     password = in.nextLine();
+                    if (password.equals("")) {System.out.println("Invalid");continue;}
+
                     addAdmin(school,name,Email,password);
                     break;
                 case 2:
@@ -213,18 +219,21 @@ public class CLI_interface {
                         if (checklist.contains("1")){
                             System.out.println("Enter New Name:");
                             name = in.nextLine();
+                            if (name.equals("")) {System.out.println("Invalid");continue;}
                         }else {
                             name = user.getName();
                         }
                         if (checklist.contains("2")){
                             System.out.println("Enter New Email:");
                             Email = in.nextLine();
+                            if (Email.equals("")) {System.out.println("Invalid");continue;}
                         }else{
                             Email = user.getEmail();
                         }
                         if (checklist.contains("3")){
                             System.out.println("Enter New Password:");
                             password = in.nextLine();
+                            if (password.equals("")) {System.out.println("Invalid");continue;}
                         }else{
                             password = null;
                         }
@@ -278,31 +287,48 @@ public class CLI_interface {
             String dateOfBirth;
             String gender;
             String mobileNo;
-            int classId;
+            String address;
             String section;
             switch (choice) {
                 case 1:
                     System.out.println("Enter Student name:");
                     name = in.nextLine();
+                    if (name.equals("")) {System.out.println("Invalid");continue;}
+
                     System.out.println("Enter Student Email:");
                     email = in.nextLine();
+                    if (email.equals("")) {System.out.println("Invalid");continue;}
+
                     System.out.println("Enter Student password:");
                     password = in.nextLine();
+                    if (password.equals("")) {System.out.println("Invalid");continue;}
+
                     System.out.println("Enter Student Parent's Name:");
                     parentName = in.nextLine();
+                    if (parentName.equals("")) {System.out.println("Invalid");continue;}
+
                     System.out.println("Enter Student Date of Birth (dd-MM-yyyy):");
                     dateOfBirth = in.nextLine();
+                    if (dateOfBirth.equals("")) {System.out.println("Invalid");continue;}
+
                     System.out.println("Enter Student Gender (M or F):");
                     gender = in.nextLine();
+                    if (gender.equals("")) {System.out.println("Invalid");continue;}
+
                     System.out.println("Enter Student Mobile No:");
                     mobileNo = in.nextLine();
-                    System.out.println("Enter Student Class ID:");
-                    classId = in.nextInt();
-                    in.nextLine();
+                    if (mobileNo.equals("")) {System.out.println("Invalid");continue;}
+
+                    System.out.println("Enter Student Address:");
+                    address = in.nextLine();
+                    if (address.equals("")) {System.out.println("Invalid");continue;}
+
                     System.out.println("Enter Student Section:");
                     section = in.nextLine();
+                    if (section.equals("")) {System.out.println("Invalid");continue;}
+
                     try {
-                        addStudent(school, name, email, password, parentName, formatter.parse(dateOfBirth), gender, mobileNo, classId, section);
+                        addStudent(school, name, email, password, parentName, formatter.parse(dateOfBirth), gender, mobileNo,address, section);
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
@@ -322,7 +348,7 @@ public class CLI_interface {
                         System.out.println("5. Date of Birth (dd-MM-yyyy)");
                         System.out.println("6. Gender (F or M)");
                         System.out.println("7. Mobile No");
-                        System.out.println("8. Class ID");
+                        System.out.println("8. Address");
                         System.out.println("9. Section");
                         System.out.println("0. Cancel");
                         checklist = in.nextLine();
@@ -333,60 +359,68 @@ public class CLI_interface {
                         if (checklist.contains("1")) {
                             System.out.println("Enter Student name:");
                             name = in.nextLine();
+                            if (name.equals("")) {System.out.println("Invalid");continue;}
                         }else {
                             name = user.getName();
                         }
                         if (checklist.contains("2")) {
                             System.out.println("Enter Student Email:");
                             email = in.nextLine();
+                            if (email.equals("")) {System.out.println("Invalid");continue;}
                         }else {
                             email = user.getEmail();
                         }
                         if (checklist.contains("3")) {
                             System.out.println("Enter Student password:");
                             password = in.nextLine();
+                            if (password.equals("")) {System.out.println("Invalid");continue;}
                         }else {
                             password = null;
                         }
                         if (checklist.contains("4")) {
                             System.out.println("Enter Student Parent's Name:");
                             parentName = in.nextLine();
+                            if (parentName.equals("")) {System.out.println("Invalid");continue;}
                         }else {
                             parentName = ((Student) user).getParentName();
                         }
                         if (checklist.contains("5")) {
                             System.out.println("Enter Student Date of Birth:");
                             dateOfBirth = in.nextLine();
+                            if (dateOfBirth.equals("")) {System.out.println("Invalid");continue;}
                         }else{
                             dateOfBirth = formatter.format(((Student) user).getDOB());
                         }
                         if (checklist.contains("6")) {
                             System.out.println("Enter Student Gender:");
                             gender = in.nextLine();
+                            if (gender.equals("")) {System.out.println("Invalid");continue;}
                         }else {
                             gender = ((Student) user).getGender();
                         }
                         if (checklist.contains("7")) {
                             System.out.println("Enter Student Mobile No:");
                             mobileNo = in.nextLine();
+                            if (mobileNo.equals("")) {System.out.println("Invalid");continue;}
                         }else {
                             mobileNo = ((Student) user).getMobileNo();
                         }
                         if (checklist.contains("8")) {
-                            System.out.println("Enter Student Class ID:");
-                            classId = in.nextInt();
-                            in.nextLine();
+                            System.out.println("Enter Student Address:");
+                            address = in.nextLine();
+                            if (address.equals("")) {System.out.println("Invalid");continue;}
                         }else {
-                            classId = ((Student) user).getClassId();
+                            address = ((Student) user).getAddress();
                         }
                         if (checklist.contains("9")) {
                             System.out.println("Enter Student Section:");
                             section = in.nextLine();
+                            if (section.equals("")) {System.out.println("Invalid");continue;}
                         }else {
                             section = ((Student) user).getSection();
                         }
                         try {
-                            modifyStudent(school, id, name, email, password, parentName, formatter.parse(dateOfBirth), gender, mobileNo, classId, section);
+                            modifyStudent(school, id, name, email, password, parentName, formatter.parse(dateOfBirth), gender, mobileNo, address, section);
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
@@ -443,20 +477,33 @@ public class CLI_interface {
                 case 1:
                     System.out.println("Enter Teacher's name:");
                     name = in.nextLine();
+                    if (name.equals("")) {System.out.println("Invalid");continue;}
+
                     System.out.println("Enter Teacher's Email:");
                     email = in.nextLine();
+                    if (email.equals("")) {System.out.println("Invalid");continue;}
+
                     System.out.println("Enter Teacher's password:");
                     password = in.nextLine();
+                    if (password.equals("")) {System.out.println("Invalid");continue;}
+
                     System.out.println("Enter Teacher's Qualification:");
                     qualification = in.nextLine();
+                    if (qualification.equals("")) {System.out.println("Invalid");continue;}
+
                     System.out.println("Enter Teacher's Salary:");
                     salary = in.nextLine();
+                    if (salary.equals("")) {System.out.println("Invalid");continue;}
+
                     System.out.println("Enter Teacher's Mobile No:");
                     mobileNo = in.nextLine();
+                    if (mobileNo.equals("")) {System.out.println("Invalid");continue;}
+
                     System.out.println("Enter Teacher's Address:");
                     address = in.nextLine();
+                    if (address.equals("")) {System.out.println("Invalid");continue;}
 
-                    addTeacher(school, name, email, password, qualification, Integer.parseInt(salary), mobileNo, address);
+                    addTeacher(school, name, email, password, qualification, removeString(salary), mobileNo, address);
                     break;
                 case 2:
                     System.out.println("Enter Teacher id to modify:");
@@ -482,46 +529,53 @@ public class CLI_interface {
                         if (checklist.contains("1")) {
                             System.out.println("Enter Teacher name:");
                             name = in.nextLine();
+                            if (name.equals("")) {System.out.println("Invalid");continue;}
                         }else {
                             name = user.getName();
                         }
                         if (checklist.contains("2")) {
                             System.out.println("Enter Teacher Email:");
                             email = in.nextLine();
+                            if (email.equals("")) {System.out.println("Invalid");continue;}
                         }else {
                             email = user.getEmail();
                         }
                         if (checklist.contains("3")) {
                             System.out.println("Enter Teacher password:");
                             password = in.nextLine();
+                            if (password.equals("")) {System.out.println("Invalid");continue;}
                         }else {
                             password = null;
                         }
                         if (checklist.contains("4")) {
                             System.out.println("Enter Teacher Qualification:");
                             qualification = in.nextLine();
+                            if (qualification.equals("")) {System.out.println("Invalid");continue;}
                         }else {
                             qualification = ((Teacher) user).getQualification();
                         }
                         if (checklist.contains("5")) {
                             System.out.println("Enter Teacher Salary:");
                             salary = in.nextLine();
+                            if (salary.equals("")) {System.out.println("Invalid");continue;}
                         }else{
                             salary = 0 + "";
                         }
                         if (checklist.contains("6")) {
                             System.out.println("Enter Teacher Mobile No:");
                             mobileNo = in.nextLine();
+                            if (mobileNo.equals("")) {System.out.println("Invalid");continue;}
                         }else {
                             mobileNo = ((Teacher) user).getMobileNo();
                         }
                         if (checklist.contains("7")) {
                             System.out.println("Enter Teacher Address:");
                             address = in.nextLine();
+                            if (address.equals("")) {System.out.println("Invalid");continue;}
                         }else {
                             address = ((Teacher) user).getMobileNo();
                         }
-                        modifyTeacher(school,id, name, email, password, qualification, Integer.parseInt(salary), mobileNo, address);
+                        modifyTeacher(school,id, name, email, password, qualification, removeString(salary), mobileNo, address);
                     }else {
                         System.err.println("No teacher found for id " + id);
                     }
@@ -564,15 +618,19 @@ public class CLI_interface {
             choice = in.nextInt();
             in.nextLine();
             String name;
-            char section;
+            String section;
             int maxstudents;
             int id;
             switch (choice) {
                 case 1:
                     System.out.println("Enter Module Name:");
                     name = in.nextLine();
+                    if (name.equals("")) {System.out.println("Invalid");continue;}
+
                     System.out.println("Enter Module section as char:");
-                    section = in.next().charAt(0);
+                    section = in.nextLine();
+                    if (section.equals("")) {System.out.println("Invalid");continue;}
+
                     System.out.println("Enter Module Student limit:");
                     maxstudents = in.nextInt();
                     in.nextLine();
@@ -598,12 +656,14 @@ public class CLI_interface {
                         if (checklist.contains("1")){
                             System.out.println("Enter New Name:");
                             name = in.nextLine();
+                            if (name.equals("")) {System.out.println("Invalid");continue;}
                         }else {
                             name = module.getName();
                         }
                         if (checklist.contains("2")){
                             System.out.println("Enter New section as char:");
-                            section = in.next().charAt(0);
+                            section = in.nextLine();
+                            if (section.equals("")) {System.out.println("Invalid");continue;}
                         }else{
                             section = module.getSection();
                         }
@@ -871,4 +931,19 @@ public class CLI_interface {
             }
         }
     }
+
+    public static int removeString(String str) {
+        String CleanString = "";
+        if (str.isEmpty()) {
+            return 0;
+        }
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            if (ch >= '0' && ch <= '9') {
+                CleanString += ch;
+            }
+        }
+        return Integer.parseInt(CleanString);
+    }
+
 }
