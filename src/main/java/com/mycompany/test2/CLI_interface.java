@@ -739,6 +739,106 @@ public class CLI_interface {
         }
     }
 
+    //interface for Grade Class
+    private static void Cli_Grade(School school) {
+        int choice = 0;
+        while(choice != -1) {
+            System.out.println("Choose your choice");
+            System.out.println("1. Enter Grade for Student");
+            System.out.println("2. Edit Grade for Student");
+            System.out.println("3. Remove Grade from Student");
+            System.out.println("4. View Student Grades");
+            System.out.println("-1. Exit");
+            Scanner in = new Scanner(System.in);
+            choice = Integer.parseInt(in.nextLine());
+            int studentId;
+            int moduleId;
+            /*
+            switch (choice){
+                case 1 -> {
+                    System.out.println("Enter Student id:");
+                    studentId = in.nextInt();
+                    in.nextLine();
+                    User user = school.getUser(studentId);
+                    if (user instanceof Student) {
+                        System.out.println("Enter Module id:");
+                        moduleId = in.nextInt();
+                        in.nextLine();
+                        school.enrollStudent(studentId, moduleId);
+                    }else{
+                        System.err.println("User not found");
+                    }
+                }
+                case 2 ->{
+                    System.out.println("Enter Student id:");
+                    studentId = in.nextInt();
+                    in.nextLine();
+                    User user = school.getUser(studentId);
+                    if (user instanceof Student) {
+                        Enrollment enrollment = school.getEnrollmentByStudentId(studentId);
+                        if (enrollment != null) {
+                            System.out.println("Enter Module id:");
+                            moduleId = in.nextInt();
+                            in.nextLine();
+                            school.cancelEnrollment(studentId, moduleId);
+                        }else{
+                            System.err.println("Enrollment not found");
+                        }
+                    }else{
+                        System.err.println("User not found");
+                    }
+                }
+                case 3 ->{
+                    System.out.println("Enter Student id:");
+                    studentId = in.nextInt();
+                    in.nextLine();
+                    User user = school.getUser(studentId);
+                    if (user instanceof Student) {
+                        Enrollment enrollment = school.getEnrollmentByStudentId(studentId);
+                        if (enrollment != null && !enrollment.isEmpty()) {
+                            System.out.println("Enter Module id:");
+                            moduleId = in.nextInt();
+                            in.nextLine();
+                            Module module = school.getModule(moduleId);
+                            if (module != null && enrollment.findModule(module)) {
+                                System.out.println("Enter New Module id:");
+                                int new_moduleId = in.nextInt();
+                                in.nextLine();
+                                Module new_module = school.getModule(new_moduleId);
+                                if (new_module != null) {
+                                    school.swapEnrollments(studentId, moduleId, new_moduleId);
+                                } else {
+                                    System.err.println("Module not found");
+                                }
+                            } else {
+                                System.err.println("Module not found");
+                            }
+                        }else{
+                            System.err.println("No enrollment found");
+                        }
+                    }else {
+                        System.err.println("User not found");
+                    }
+                }
+                case 4 -> {
+                    System.out.println("Enter Student id:");
+                    studentId = in.nextInt();
+                    in.nextLine();
+                    User user = school.getUser(studentId);
+                    if (user instanceof Student) {
+                        school.viewStudentEnrollments(studentId);
+                    }else{
+                        System.err.println("User not found");
+                    }
+                }
+                case -1 -> {}
+                default -> System.err.println("Invalid choice");
+            }
+
+             */
+        }
+    }
+
     //Main Selector for every Class
     public static void CLI_selection(School school) {
         int choice = 0;
@@ -767,6 +867,8 @@ public class CLI_interface {
                 case 5:
                     Cli_Enrollment(school);
                     break;
+                case 6:
+
                 case -1:
                     break;
                 default:

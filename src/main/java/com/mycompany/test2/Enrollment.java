@@ -1,6 +1,7 @@
 package com.mycompany.test2;
 
 import java.util.HashSet;
+import java.util.Objects;
 
 public class Enrollment {
     private static int count = 0;
@@ -100,13 +101,32 @@ public class Enrollment {
         }
     }
 
-    /*@Override
+    public String getModuleNames(){
+        String moduleNames = "";
+        for (Module module : modules) {
+            moduleNames += module.getName()+" ";
+        }
+        return moduleNames;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Enrollment that)) return false;
+        return Objects.equals(student, that.student);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(student);
+    }
+
+
+    @Override
     public String toString() {
         return "Enrollment{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", student=" + student +
-                ", module=" + module +
+                ", student=" + student.getName() +
+                ", modules=" + getModuleNames() +
                 '}';
-    }*/
+    }
 }

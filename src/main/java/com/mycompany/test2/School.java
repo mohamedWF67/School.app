@@ -8,11 +8,13 @@ public class School {
     private ArrayList<User> users;
     private ArrayList<Module> modules;
     private HashSet<Enrollment> enrollments;
+    private HashSet<Grade> grades;
 
     public School() {
         modules = new ArrayList<>();
         users = new ArrayList<>();
         enrollments = new HashSet<>();
+        grades = new HashSet<>();
     }
 
     public School(String name) {
@@ -20,12 +22,14 @@ public class School {
         modules = new ArrayList<>();
         users = new ArrayList<>();
         enrollments = new HashSet<>();
+        grades = new HashSet<>();
     }
-    public School(String name, ArrayList<User> users, ArrayList<Module> modules, HashSet<Enrollment> enrollments) {
+    public School(String name, ArrayList<User> users, ArrayList<Module> modules, HashSet<Enrollment> enrollments, HashSet<Grade> grades) {
         this.name = name;
         this.users = users;
         this.modules = modules;
         this.enrollments = enrollments;
+        this.grades = grades;
     }
 
     public String getName() {
@@ -172,7 +176,6 @@ public class School {
     public HashSet<Enrollment> getEnrollments() {
         return enrollments;
     }
-
     public void addEnrollment(Student student,Module module) {
         if (!module.isFull()){
             enrollments.add(new Enrollment(student,module));
@@ -279,6 +282,111 @@ public class School {
             }
         }else{
             System.err.println("No enrollments");
+        }
+    }
+
+    public Grade getGrade(Student student, Module module) {
+        for (Grade grade : grades) {
+            if (grade.getStudent().equals(student) && grade.getModule().equals(module)) {
+                return grade;
+            }
+        }
+        return null;
+    }
+
+    public boolean gradeExists(Student student, Module module) {
+        return getGrade(student, module) != null;
+    }
+
+    public int checkGrade(int grade){
+        if (grade >=100) {
+            return 100;
+        }else if (grade <=0) {
+            return 0;
+        }
+        return grade;
+    }
+
+    public void addGradetoStudent(int studentId, int moduleId,int grade) {
+        User user = getUser(studentId);
+        Module module = getModule(moduleId);
+        if (user instanceof Student) {
+            Enrollment enrollment = getEnrollmentByStudentId(studentId);
+            if (enrollment != null && !enrollment.isEmpty()) {
+                if (module != null) {
+                    if (!gradeExists((Student) user,module)){
+                        grades.add(new Grade((Student) user,module,checkGrade(grade)));
+                    }else{
+                        System.err.println("Grade already exists");
+                    }
+                }else{
+                    System.err.println("Module not found");
+                }
+            }else {
+                System.err.println("Enrollment not found");
+            }
+        }else {
+            System.err.println("User not found");
+        }
+    }
+
+    public void removeGradeFromStudent(int studentId, int moduleId) {
+        User user = getUser(studentId);
+        Module module = getModule(moduleId);
+        if (user instanceof Student) {
+            Enrollment enrollment = getEnrollmentByStudentId(studentId);
+            if (enrollment != null && !enrollment.isEmpty()) {
+                if (module != null) {
+                    Grade grade =getGrade((Student) user,module);
+                    if (grade != null) {
+                        grades.remove(grade);
+                    }else{
+                        System.err.println("Grade not found");
+                    }
+                }else{
+                    System.err.println("Module not found");
+                }
+            }else {
+                System.err.println("Enrollment not found");
+            }
+        }else {
+            System.err.println("User not found");
+        }
+    }
+
+    public void editGrade(int studentId, int moduleId, int mark) {
+        User user = getUser(studentId);
+        Module module = getModule(moduleId);
+        if (user instanceof Student) {
+            Enrollment enrollment = getEnrollmentByStudentId(studentId);
+            if (enrollment != null && !enrollment.isEmpty()) {
+                if (module != null) {
+                    Grade grade = getGrade((Student) user,module);
+                    if (grade != null) {
+                        grade.setGrade(checkGrade(mark));
+                    }else{
+                        System.err.println("Grade not found exists");
+                    }
+                }else{
+                    System.err.println("Module not found");
+                }
+            }else {
+                System.err.println("Enrollment not found");
+            }
+        }else {
+            System.err.println("User not found");
+        }
+    }
+    public void viewGrades(int studentId) {
+        User user = getUser(studentId);
+        if (user instanceof Student) {
+            for (Grade grade : grades) {
+                if (grade.getStudent().equals((Student) user)) {
+                    System.out.println(grade.getGradeString());
+                }
+            }
+        }else{
+            System.err.println("User not found");
         }
     }
 }
