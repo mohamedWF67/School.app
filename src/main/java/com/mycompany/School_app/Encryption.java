@@ -1,4 +1,4 @@
-package com.mycompany.test2;
+package com.mycompany.School_app;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

@@ -1,4 +1,4 @@
-package com.mycompany.test2;
+package com.mycompany.School_app;
 
 public class Teacher extends User{
     private String qualification;
