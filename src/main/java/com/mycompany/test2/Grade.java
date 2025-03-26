@@ -58,7 +58,7 @@ public class Grade {
     }
 
     public String getGradeString() {
-        return "Module Name=" + module.getName() +
+        return  module.getName() +
                 ", Grade=" + grade;
     }
 }

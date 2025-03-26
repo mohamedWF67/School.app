@@ -104,7 +104,7 @@ public class Enrollment {
     public String getModuleNames(){
         String moduleNames = "";
         for (Module module : modules) {
-            moduleNames += module.getName()+" ";
+            moduleNames += module.getName()+",";
         }
         return moduleNames;
     }
@@ -126,7 +126,7 @@ public class Enrollment {
         return "Enrollment{" +
                 "id=" + id +
                 ", student=" + student.getName() +
-                ", modules=" + getModuleNames() +
-                '}';
+                ", modules=["+ getModuleNames() +
+                "]}";
     }
 }

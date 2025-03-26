@@ -195,10 +195,18 @@ public class School {
         return null;
     }
 
+    public boolean isModuleInEnrollments(Student student, Module module) {
+        Enrollment enrollment = getEnrollmentByStudentId(student.getId());
+        if (enrollment != null && module!=null && enrollment.findModule(module)) {
+                return true;
+        }
+        return false;
+    }
+
     public void viewStudentEnrollments(int id) {
         Enrollment enrollment = getEnrollmentByStudentId(id);
         if (enrollment != null) {
-            enrollment.printModules();
+            System.out.println(enrollment);
         }else{
             System.err.println("No enrollment for this student");
         }
@@ -308,6 +316,7 @@ public class School {
     }
 
     public void addGradetoStudent(int studentId, int moduleId,int grade) {
+        int mark = checkGrade(grade);
         User user = getUser(studentId);
         Module module = getModule(moduleId);
         if (user instanceof Student) {
@@ -315,7 +324,8 @@ public class School {
             if (enrollment != null && !enrollment.isEmpty()) {
                 if (module != null) {
                     if (!gradeExists((Student) user,module)){
-                        grades.add(new Grade((Student) user,module,checkGrade(grade)));
+                        grades.add(new Grade((Student) user,module,mark));
+                        System.out.println("Added grade " + mark + " in " + module.getName() + " for Student " + user.getName());
                     }else{
                         System.err.println("Grade already exists");
                     }
@@ -340,6 +350,7 @@ public class School {
                     Grade grade =getGrade((Student) user,module);
                     if (grade != null) {
                         grades.remove(grade);
+                        System.out.println("Removed grade from " + module.getName() + " for Student " + user.getName());
                     }else{
                         System.err.println("Grade not found");
                     }
@@ -355,6 +366,7 @@ public class School {
     }
 
     public void editGrade(int studentId, int moduleId, int mark) {
+        int newgrade = checkGrade(mark);
         User user = getUser(studentId);
         Module module = getModule(moduleId);
         if (user instanceof Student) {
@@ -363,7 +375,9 @@ public class School {
                 if (module != null) {
                     Grade grade = getGrade((Student) user,module);
                     if (grade != null) {
-                        grade.setGrade(checkGrade(mark));
+                        int oldgrade = grade.getGrade();
+                        grade.setGrade(newgrade);
+                        System.out.println("Grade updated from " + oldgrade + " to "+ newgrade + " in " + module.getName() + " for Student " + user.getName());
                     }else{
                         System.err.println("Grade not found exists");
                     }
@@ -379,11 +393,25 @@ public class School {
     }
     public void viewGrades(int studentId) {
         User user = getUser(studentId);
+        boolean foundAGrade = false;
         if (user instanceof Student) {
-            for (Grade grade : grades) {
-                if (grade.getStudent().equals((Student) user)) {
-                    System.out.println(grade.getGradeString());
+            if (!grades.isEmpty()) {
+                for (Grade grade : grades) {
+                    if(!foundAGrade){
+                        foundAGrade = grade.getStudent().equals((Student) user);
+                        if (foundAGrade){
+                            System.out.println("Grades for Student " + user.getName());
+                        }
+                    }
+                    if (grade.getStudent().equals((Student) user)) {
+                        System.out.println(grade.getGradeString());
+                    }
                 }
+                if(!foundAGrade){
+                    System.out.println("No grade found");
+                }
+            }else {
+                System.err.println("no grades");
             }
         }else{
             System.err.println("User not found");

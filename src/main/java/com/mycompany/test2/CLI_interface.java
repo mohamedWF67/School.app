@@ -753,7 +753,7 @@ public class CLI_interface {
             choice = Integer.parseInt(in.nextLine());
             int studentId;
             int moduleId;
-            /*
+            int grade;
             switch (choice){
                 case 1 -> {
                     System.out.println("Enter Student id:");
@@ -764,7 +764,14 @@ public class CLI_interface {
                         System.out.println("Enter Module id:");
                         moduleId = in.nextInt();
                         in.nextLine();
-                        school.enrollStudent(studentId, moduleId);
+                        if(school.isModuleInEnrollments((Student) user,school.getModule(moduleId))){
+                            System.out.println("Enter Grade id:");
+                            grade = in.nextInt();
+                            in.nextLine();
+                            school.addGradetoStudent(studentId, moduleId, grade);
+                        }else {
+                            System.err.println("Module not found");
+                        }
                     }else{
                         System.err.println("User not found");
                     }
@@ -775,14 +782,16 @@ public class CLI_interface {
                     in.nextLine();
                     User user = school.getUser(studentId);
                     if (user instanceof Student) {
-                        Enrollment enrollment = school.getEnrollmentByStudentId(studentId);
-                        if (enrollment != null) {
-                            System.out.println("Enter Module id:");
-                            moduleId = in.nextInt();
+                        System.out.println("Enter Module id:");
+                        moduleId = in.nextInt();
+                        in.nextLine();
+                        if(school.isModuleInEnrollments((Student) user,school.getModule(moduleId))){
+                            System.out.println("Enter Grade id:");
+                            grade = in.nextInt();
                             in.nextLine();
-                            school.cancelEnrollment(studentId, moduleId);
-                        }else{
-                            System.err.println("Enrollment not found");
+                            school.editGrade(studentId, moduleId, grade);
+                        }else {
+                            System.err.println("Module not found");
                         }
                     }else{
                         System.err.println("User not found");
@@ -794,29 +803,15 @@ public class CLI_interface {
                     in.nextLine();
                     User user = school.getUser(studentId);
                     if (user instanceof Student) {
-                        Enrollment enrollment = school.getEnrollmentByStudentId(studentId);
-                        if (enrollment != null && !enrollment.isEmpty()) {
-                            System.out.println("Enter Module id:");
-                            moduleId = in.nextInt();
-                            in.nextLine();
-                            Module module = school.getModule(moduleId);
-                            if (module != null && enrollment.findModule(module)) {
-                                System.out.println("Enter New Module id:");
-                                int new_moduleId = in.nextInt();
-                                in.nextLine();
-                                Module new_module = school.getModule(new_moduleId);
-                                if (new_module != null) {
-                                    school.swapEnrollments(studentId, moduleId, new_moduleId);
-                                } else {
-                                    System.err.println("Module not found");
-                                }
-                            } else {
-                                System.err.println("Module not found");
-                            }
-                        }else{
-                            System.err.println("No enrollment found");
+                        System.out.println("Enter Module id:");
+                        moduleId = in.nextInt();
+                        in.nextLine();
+                        if(school.isModuleInEnrollments((Student) user,school.getModule(moduleId))){
+                            school.removeGradeFromStudent(studentId, moduleId);
+                        }else {
+                            System.err.println("Module not found");
                         }
-                    }else {
+                    }else{
                         System.err.println("User not found");
                     }
                 }
@@ -826,7 +821,7 @@ public class CLI_interface {
                     in.nextLine();
                     User user = school.getUser(studentId);
                     if (user instanceof Student) {
-                        school.viewStudentEnrollments(studentId);
+                        school.viewGrades(studentId);
                     }else{
                         System.err.println("User not found");
                     }
@@ -834,15 +829,13 @@ public class CLI_interface {
                 case -1 -> {}
                 default -> System.err.println("Invalid choice");
             }
-
-             */
         }
     }
 
     //Main Selector for every Class
     public static void CLI_selection(School school) {
         int choice = 0;
-        String[] choices = {"Admin", "Student", "Teacher", "Module","Enrollment"};
+        String[] choices = {"Admin", "Student", "Teacher", "Module","Enrollment","Grade"};
         while(choice != -1) {
             System.out.println("Choose your choice");
             for (int i = 0; i < choices.length; i++) {
@@ -868,7 +861,8 @@ public class CLI_interface {
                     Cli_Enrollment(school);
                     break;
                 case 6:
-
+                    Cli_Grade(school);
+                    break;
                 case -1:
                     break;
                 default:
