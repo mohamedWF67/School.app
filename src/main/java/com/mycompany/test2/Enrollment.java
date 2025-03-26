@@ -94,11 +94,13 @@ public class Enrollment {
         }
     }
 
-    public void printModules() {
+    public boolean printModules() {
         if(!modules.isEmpty()) {
             System.out.println(modules);
+            return true;
         }else{
             System.err.println("No modules");
+            return false;
         }
     }
 

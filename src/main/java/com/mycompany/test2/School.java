@@ -302,6 +302,43 @@ public class School {
         }
     }
 
+    public ArrayList<Module> getCompatibleModules(User user) {
+        Student student = (Student) user;
+        ArrayList<Module> compatibleModules = new ArrayList<>();
+        if (!modules.isEmpty()) {
+            for (Module module : modules) {
+                boolean enrolled = false;
+                Enrollment enrollment = getEnrollmentByStudentId(user.getId());
+                if (enrollment != null) {
+                    enrolled = enrollment.findModule(module);
+                }
+                if (module.getSection().equals(student.getSection()) && !enrolled) {
+                    compatibleModules.add(module);
+                }
+            }
+        }
+        return compatibleModules;
+    }
+
+    public void printCompatibleModules(User user) {
+        ArrayList<Module> compatibleModules = getCompatibleModules(user);
+        if (compatibleModules != null) {
+            for (Module module : compatibleModules) {
+                System.out.println(module);
+            }
+        }
+    }
+
+    public void printEnrolledModules(User user) {
+        if (getUser(user.getId()) instanceof Student) {
+            Student student = (Student) user;
+            Enrollment enrollment = getEnrollmentByStudentId(student.getId());
+            if (enrollment != null) {
+                enrollment.printModules();
+            }
+        }
+    }
+
     public Grade getGrade(Student student, Module module) {
         for (Grade grade : grades) {
             if (grade.getStudent().equals(student) && grade.getModule().equals(module)) {

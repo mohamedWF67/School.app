@@ -723,6 +723,7 @@ public class CLI_interface {
                     in.nextLine();
                     User user = school.getUser(studentId);
                     if (user instanceof Student) {
+                        school.printCompatibleModules(user);
                         System.out.println("Enter Module id:");
                         moduleId = in.nextInt();
                         in.nextLine();
@@ -739,6 +740,7 @@ public class CLI_interface {
                     if (user instanceof Student) {
                         Enrollment enrollment = school.getEnrollmentByStudentId(studentId);
                         if (enrollment != null) {
+                            school.printEnrolledModules(user);
                             System.out.println("Enter Module id:");
                             moduleId = in.nextInt();
                             in.nextLine();
@@ -758,11 +760,13 @@ public class CLI_interface {
                     if (user instanceof Student) {
                         Enrollment enrollment = school.getEnrollmentByStudentId(studentId);
                         if (enrollment != null && !enrollment.isEmpty()) {
+                            school.printEnrolledModules(user);
                             System.out.println("Enter Module id:");
                             moduleId = in.nextInt();
                             in.nextLine();
                             Module module = school.getModule(moduleId);
                             if (module != null && enrollment.findModule(module)) {
+                                school.printCompatibleModules(user);
                                 System.out.println("Enter New Module id:");
                                 int new_moduleId = in.nextInt();
                                 in.nextLine();
