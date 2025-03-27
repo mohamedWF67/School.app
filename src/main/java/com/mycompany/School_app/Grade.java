@@ -86,6 +86,6 @@ public class Grade {
     //Returns the module name and grade as a String
     public String getGradeString() {
         return  "ID: " + module.getId()+" "+module.getName() +"\t"+
-                ", Grade:" + grade + " " + getGradeChar();
+                "Grade:" + grade + " " + getGradeChar();
     }
 }
