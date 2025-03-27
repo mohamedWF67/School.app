@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class School {
+    //Attributes and collections
     private String name;
     private ArrayList<User> users;
     private ArrayList<Module> modules;
     private HashSet<Enrollment> enrollments;
     private HashSet<Grade> grades;
 
+    //Empty Constructor
     public School() {
         modules = new ArrayList<>();
         users = new ArrayList<>();
@@ -17,6 +19,7 @@ public class School {
         grades = new HashSet<>();
     }
 
+    //Constructor with name
     public School(String name) {
         this.name = name;
         modules = new ArrayList<>();
@@ -24,6 +27,8 @@ public class School {
         enrollments = new HashSet<>();
         grades = new HashSet<>();
     }
+
+    //Constructor with all data
     public School(String name, ArrayList<User> users, ArrayList<Module> modules, HashSet<Enrollment> enrollments, HashSet<Grade> grades) {
         this.name = name;
         this.users = users;
@@ -32,18 +37,22 @@ public class School {
         this.grades = grades;
     }
 
+    //Getter for name
     public String getName() {
         return name;
     }
 
+    //Setter for name
     public void setName(String name) {
         this.name = name;
     }
 
+    //Getter for users as an ArrayList
     public ArrayList<User> getUsers() {
         return users;
     }
 
+    //Getter for a User by it's id
     public User getUser(int id) {
         for (User user : users) {
             if (user.getId() == id) {
@@ -53,22 +62,27 @@ public class School {
         return null;
     }
 
+    //Setter for users
     public void setUsers(ArrayList<User> users) {
         this.users = users;
     }
 
+    //Getter for Modules as an ArrayList
     public ArrayList<Module> getModules() {
         return modules;
     }
 
+    //Setter for modules
     public void setModules(ArrayList<Module> modules) {
         this.modules = modules;
     }
 
+    //Adds user to users
     public void addUser(User user) {
         (!users.contains(user)?users:null).add(user);
     }
 
+    //Removes user from users by it's id
     public void removeUser(int id) {
         User user = getUser(id);
         if (user != null) {
@@ -76,22 +90,7 @@ public class School {
         }
     }
 
-    public void printStudents() {
-        for (User user : users) {
-            if (user instanceof Student) {
-                System.out.println(user);
-            }
-        }
-    }
-
-    public void printTeachers() {
-        for (User user : users) {
-            if (user instanceof Teacher) {
-                System.out.println(user);
-            }
-        }
-    }
-
+    //Print Admins
     public void printAdmins() {
         for (User user : users) {
             if (user instanceof Admin) {
@@ -100,25 +99,50 @@ public class School {
         }
     }
 
-    public void printStudent(int id) {
-        User user = getUser(id);
-        System.out.println(user instanceof Student?user:"No such Student");
+    //Prints users
+    public void printStudents() {
+        for (User user : users) {
+            if (user instanceof Student) {
+                System.out.println(user);
+            }
+        }
     }
 
-    public void printTeacher(int id) {
-        User user = getUser(id);
-        System.out.println(user instanceof Teacher?user:"No such Teacher");
+    //Print teachers
+    public void printTeachers() {
+        for (User user : users) {
+            if (user instanceof Teacher) {
+                System.out.println(user);
+            }
+        }
     }
 
+    //Print admin using it's id
     public void printAdmin(int id) {
         User user = getUser(id);
         System.out.println(user instanceof Admin?user:"No such Admin");
     }
 
-    public void addModule(Module module) {
-        modules.add(module);
+    //Print student using it's id
+    public void printStudent(int id) {
+        User user = getUser(id);
+        System.out.println(user instanceof Student?user:"No such Student");
     }
 
+    //Print teacher using it's id
+    public void printTeacher(int id) {
+        User user = getUser(id);
+        System.out.println(user instanceof Teacher?user:"No such Teacher");
+    }
+
+    //add module to modules
+    public void addModule(Module module) {
+        if (!modules.contains(module)) {
+            modules.add(module);
+        }
+    }
+
+    //Getter for a module by it's id
     public Module getModule(int id) {
         for (Module module : modules) {
             if (module.getId() == id) {
@@ -128,6 +152,8 @@ public class School {
         return null;
     }
 
+    //Legacy Update module method
+    /*
     public String updateModule(int id,Module module) {
         Module oldModule = getModule(id);
         if (oldModule != null) {
@@ -135,7 +161,9 @@ public class School {
             return "Module found";
         }
         return "Module not found";
-    }
+    }*/
+
+    //Remove module from modules by it's id
     public String deleteModule(int id) {
         Module module = getModule(id);
         if (module != null) {
@@ -145,6 +173,8 @@ public class School {
         }
         return "Module not found";
     }
+
+    //Generate report for module by it's id
     public void GenerateReport(int id) {
         Module module = getModule(id);
         if (module != null) {
@@ -154,12 +184,14 @@ public class School {
         }
     }
 
+    //Prints modules
     public void printModules() {
         for (Module module : modules) {
             System.out.println(module);
         }
     }
 
+    //Checks if this Email already exists
     public boolean emailExists(String email) {
         for (User user : users) {
             if (user.getEmail().equals(email)) {
@@ -169,13 +201,17 @@ public class School {
         return false;
     }
 
+    //Setter for enrollments
     public void setEnrollments(HashSet<Enrollment> enrollments) {
         this.enrollments = enrollments;
     }
 
+    //Getter for enrollments
     public HashSet<Enrollment> getEnrollments() {
         return enrollments;
     }
+
+    //Add enrollment to enrollments
     public boolean addEnrollment(Student student,Module module) {
         if (!module.isFull()){
             if (module.checkCompatability(student)) {
@@ -188,6 +224,7 @@ public class School {
         return false;
     }
 
+    //Getter for enrollment by student's id
     public Enrollment getEnrollmentByStudentId(int id) {
         if (enrollments != null) {
             for (Enrollment enrollment : enrollments) {
@@ -199,14 +236,16 @@ public class School {
         return null;
     }
 
+    //Checks if the Student is enrolled int this module
     public boolean isModuleInEnrollments(Student student, Module module) {
         Enrollment enrollment = getEnrollmentByStudentId(student.getId());
-        if (enrollment != null && module!=null && enrollment.findModule(module)) {
+        if (enrollment != null && module!=null && enrollment.moduleExists(module)) {
                 return true;
         }
         return false;
     }
 
+    //Prints the enrollment for student by it's id
     public void viewStudentEnrollments(int id) {
         Enrollment enrollment = getEnrollmentByStudentId(id);
         if (enrollment != null) {
@@ -216,6 +255,7 @@ public class School {
         }
     }
 
+    //Enrolls student in a module
     public void enrollStudent(int studentId, int moduleId) {
         User user = getUser(studentId);
         Module module = getModule(moduleId);
@@ -243,6 +283,7 @@ public class School {
         }
     }
 
+    //Cancels Enrollment of student from a module
     public void cancelEnrollment(int studentId,int moduleId) {
         User user = getUser(studentId);
         Module module = getModule(moduleId);
@@ -264,6 +305,7 @@ public class School {
         }
     }
 
+    //Swaps an enrolled module with a new one
     public void swapEnrollments(int studentId,int moduleId1,int moduleId2) {
         User user = getUser(studentId);
         if (user instanceof Student) {
@@ -272,7 +314,7 @@ public class School {
             if (module1 != null && module2 != null) {
                 Enrollment enrollment = getEnrollmentByStudentId(studentId);
                 if (enrollment != null && !enrollment.isEmpty()) {
-                    if (enrollment.findModule(module1) && moduleId1 != moduleId2 && module2.checkCompatability((Student) user)) {
+                    if (enrollment.moduleExists(module1) && moduleId1 != moduleId2 && module2.checkCompatability((Student) user)) {
                         enrollment.removeModule(module1);
                         enrollment.addModule(module2);
                         System.out.println("Swapped module " + module1.getName() + " with "+ module2.getName() + " for Student " + user.getName());
@@ -290,10 +332,11 @@ public class School {
         }
     }
 
+    //Delete module from all enrollments
     public void deleteModuleFromEnrollments(Module module) {
         if (enrollments != null) {
             for (Enrollment enrollment : enrollments) {
-                if (enrollment.findModule(module)) {
+                if (enrollment.moduleExists(module)) {
                     enrollment.removeModule(module);
                 }
             }
@@ -302,6 +345,7 @@ public class School {
         }
     }
 
+    //Getter for all the modules that the student can enroll in
     public ArrayList<Module> getCompatibleModules(User user) {
         Student student = (Student) user;
         ArrayList<Module> compatibleModules = new ArrayList<>();
@@ -310,7 +354,7 @@ public class School {
                 boolean enrolled = false;
                 Enrollment enrollment = getEnrollmentByStudentId(user.getId());
                 if (enrollment != null) {
-                    enrolled = enrollment.findModule(module);
+                    enrolled = enrollment.moduleExists(module);
                 }
                 if (module.getSection().equals(student.getSection()) && !enrolled) {
                     compatibleModules.add(module);
@@ -320,6 +364,7 @@ public class School {
         return compatibleModules;
     }
 
+    //Prints all the modules that the student can enroll in
     public void printCompatibleModules(User user) {
         ArrayList<Module> compatibleModules = getCompatibleModules(user);
         if (compatibleModules != null) {
@@ -329,6 +374,7 @@ public class School {
         }
     }
 
+    //Prints all the Users Enrolled modules
     public void printEnrolledModules(User user) {
         if (getUser(user.getId()) instanceof Student) {
             Student student = (Student) user;
@@ -339,6 +385,7 @@ public class School {
         }
     }
 
+    //Getter for a Grade
     public Grade getGrade(Student student, Module module) {
         for (Grade grade : grades) {
             if (grade.getStudent().equals(student) && grade.getModule().equals(module)) {
@@ -348,10 +395,12 @@ public class School {
         return null;
     }
 
+    //Checks if the Grade exists
     public boolean gradeExists(Student student, Module module) {
         return getGrade(student, module) != null;
     }
 
+    //Clamps the Grade in a range from [0,100] and returns it's value
     public int checkGrade(int grade){
         if (grade >=100) {
             return 100;
@@ -361,6 +410,7 @@ public class School {
         return grade;
     }
 
+    //Adds a grade for a student in a certain module
     public void addGradetoStudent(int studentId, int moduleId,int grade) {
         int mark = checkGrade(grade);
         User user = getUser(studentId);
@@ -386,6 +436,7 @@ public class School {
         }
     }
 
+    //Removes a grade for a student in a certain module
     public void removeGradeFromStudent(int studentId, int moduleId) {
         User user = getUser(studentId);
         Module module = getModule(moduleId);
@@ -411,6 +462,7 @@ public class School {
         }
     }
 
+    //Edits a grade for a student in a certain module
     public void editGrade(int studentId, int moduleId, int mark) {
         int newgrade = checkGrade(mark);
         User user = getUser(studentId);
@@ -437,6 +489,8 @@ public class School {
             System.err.println("User not found");
         }
     }
+
+    //View student grades using his id
     public void viewGrades(int studentId) {
         User user = getUser(studentId);
         boolean foundAGrade = false;

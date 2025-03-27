@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class CLI_interface {
 
+    //Formatter to convert Date to string and vise-versa
     private static final SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 
     //Method for Adding a new Admin object to the Arraylist in School
@@ -765,7 +766,7 @@ public class CLI_interface {
                             moduleId = in.nextInt();
                             in.nextLine();
                             Module module = school.getModule(moduleId);
-                            if (module != null && enrollment.findModule(module)) {
+                            if (module != null && enrollment.moduleExists(module)) {
                                 school.printCompatibleModules(user);
                                 System.out.println("Enter New Module id:");
                                 int new_moduleId = in.nextInt();
@@ -897,10 +898,10 @@ public class CLI_interface {
         }
     }
 
-    //Main Selector for every Class
-    public static void CLI_selection(School school) {
+    //Selector if the user is Admin
+    public static void CLI_Admin_select(School school) {
         int choice = 0;
-        String[] choices = {"Admin", "Student", "Teacher", "Module","Enrollment","Grade"};
+        String[] choices = {"Manage Admin", "Manage Student", "Manage Teacher", "Manage Module","Manage Enrollment","Manage Grade"};
         while(choice != -1) {
             System.out.println("Choose your choice");
             for (int i = 0; i < choices.length; i++) {
@@ -931,12 +932,100 @@ public class CLI_interface {
                 case -1:
                     break;
                 default:
-                    System.out.println("Invalid choice");
+                    System.err.println("Invalid choice");
                     break;
             }
         }
     }
 
+    //Selector if the user is Student
+    public static void CLI_Student_select(School school) {
+        int choice = 0;
+        String[] choices = {"Manage Student","Enrollment"};
+        while(choice != -1) {
+            System.out.println("Choose your choice");
+            for (int i = 0; i < choices.length; i++) {
+                System.out.println( (i+1) + ". " + choices[i]);
+            }
+            System.out.println("-1. Exit");
+            Scanner in = new Scanner(System.in);
+            choice = Integer.parseInt(in.nextLine());
+            switch (choice) {
+                case 1:
+                    Cli_student(school);
+                    break;
+                case 2:
+                    Cli_Enrollment(school);
+                    break;
+                case -1:
+                    break;
+                default:
+                    System.err.println("Invalid choice");
+                    break;
+            }
+        }
+    }
+
+    //Selector if the user is Teacher
+    public static void CLI_Teacher_select(School school) {
+        int choice = 0;
+        String[] choices = {"Teacher","Grade"};
+        while(choice != -1) {
+            System.out.println("Choose your choice");
+            for (int i = 0; i < choices.length; i++) {
+                System.out.println( (i+1) + ". " + choices[i]);
+            }
+            System.out.println("-1. Exit");
+            Scanner in = new Scanner(System.in);
+            choice = Integer.parseInt(in.nextLine());
+            switch (choice) {
+                case 1:
+                    Cli_Teacher(school);
+                    break;
+                case 2:
+                    Cli_Grade(school);
+                    break;
+                case -1:
+                    break;
+                default:
+                    System.err.println("Invalid choice");
+                    break;
+            }
+        }
+    }
+
+    //Main Selector for every Class
+    public static void CLI_selection(School school) {
+        int choice = 0;
+        String[] choices = {"Admin", "Student", "Teacher"};
+        while(choice != -1) {
+            System.out.println("Choose your choice");
+            for (int i = 0; i < choices.length; i++) {
+                System.out.println( (i+1) + ". " + choices[i]);
+            }
+            System.out.println("-1. Exit");
+            Scanner in = new Scanner(System.in);
+            choice = Integer.parseInt(in.nextLine());
+            switch (choice) {
+                case 1:
+                    CLI_Admin_select(school);
+                    break;
+                case 2:
+                    CLI_Student_select(school);
+                    break;
+                case 3:
+                    CLI_Teacher_select(school);
+                    break;
+                case -1:
+                    break;
+                default:
+                    System.err.println("Invalid choice");
+                    break;
+            }
+        }
+    }
+
+    //Function to remove characters from a String with numbers
     public static int removeString(String str) {
         String CleanString = "";
         if (str.isEmpty()) {
