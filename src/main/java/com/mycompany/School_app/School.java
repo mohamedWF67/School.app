@@ -423,7 +423,7 @@ public class School {
                         grades.add(new Grade((Student) user,module,mark));
                         System.out.println("Added grade " + mark + " in " + module.getName() + " for Student " + user.getName());
                     }else{
-                        System.err.println("Grade already exists");
+                        editGrade(studentId, moduleId, grade);
                     }
                 }else{
                     System.err.println("Module not found");
@@ -477,7 +477,7 @@ public class School {
                         grade.setGrade(newgrade);
                         System.out.println("Grade updated from " + oldgrade + " to "+ newgrade + " in " + module.getName() + " for Student " + user.getName());
                     }else{
-                        System.err.println("Grade not found exists");
+                        System.err.println("Grade not found");
                     }
                 }else{
                     System.err.println("Module not found");
@@ -511,7 +511,7 @@ public class School {
                     System.out.println("No grade found");
                 }
             }else {
-                System.err.println("no grades");
+                System.err.println("No grades");
             }
         }else{
             System.err.println("User not found");

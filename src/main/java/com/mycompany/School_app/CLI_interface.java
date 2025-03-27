@@ -848,6 +848,7 @@ public class CLI_interface {
                     in.nextLine();
                     User user = school.getUser(studentId);
                     if (user instanceof Student) {
+                        school.viewGrades(studentId);
                         System.out.println("Enter Module id:");
                         moduleId = in.nextInt();
                         in.nextLine();
@@ -869,6 +870,7 @@ public class CLI_interface {
                     in.nextLine();
                     User user = school.getUser(studentId);
                     if (user instanceof Student) {
+                        school.viewGrades(studentId);
                         System.out.println("Enter Module id:");
                         moduleId = in.nextInt();
                         in.nextLine();

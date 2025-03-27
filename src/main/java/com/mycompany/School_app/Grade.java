@@ -45,6 +45,24 @@ public class Grade {
         this.grade = grade;
     }
 
+    //Method to convert number to Char
+    private char getGradeChar() {
+        if (grade >= 70) {
+            return 'A';
+        }else if (grade >= 60) {
+            return 'B';
+        }
+        else if (grade >= 50) {
+            return 'C';
+        }
+        else if (grade >= 40) {
+            return 'D';
+        }
+        else{
+            return 'F';
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Grade grade)) return false;
@@ -67,7 +85,7 @@ public class Grade {
 
     //Returns the module name and grade as a String
     public String getGradeString() {
-        return  module.getName() +
-                ", Grade=" + grade;
+        return  "ID: " + module.getId()+" "+module.getName() +"\t"+
+                ", Grade:" + grade + " " + getGradeChar();
     }
 }
