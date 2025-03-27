@@ -96,7 +96,9 @@ public class Enrollment {
 
     public boolean printModules() {
         if(!modules.isEmpty()) {
-            System.out.println(modules);
+            for (Module module : modules) {
+                System.out.println(module);
+            }
             return true;
         }else{
             System.err.println("No modules");

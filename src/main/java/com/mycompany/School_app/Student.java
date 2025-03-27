@@ -115,13 +115,13 @@ public class Student extends User {
 
     @Override
     public String toString() {
-        return "Student{" +
+        return  super.toString()+"Student{" +
                 "parentName='" + parentName + '\'' +
                 ", DOB=" + DOB +
                 ", gender='" + gender + '\'' +
                 ", mobileNo='" + mobileNo + '\'' +
                 ", address='" + address + '\'' +
                 ", section='" + section + '\'' +
-                "} " + super.toString();
+                "} ";
     }
 }

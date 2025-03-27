@@ -825,11 +825,12 @@ public class CLI_interface {
                     in.nextLine();
                     User user = school.getUser(studentId);
                     if (user instanceof Student) {
+                        school.printEnrolledModules(user);
                         System.out.println("Enter Module id:");
                         moduleId = in.nextInt();
                         in.nextLine();
                         if(school.isModuleInEnrollments((Student) user,school.getModule(moduleId))){
-                            System.out.println("Enter Grade id:");
+                            System.out.println("Enter Grade:");
                             grade = in.nextInt();
                             in.nextLine();
                             school.addGradetoStudent(studentId, moduleId, grade);
@@ -850,7 +851,7 @@ public class CLI_interface {
                         moduleId = in.nextInt();
                         in.nextLine();
                         if(school.isModuleInEnrollments((Student) user,school.getModule(moduleId))){
-                            System.out.println("Enter Grade id:");
+                            System.out.println("Enter Grade:");
                             grade = in.nextInt();
                             in.nextLine();
                             school.editGrade(studentId, moduleId, grade);

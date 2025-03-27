@@ -70,6 +70,10 @@ public class Module {
         this.maxstudents = maxstudents;
     }
 
+    public void setNumstudents(int numstudents) {
+        this.numstudents = numstudents;
+    }
+
     public int getTotalEnrolled() {
         return numstudents;
     }
