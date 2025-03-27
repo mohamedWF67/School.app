@@ -3,36 +3,44 @@ package com.mycompany.School_app;
 import java.util.Objects;
 
 public class Grade {
+    //Attributes and collections
     private Student student;
     private Module module;
     private int grade;
 
+    //Constructor
     public Grade(Student student, Module module, int grade) {
         this.student = student;
         this.module = module;
         this.grade = grade;
     }
 
+    //Getter for student
     public Student getStudent() {
         return student;
     }
 
+    //Setter for student
     public void setStudent(Student student) {
         this.student = student;
     }
 
+    //Getter for module
     public Module getModule() {
         return module;
     }
 
+    //Setter for module
     public void setModule(Module module) {
         this.module = module;
     }
 
+    //Getter for grade
     public int getGrade() {
         return grade;
     }
 
+    //Setter for grade
     public void setGrade(int grade) {
         this.grade = grade;
     }
@@ -57,6 +65,7 @@ public class Grade {
                 '}';
     }
 
+    //Returns the module name and grade as a String
     public String getGradeString() {
         return  module.getName() +
                 ", Grade=" + grade;

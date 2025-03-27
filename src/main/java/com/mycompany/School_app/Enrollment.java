@@ -144,7 +144,7 @@ public class Enrollment {
         return Objects.hashCode(student);
     }
 
-    
+
     @Override
     public String toString() {
         if (!modules.isEmpty()){

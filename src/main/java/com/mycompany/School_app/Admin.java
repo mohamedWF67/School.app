@@ -2,14 +2,17 @@ package com.mycompany.School_app;
 
 public class Admin extends User {
 
+    //Empty Constructor
     public Admin() {
         super();
     }
 
+    //Constructor with id as an input
     public Admin(int id, String name, String email, String password) {
         super(id, name, email, password);
     }
 
+    //Constructor with id automatic
     public Admin(String name, String email, String password) {
         super(name, email, password);
     }
