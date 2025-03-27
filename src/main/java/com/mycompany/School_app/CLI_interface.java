@@ -998,6 +998,7 @@ public class CLI_interface {
 
     //Main Selector for every Class
     public static void CLI_selection(School school) {
+        System.out.println("Welcome to " + school.getName());
         int choice = 0;
         String[] choices = {"Admin", "Student", "Teacher"};
         while(choice != -1) {
