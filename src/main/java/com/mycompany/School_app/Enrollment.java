@@ -78,35 +78,36 @@ public class Enrollment {
 
     //Adds module to modules
     public boolean addModule(Module module) {
-        if (!module.isFull()){
-            if (!modules.contains(module)) {
-                if (module.checkCompatability(student)) {
-                    modules.add(module);
-                    module.addEnrolledModule();
-                    return true;
-                }
-            }else{
-                System.err.println("Module " + module.getName() + " is already enrolled");
-            }
-        }else {
-            System.err.println("Module is Full");
+        if (module.isFull()) {
+            System.err.println("Module is full");
+            return false;
         }
-        return false;
+
+        if (modules.contains(module)) {
+            System.err.println("Module " + module.getName() + " is already enrolled");
+            return false;
+        }
+
+        if (!module.checkCompatibility(student)) {
+            System.err.println("Module " + module.getName() + " is not from the same section");
+            return false;
+        }
+
+        modules.add(module);
+        module.addEnrolledModule();
+        return true;
     }
+
 
     //Remove module from modules
     public boolean removeModule(Module module) {
-        try {
-            if (modules.contains(module)) {
-                modules.remove(module);
-                module.removeEnrolledModule();
-                return true;
-            }else {
-                System.err.println("No Enrollment for this module");
-                return false;
-            }
-        }catch (RuntimeException e) {
-            throw new RuntimeException(e);
+        if (modules.contains(module)) {
+            modules.remove(module);
+            module.removeEnrolledModule();
+            return true;
+        } else {
+            System.err.println("No Enrollment for this module");
+            return false;
         }
     }
 

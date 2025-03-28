@@ -8,12 +8,13 @@ import java.util.Scanner;
 public class CLI_interface {
 
     //Formatter to convert Date to string and vise-versa
-    private static final SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+    private static final SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
     //Method for Adding a new Admin object to the Arraylist in School
-    public static void addAdmin(School school, String name, String email, String password) {
-        if (!school.emailExists(email)) {
-            school.addUser(new Admin(name, email, password));
+    public static void addAdmin(School school, String name, String Email, String password) {
+        if (!school.emailExists(Email)) {
+            school.addUser(new Admin(name, Email, password));
+
             System.out.println("Admin added successfully");
         }else{
             System.err.println("This Email already exists");
@@ -21,14 +22,15 @@ public class CLI_interface {
     }
 
     //Method for Modifying an admin using id
-    public static void modifyAdmin(School school,int id, String name, String email, String password) {
+    public static void modifyAdmin(School school,int id, String name, String Email, String password) {
         User user = school.getUser(id);
-        if (!school.emailExists(email) &&  user instanceof Admin || user.getEmail().equals(email) && user instanceof Admin) {
+        if (!school.emailExists(Email) &&  user instanceof Admin || user.getEmail().equals(Email) && user instanceof Admin) {
             user.setName(name);
-            user.setEmail(email);
+            user.setEmail(Email);
             if (password != null) {
                 user.setHahedPassword(password);
             }
+
             System.out.println("Admin modified successfully");
         }else{
             System.err.println("Failed to modify admin");
@@ -40,6 +42,7 @@ public class CLI_interface {
         User user = school.getUser(id);
         if (user instanceof Admin) {
             school.removeUser(id);
+
             System.out.println("Admin removed successfully");
         }else{
             System.err.println("Failed to remove admin");
@@ -47,9 +50,10 @@ public class CLI_interface {
     }
 
     //Method for Adding a new Student object to the Arraylist in School
-    public static void addStudent(School school,String name, String email, String password, String parentName, Date DOB, String gender, String mobileNo,String address, String section) {
-        if (!school.emailExists(email)) {
-            school.addUser(new Student(name, email, password, parentName, DOB, gender, mobileNo,address, section));
+    public static void addStudent(School school,String name, String Email, String password, String parentName, Date DOB, String gender, String mobileNo,String address, String section) {
+        if (!school.emailExists(Email)) {
+            school.addUser(new Student(name, Email, password, parentName, DOB, gender, mobileNo,address, section));
+
             System.out.println("Added student successfully");
         }else {
             System.err.println("This Email already exists");
@@ -57,12 +61,12 @@ public class CLI_interface {
     }
 
     //Method for Modifying Student using id
-    public static void modifyStudent(School school,int id,String name, String email, String password, String parentName, Date DOB, String gender, String mobileNo,String address, String section){
+    public static void modifyStudent(School school,int id,String name, String Email, String password, String parentName, Date DOB, String gender, String mobileNo,String address, String section){
         User user = school.getUser(id);
-        if (!school.emailExists(email) && user instanceof Student || user.getEmail().equals(email) && user instanceof Student) {
+        if (!school.emailExists(Email) && user instanceof Student || user.getEmail().equals(Email) && user instanceof Student) {
             Student student = (Student) user;
             student.setName(name);
-            student.setEmail(email);
+            student.setEmail(Email);
             if (password != null) {
                 student.setHahedPassword(password);
             }
@@ -72,6 +76,7 @@ public class CLI_interface {
             student.setMobileNo(mobileNo);
             student.setAddress(address);
             student.setSection(section);
+
             System.out.println("Modified student successfully");
         }else {
             System.err.println("Failed to modify student");
@@ -83,6 +88,7 @@ public class CLI_interface {
         User user = school.getUser(id);
         if (user instanceof Student) {
             school.removeUser(id);
+
             System.out.println("Removed student successfully");
         }else{
             System.err.println("Failed to remove student");
@@ -90,9 +96,10 @@ public class CLI_interface {
     }
 
     //Method for Adding a new Teacher object to the Arraylist in School
-    public static void addTeacher(School school,String name, String email, String password, String qualification, int salary, String mobileNo, String address) {
-        if (!school.emailExists(email)) {
-            school.addUser(new Teacher(name, email, password, qualification, salary, mobileNo, address));
+    public static void addTeacher(School school,String name, String Email, String password, String qualification, int salary, String mobileNo, String address) {
+        if (!school.emailExists(Email)) {
+            school.addUser(new Teacher(name, Email, password, qualification, salary, mobileNo, address));
+
             System.out.println("Added teacher successfully");
         }else {
             System.err.println("This Email already exists");
@@ -100,13 +107,13 @@ public class CLI_interface {
     }
 
     //Method for Modifying Teacher using id
-    public static void modifyTeacher(School school,int id,String name, String email, String password, String qualification, int salary, String mobileNo, String address){
+    public static void modifyTeacher(School school,int id,String name, String Email, String password, String qualification, int salary, String mobileNo, String address){
         User user = school.getUser(id);
-        if (!school.emailExists(email) && user instanceof Teacher || user.getEmail().equals(email) && user instanceof Teacher) {
+        if (!school.emailExists(Email) && user instanceof Teacher || user.getEmail().equals(Email) && user instanceof Teacher) {
             try {
                 Teacher teacher = (Teacher) user;
             teacher.setName(name);
-            teacher.setEmail(email);
+            teacher.setEmail(Email);
             if (password != null) {
                 teacher.setHahedPassword(password);
             }
@@ -116,6 +123,7 @@ public class CLI_interface {
             }
             teacher.setMobileNo(mobileNo);
             teacher.setAddress(address);
+
             System.out.println("Modified teacher successfully");
             }catch (ClassCastException e) {
                 System.err.println("Failed to modify teacher");
@@ -130,6 +138,7 @@ public class CLI_interface {
         User user = school.getUser(id);
         if (user instanceof Teacher) {
             school.removeUser(id);
+
             System.out.println("Removed teacher successfully");
         }else{
             System.err.println("Failed to remove teacher");
@@ -148,9 +157,8 @@ public class CLI_interface {
         if(module != null){
             module.setName(name);
             module.setSection(section);
-            if (maxstudents <= module.getTotalEnrolled()) {
-                module.setMaxstudents(maxstudents);
-            }
+            module.setMaxstudents(maxstudents);
+
             System.out.println("Modified Module successfully");
         }else{
             System.err.println("Failed to modify Module");
@@ -192,7 +200,7 @@ public class CLI_interface {
 
                     System.out.println("Enter Admin Email:");
                     Email = in.nextLine();
-                    if (Email.isEmpty()) {System.err.println("Invalid");continue;}
+                    if (Email.isEmpty() || isValidEmail(Email)) {System.err.println("Invalid");continue;}
 
                     System.out.println("Enter Admin Password:");
                     password = in.nextLine();
@@ -227,7 +235,7 @@ public class CLI_interface {
                         if (checklist.contains("2")){
                             System.out.println("Enter New Email:");
                             Email = in.nextLine();
-                            if (Email.isEmpty()) {System.err.println("Invalid");continue;}
+                            if (Email.isEmpty() || isValidEmail(Email)) {System.err.println("Invalid");continue;}
                         }else{
                             Email = user.getEmail();
                         }
@@ -282,7 +290,7 @@ public class CLI_interface {
             in.nextLine();
             int id;
             String name;
-            String email;
+            String Email;
             String password;
             String parentName;
             String dateOfBirth;
@@ -297,8 +305,8 @@ public class CLI_interface {
                     if (name.isEmpty()) {System.err.println("Invalid");continue;}
 
                     System.out.println("Enter Student Email:");
-                    email = in.nextLine();
-                    if (email.isEmpty()) {System.err.println("Invalid");continue;}
+                    Email = in.nextLine();
+                    if (Email.isEmpty() || isValidEmail(Email)) {System.err.println("Invalid");continue;}
 
                     System.out.println("Enter Student password:");
                     password = in.nextLine();
@@ -308,7 +316,7 @@ public class CLI_interface {
                     parentName = in.nextLine();
                     if (parentName.isEmpty()) {System.err.println("Invalid");continue;}
 
-                    System.out.println("Enter Student Date of Birth (dd-MM-yyyy):");
+                    System.out.println("Enter Student Date of Birth (dd/MM/yyyy):");
                     dateOfBirth = in.nextLine();
                     if (dateOfBirth.isEmpty()) {System.err.println("Invalid");continue;}
 
@@ -329,7 +337,7 @@ public class CLI_interface {
                     if (section.isEmpty()) {System.err.println("Invalid");continue;}
 
                     try {
-                        addStudent(school, name, email, password, parentName, formatter.parse(dateOfBirth), gender, mobileNo,address, section);
+                        addStudent(school, name, Email, password, parentName, formatter.parse(dateOfBirth), gender, mobileNo,address, section);
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
@@ -339,14 +347,14 @@ public class CLI_interface {
                     id = in.nextInt();
                     in.nextLine();
                     User user = school.getUser(id);
-                    if (user instanceof Student ) {
+                    if (user instanceof Student student ) {
                         String checklist;
                         System.out.println("type the numbers of what you want to modify:");
                         System.out.println("1. Name");
                         System.out.println("2. Email");
                         System.out.println("3. Password");
                         System.out.println("4. Parent's Name");
-                        System.out.println("5. Date of Birth (dd-MM-yyyy)");
+                        System.out.println("5. Date of Birth (dd/MM/yyyy)");
                         System.out.println("6. Gender (F or M)");
                         System.out.println("7. Mobile No");
                         System.out.println("8. Address");
@@ -366,10 +374,10 @@ public class CLI_interface {
                         }
                         if (checklist.contains("2")) {
                             System.out.println("Enter Student Email:");
-                            email = in.nextLine();
-                            if (email.isEmpty()) {System.err.println("Invalid");continue;}
+                            Email = in.nextLine();
+                            if (Email.isEmpty() || isValidEmail(Email)) {System.err.println("Invalid");continue;}
                         }else {
-                            email = user.getEmail();
+                            Email = user.getEmail();
                         }
                         if (checklist.contains("3")) {
                             System.out.println("Enter Student password:");
@@ -383,45 +391,45 @@ public class CLI_interface {
                             parentName = in.nextLine();
                             if (parentName.isEmpty()) {System.err.println("Invalid");continue;}
                         }else {
-                            parentName = ((Student) user).getParentName();
+                            parentName = student.getParentName();
                         }
                         if (checklist.contains("5")) {
-                            System.out.println("Enter Student Date of Birth:");
+                            System.out.println("Enter Student Date of Birth (dd/MM/yyyy):");
                             dateOfBirth = in.nextLine();
                             if (dateOfBirth.isEmpty()) {System.err.println("Invalid");continue;}
                         }else{
-                            dateOfBirth = formatter.format(((Student) user).getDOB());
+                            dateOfBirth = formatter.format(student.getDOB());
                         }
                         if (checklist.contains("6")) {
-                            System.out.println("Enter Student Gender:");
+                            System.out.println("Enter Student Gender (M or F):");
                             gender = in.nextLine();
                             if (gender.isEmpty()) {System.err.println("Invalid");continue;}
                         }else {
-                            gender = ((Student) user).getGender();
+                            gender = student.getGender();
                         }
                         if (checklist.contains("7")) {
                             System.out.println("Enter Student Mobile No:");
                             mobileNo = in.nextLine();
                             if (mobileNo.isEmpty()) {System.err.println("Invalid");continue;}
                         }else {
-                            mobileNo = ((Student) user).getMobileNo();
+                            mobileNo = student.getMobileNo();
                         }
                         if (checklist.contains("8")) {
                             System.out.println("Enter Student Address:");
                             address = in.nextLine();
                             if (address.isEmpty()) {System.err.println("Invalid");continue;}
                         }else {
-                            address = ((Student) user).getAddress();
+                            address = student.getAddress();
                         }
                         if (checklist.contains("9")) {
                             System.out.println("Enter Student Section:");
                             section = in.nextLine();
                             if (section.isEmpty()) {System.err.println("Invalid");continue;}
                         }else {
-                            section = ((Student) user).getSection();
+                            section = student.getSection();
                         }
                         try {
-                            modifyStudent(school, id, name, email, password, parentName, formatter.parse(dateOfBirth), gender, mobileNo, address, section);
+                            modifyStudent(school, id, name, Email, password, parentName, formatter.parse(dateOfBirth), gender, mobileNo, address, section);
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
@@ -468,7 +476,7 @@ public class CLI_interface {
             in.nextLine();
             int id;
             String name;
-            String email;
+            String Email;
             String password;
             String qualification;
             String salary;
@@ -481,8 +489,8 @@ public class CLI_interface {
                     if (name.isEmpty()) {System.err.println("Invalid");continue;}
 
                     System.out.println("Enter Teacher's Email:");
-                    email = in.nextLine();
-                    if (email.isEmpty()) {System.err.println("Invalid");continue;}
+                    Email = in.nextLine();
+                    if (Email.isEmpty() || isValidEmail(Email)) {System.err.println("Invalid");continue;}
 
                     System.out.println("Enter Teacher's password:");
                     password = in.nextLine();
@@ -504,14 +512,14 @@ public class CLI_interface {
                     address = in.nextLine();
                     if (address.isEmpty()) {System.err.println("Invalid");continue;}
 
-                    addTeacher(school, name, email, password, qualification, removeString(salary), mobileNo, address);
+                    addTeacher(school, name, Email, password, qualification, removeString(salary), mobileNo, address);
                     break;
                 case 2:
                     System.out.println("Enter Teacher id to modify:");
                     id = in.nextInt();
                     in.nextLine();
                     User user = school.getUser(id);
-                    if (user instanceof Teacher ) {
+                    if (user instanceof Teacher teacher) {
                         String checklist;
                         System.out.println("type the numbers of what you want to modify:");
                         System.out.println("1. Name");
@@ -536,10 +544,10 @@ public class CLI_interface {
                         }
                         if (checklist.contains("2")) {
                             System.out.println("Enter Teacher Email:");
-                            email = in.nextLine();
-                            if (email.isEmpty()) {System.err.println("Invalid");continue;}
+                            Email = in.nextLine();
+                            if (Email.isEmpty() || isValidEmail(Email)) {System.err.println("Invalid");continue;}
                         }else {
-                            email = user.getEmail();
+                            Email = user.getEmail();
                         }
                         if (checklist.contains("3")) {
                             System.out.println("Enter Teacher password:");
@@ -553,7 +561,7 @@ public class CLI_interface {
                             qualification = in.nextLine();
                             if (qualification.isEmpty()) {System.err.println("Invalid");continue;}
                         }else {
-                            qualification = ((Teacher) user).getQualification();
+                            qualification = teacher.getQualification();
                         }
                         if (checklist.contains("5")) {
                             System.out.println("Enter Teacher Salary:");
@@ -567,16 +575,16 @@ public class CLI_interface {
                             mobileNo = in.nextLine();
                             if (mobileNo.isEmpty()) {System.err.println("Invalid");continue;}
                         }else {
-                            mobileNo = ((Teacher) user).getMobileNo();
+                            mobileNo = teacher.getMobileNo();
                         }
                         if (checklist.contains("7")) {
                             System.out.println("Enter Teacher Address:");
                             address = in.nextLine();
                             if (address.isEmpty()) {System.err.println("Invalid");continue;}
                         }else {
-                            address = ((Teacher) user).getMobileNo();
+                            address = teacher.getMobileNo();
                         }
-                        modifyTeacher(school,id, name, email, password, qualification, removeString(salary), mobileNo, address);
+                        modifyTeacher(school,id, name, Email, password, qualification, removeString(salary), mobileNo, address);
                     }else {
                         System.err.println("No teacher found for id " + id);
                     }
@@ -693,7 +701,7 @@ public class CLI_interface {
                     System.out.println("Enter Module id");
                     id = in.nextInt();
                     in.nextLine();
-                    school.GenerateReport(id);
+                    school.generateReport(id);
                     break;
                 case -1:
                     break;
@@ -719,80 +727,97 @@ public class CLI_interface {
             int moduleId;
             switch (choice){
                 case 1 -> {
-                    System.out.println("Enter Student id:");
+                    System.out.println("Enter Student ID:");
                     studentId = in.nextInt();
                     in.nextLine();
-                    User user = school.getUser(studentId);
-                    if (user instanceof Student) {
-                        school.printCompatibleModules(user);
+
+                    if (school.getUser(studentId) instanceof Student student) {
+                        school.printCompatibleModules(student);
+
                         System.out.println("Enter Module id:");
                         moduleId = in.nextInt();
                         in.nextLine();
+
                         school.enrollStudent(studentId, moduleId);
                     }else{
                         System.err.println("User not found");
                     }
                 }
-                case 2 ->{
-                    System.out.println("Enter Student id:");
+                case 2 -> {
+                    System.out.print("Enter Student ID: ");
                     studentId = in.nextInt();
                     in.nextLine();
+
                     User user = school.getUser(studentId);
-                    if (user instanceof Student) {
-                        Enrollment enrollment = school.getEnrollmentByStudentId(studentId);
-                        if (enrollment != null) {
-                            school.printEnrolledModules(user);
-                            System.out.println("Enter Module id:");
-                            moduleId = in.nextInt();
-                            in.nextLine();
-                            school.cancelEnrollment(studentId, moduleId);
-                        }else{
-                            System.err.println("Enrollment not found");
-                        }
-                    }else{
-                        System.err.println("User not found");
+                    if (!(user instanceof Student student)) {
+                        System.err.println("User not found or not a student");
+                        return;
                     }
+
+                    Enrollment enrollment = school.getEnrollmentByStudentId(studentId);
+                    if (enrollment == null) {
+                        System.err.println("Enrollment not found");
+                        return;
+                    }
+
+                    school.printEnrolledModules(student);
+
+                    System.out.print("Enter Module ID to cancel enrollment: ");
+                    moduleId = in.nextInt();
+                    in.nextLine();
+
+                    school.cancelEnrollment(studentId, moduleId);
                 }
-                case 3 ->{
-                    System.out.println("Enter Student id:");
+
+                case 3 -> {
+                    System.out.print("Enter Student ID: ");
                     studentId = in.nextInt();
                     in.nextLine();
+
                     User user = school.getUser(studentId);
-                    if (user instanceof Student) {
-                        Enrollment enrollment = school.getEnrollmentByStudentId(studentId);
-                        if (enrollment != null && !enrollment.isEmpty()) {
-                            school.printEnrolledModules(user);
-                            System.out.println("Enter Module id:");
-                            moduleId = in.nextInt();
-                            in.nextLine();
-                            Module module = school.getModule(moduleId);
-                            if (module != null && enrollment.moduleExists(module)) {
-                                school.printCompatibleModules(user);
-                                System.out.println("Enter New Module id:");
-                                int new_moduleId = in.nextInt();
-                                in.nextLine();
-                                Module new_module = school.getModule(new_moduleId);
-                                if (new_module != null) {
-                                    school.swapEnrollments(studentId, moduleId, new_moduleId);
-                                } else {
-                                    System.err.println("Module not found");
-                                }
-                            } else {
-                                System.err.println("Module not found");
-                            }
-                        }else{
-                            System.err.println("No enrollment found");
-                        }
-                    }else {
-                        System.err.println("User not found");
+                    if (!(user instanceof Student student)) {
+                        System.err.println("User not found or not a student");
+                        return;
                     }
+
+                    Enrollment enrollment = school.getEnrollmentByStudentId(studentId);
+                    if (enrollment == null || enrollment.isEmpty()) {
+                        System.err.println("No enrollment found");
+                        return;
+                    }
+
+                    school.printEnrolledModules(student);
+
+                    System.out.print("Enter Module ID to swap from: ");
+                    int oldModuleId = in.nextInt();
+                    in.nextLine();
+                    Module oldModule = school.getModule(oldModuleId);
+
+                    if (oldModule == null || !enrollment.moduleExists(oldModule)) {
+                        System.err.println("Module not found or not enrolled in this module");
+                        return;
+                    }
+
+                    school.printCompatibleModules(student);
+
+                    System.out.print("Enter New Module ID to swap into: ");
+                    int newModuleId = in.nextInt();
+                    in.nextLine();
+                    Module newModule = school.getModule(newModuleId);
+
+                    if (newModule == null) {
+                        System.err.println("New module not found");
+                        return;
+                    }
+
+                    school.swapEnrollments(studentId, oldModuleId, newModuleId);
                 }
                 case 4 -> {
                     System.out.println("Enter Student id:");
                     studentId = in.nextInt();
                     in.nextLine();
-                    User user = school.getUser(studentId);
-                    if (user instanceof Student) {
+
+                    if (school.getUser(studentId) instanceof Student) {
                         school.viewStudentEnrollments(studentId);
                     }else{
                         System.err.println("User not found");
@@ -824,13 +849,14 @@ public class CLI_interface {
                     System.out.println("Enter Student id:");
                     studentId = in.nextInt();
                     in.nextLine();
-                    User user = school.getUser(studentId);
-                    if (user instanceof Student) {
-                        school.printEnrolledModules(user);
+
+                    if (school.getUser(studentId) instanceof Student student) {
+                        school.printEnrolledModules(student);
                         System.out.println("Enter Module id:");
                         moduleId = in.nextInt();
                         in.nextLine();
-                        if(school.isModuleInEnrollments((Student) user,school.getModule(moduleId))){
+
+                        if(school.isModuleInEnrollments(student,school.getModule(moduleId))){
                             System.out.println("Enter Grade:");
                             grade = in.nextInt();
                             in.nextLine();
@@ -846,16 +872,18 @@ public class CLI_interface {
                     System.out.println("Enter Student id:");
                     studentId = in.nextInt();
                     in.nextLine();
-                    User user = school.getUser(studentId);
-                    if (user instanceof Student) {
+
+                    if (school.getUser(studentId) instanceof Student student) {
                         school.viewGrades(studentId);
                         System.out.println("Enter Module id:");
                         moduleId = in.nextInt();
                         in.nextLine();
-                        if(school.isModuleInEnrollments((Student) user,school.getModule(moduleId))){
+
+                        if(school.isModuleInEnrollments(student,school.getModule(moduleId))){
                             System.out.println("Enter Grade:");
                             grade = in.nextInt();
                             in.nextLine();
+
                             school.editGrade(studentId, moduleId, grade);
                         }else {
                             System.err.println("Module not found");
@@ -868,13 +896,14 @@ public class CLI_interface {
                     System.out.println("Enter Student id:");
                     studentId = in.nextInt();
                     in.nextLine();
-                    User user = school.getUser(studentId);
-                    if (user instanceof Student) {
+
+                    if ((school.getUser(studentId) instanceof Student student)) {
                         school.viewGrades(studentId);
                         System.out.println("Enter Module id:");
                         moduleId = in.nextInt();
                         in.nextLine();
-                        if(school.isModuleInEnrollments((Student) user,school.getModule(moduleId))){
+
+                        if(school.isModuleInEnrollments(student,school.getModule(moduleId))){
                             school.removeGradeFromStudent(studentId, moduleId);
                         }else {
                             System.err.println("Module not found");
@@ -887,8 +916,8 @@ public class CLI_interface {
                     System.out.println("Enter Student id:");
                     studentId = in.nextInt();
                     in.nextLine();
-                    User user = school.getUser(studentId);
-                    if (user instanceof Student) {
+
+                    if (school.getUser(studentId) instanceof Student) {
                         school.viewGrades(studentId);
                     }else{
                         System.err.println("User not found");
@@ -1041,6 +1070,14 @@ public class CLI_interface {
             }
         }
         return Integer.parseInt(CleanString);
+    }
+
+    //Checks the validity of the Email
+    public static boolean isValidEmail(String Email) {
+        if (Email == null || Email.isBlank()) return false;
+
+        String regex = "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$";
+        return Email.matches(regex);
     }
 
 }

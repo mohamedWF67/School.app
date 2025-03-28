@@ -2,6 +2,8 @@ package com.mycompany.School_app;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class School {
     //Attributes and collections
@@ -52,16 +54,6 @@ public class School {
         return users;
     }
 
-    //Getter for a User by it's id
-    public User getUser(int id) {
-        for (User user : users) {
-            if (user.getId() == id) {
-                return user;
-            }
-        }
-        return null;
-    }
-
     //Setter for users
     public void setUsers(ArrayList<User> users) {
         this.users = users;
@@ -77,9 +69,35 @@ public class School {
         this.modules = modules;
     }
 
+    //Setter for enrollments
+    public void setEnrollments(HashSet<Enrollment> enrollments) {
+        this.enrollments = enrollments;
+    }
+
+    //Getter for enrollments
+    public HashSet<Enrollment> getEnrollments() {
+        return enrollments;
+    }
+
+    public HashSet<Grade> getGrades() {
+        return grades;
+    }
+
+    public void setGrades(HashSet<Grade> grades) {
+        this.grades = grades;
+    }
+
     //Adds user to users
     public void addUser(User user) {
         (!users.contains(user)?users:null).add(user);
+    }
+
+    //Getter for a User by it's id
+    public User getUser(int id) {
+        return users.stream()
+                .filter(user -> user.getId() == id)
+                .findFirst()
+                .orElse(null);
     }
 
     //Removes user from users by it's id
@@ -92,29 +110,23 @@ public class School {
 
     //Print Admins
     public void printAdmins() {
-        for (User user : users) {
-            if (user instanceof Admin) {
-                System.out.println(user);
-            }
-        }
+        users.stream()
+                .filter(user -> user instanceof Admin)
+                .forEach(user -> System.out.println(user));
     }
 
     //Prints users
     public void printStudents() {
-        for (User user : users) {
-            if (user instanceof Student) {
-                System.out.println(user);
-            }
-        }
+        users.stream()
+                .filter(user -> user instanceof Student)
+                .forEach(user -> System.out.println(user));
     }
 
     //Print teachers
     public void printTeachers() {
-        for (User user : users) {
-            if (user instanceof Teacher) {
-                System.out.println(user);
-            }
-        }
+        users.stream()
+                .filter(user -> user instanceof Teacher)
+                .forEach(user -> System.out.println(user));
     }
 
     //Print admin using it's id
@@ -144,12 +156,7 @@ public class School {
 
     //Getter for a module by it's id
     public Module getModule(int id) {
-        for (Module module : modules) {
-            if (module.getId() == id) {
-                return module;
-            }
-        }
-        return null;
+        return modules.stream().filter((m) -> m.getId() == id).findFirst().orElse(null);
     }
 
     //Legacy Update module method
@@ -166,83 +173,80 @@ public class School {
     //Remove module from modules by it's id
     public String deleteModule(int id) {
         Module module = getModule(id);
-        if (module != null) {
-            modules.remove(module);
-            deleteModuleFromEnrollments(module);
-            return "Module deleted";
+        if (module == null) {
+            return "Module not found";
         }
-        return "Module not found";
+
+        modules.remove(module);
+        deleteModuleFromEnrollments(module);
+        return "Module '" + module.getName() + "' deleted successfully";
     }
 
+
     //Generate report for module by it's id
-    public void GenerateReport(int id) {
+    public void generateReport(int id) {
         Module module = getModule(id);
-        if (module != null) {
-            System.out.println("Number of Students in module '"+ module.getName() +"' : " + module.getTotalEnrolled()  + "/" + module.getMaxstudents());
-        }else {
+
+        if (module == null) {
             System.err.println("Module not found");
+            return;
         }
+
+        System.out.printf(
+                "Report for Module '%s': %d / %d students enrolled%n",
+                module.getName(),
+                module.getTotalEnrolled(),
+                module.getMaxstudents()
+        );
     }
+
 
     //Prints modules
     public void printModules() {
-        for (Module module : modules) {
-            System.out.println(module);
-        }
+        modules.forEach(module -> System.out.println(module));
     }
 
     //Checks if this Email already exists
     public boolean emailExists(String email) {
-        for (User user : users) {
-            if (user.getEmail().equals(email)) {
-                return true;
-            }
-        }
-        return false;
+        return users.stream()
+                .anyMatch(user -> user.getEmail().equals(email));
     }
 
-    //Setter for enrollments
-    public void setEnrollments(HashSet<Enrollment> enrollments) {
-        this.enrollments = enrollments;
-    }
-
-    //Getter for enrollments
-    public HashSet<Enrollment> getEnrollments() {
-        return enrollments;
-    }
 
     //Add enrollment to enrollments
-    public boolean addEnrollment(Student student,Module module) {
-        if (!module.isFull()){
-            if (module.checkCompatability(student)) {
-                enrollments.add(new Enrollment(student,module));
-                return true;
-            }
-        }else{
-            System.err.println("Module is Full");
+    public boolean addEnrollment(Student student, Module module) {
+        if (module.isFull()) {
+            System.err.println("Module " + module.getName() + " is full.");
+            return false;
         }
-        return false;
+
+        if (!module.checkCompatibility(student)) {
+            System.err.println("Module " + module.getName() + " is not compatible with student " + student.getName());
+            return false;
+        }
+
+        enrollments.add(new Enrollment(student, module));
+        return true;
     }
+
 
     //Getter for enrollment by student's id
     public Enrollment getEnrollmentByStudentId(int id) {
-        if (enrollments != null) {
-            for (Enrollment enrollment : enrollments) {
-                if (enrollment.getStudent().getId() == id) {
-                    return enrollment;
-                }
-            }
-        }
-        return null;
+        if (enrollments == null) return null;
+
+        return enrollments.stream()
+                .filter(enrollment -> enrollment.getStudent().getId() == id)
+                .findFirst()
+                .orElse(null);
     }
 
-    //Checks if the Student is enrolled int this module
+
+    // Checks if the student is enrolled in the given module
     public boolean isModuleInEnrollments(Student student, Module module) {
+        if (student == null || module == null) return false;
+
         Enrollment enrollment = getEnrollmentByStudentId(student.getId());
-        if (enrollment != null && module!=null && enrollment.moduleExists(module)) {
-                return true;
-        }
-        return false;
+        return enrollment != null && enrollment.moduleExists(module);
     }
 
     //Prints the enrollment for student by it's id
@@ -255,113 +259,145 @@ public class School {
         }
     }
 
-    //Enrolls student in a module
+    // Enrolls a student in a module
     public void enrollStudent(int studentId, int moduleId) {
         User user = getUser(studentId);
+        if (!(user instanceof Student student)) {
+            System.err.println("User not found or not a student");
+            return;
+        }
+
         Module module = getModule(moduleId);
-        if (user instanceof Student) {
-            if (modules.contains(module)){
-                Enrollment enrollment = getEnrollmentByStudentId(studentId);
-                if (enrollment != null) {
-                    if(enrollment.addModule(module)) {
-                        System.out.println("Added module " + module.getName() + " for Student " + user.getName());
-                    }else {
-                        System.err.println("Module " + module.getName() + " is not from the same section");
-                    }
-                }else{
-                    if(addEnrollment((Student) user,module)){
-                        System.out.println("Added a new enrollment for module " + module.getName() + " for Student " + user.getName());
-                    }else{
-                        System.err.println("Module " + module.getName() + " is not from the same section");
-                    }
-                }
-            }else{
-                System.err.println("Module not found");
+        if (module == null || !modules.contains(module)) {
+            System.err.println("Module not found");
+            return;
+        }
+
+        Enrollment enrollment = getEnrollmentByStudentId(studentId);
+
+        if (enrollment != null) {
+            if (enrollment.addModule(module)) {
+                System.out.println("Added module " + module.getName() + " for Student " + student.getName());
+            } else {
+                System.err.println("Student is already enrolled in " + module.getName());
             }
-        }else{
-            System.err.println("User not found");
+        } else {
+            if (addEnrollment(student, module)) {
+                System.out.println("Added a new enrollment for module " + module.getName() + " for Student " + student.getName());
+            } else {
+                System.err.println("Failed to create new enrollment");
+            }
         }
     }
 
+
     //Cancels Enrollment of student from a module
-    public void cancelEnrollment(int studentId,int moduleId) {
+    public void cancelEnrollment(int studentId, int moduleId) {
         User user = getUser(studentId);
+
+        if (!(user instanceof Student student)) {
+            System.err.println("User not found or not a student");
+            return;
+        }
+
         Module module = getModule(moduleId);
-        if (user instanceof Student) {
-            Enrollment enrollment = getEnrollmentByStudentId(studentId);
-            if (enrollment != null && !enrollment.isEmpty()) {
-                if (modules.contains(module)){
-                    if(enrollment.removeModule(module)) {
-                        System.out.println("Removed module " + module.getName() + " from Student " + user.getName());
-                    }
-                }else{
-                    System.err.println("Module not found");
-                }
-            }else{
-                System.err.println("Enrollment not found");
-            }
-        }else{
-            System.err.println("User not found");
+        if (module == null) {
+            System.err.println("Module not found");
+            return;
+        }
+
+        Enrollment enrollment = getEnrollmentByStudentId(studentId);
+        if (enrollment == null || enrollment.isEmpty()) {
+            System.err.println("Enrollment not found");
+            return;
+        }
+
+
+        if (!modules.contains(module)) {
+            System.err.println("module not found");
+            return;
+        }
+
+        if (enrollment.removeModule(module)) {
+            System.out.println("Removed module " + module.getName() + " from Student " + student.getName());
+        } else {
+            System.err.println("Failed to remove module");
         }
     }
 
     //Swaps an enrolled module with a new one
-    public void swapEnrollments(int studentId,int moduleId1,int moduleId2) {
+    public void swapEnrollments(int studentId, int moduleId1, int moduleId2) {
         User user = getUser(studentId);
-        if (user instanceof Student) {
-            Module module1 = getModule(moduleId1);
-            Module module2 = getModule(moduleId2);
-            if (module1 != null && module2 != null) {
-                Enrollment enrollment = getEnrollmentByStudentId(studentId);
-                if (enrollment != null && !enrollment.isEmpty()) {
-                    if (enrollment.moduleExists(module1) && moduleId1 != moduleId2 && module2.checkCompatability((Student) user)) {
-                        enrollment.removeModule(module1);
-                        enrollment.addModule(module2);
-                        System.out.println("Swapped module " + module1.getName() + " with "+ module2.getName() + " for Student " + user.getName());
-                    }else{
-                        System.err.println("Module failed Swap");
-                    }
-                }else{
-                    System.err.println("Enrollment not found");
-                }
-            }else{
-                System.err.println("Module not found");
-            }
-        }else {
-            System.err.println("User not found");
+
+        if (!(user instanceof Student student)) {
+            System.err.println("Student not found");
+            return;
         }
+
+        Module module1 = getModule(moduleId1);
+        Module module2 = getModule(moduleId2);
+
+        if (module1 == null || module2 == null) {
+            System.err.println("One or both modules not found");
+            return;
+        }
+
+        Enrollment enrollment = getEnrollmentByStudentId(studentId);
+        if (enrollment == null || enrollment.isEmpty()) {
+            System.err.println("Enrollment not found");
+            return;
+        }
+
+        if (!enrollment.moduleExists(module1)) {
+            System.err.println("Module swap failed: Student " + user.getName() + " is not enrolled in " + module1.getName());
+            return;
+        }
+
+        if (moduleId1 == moduleId2) {
+            System.err.println("Module swap failed: Both module IDs are the same");
+            return;
+        }
+
+        if (!module2.checkCompatibility(student)) {
+            System.err.println("Module swap failed: " + module2.getName() + " is not compatible with " + student.getName());
+            return;
+        }
+
+        if (enrollment.moduleExists(module2)){
+            System.err.println("Module swap failed: " + student.getName() + " is already enrolled in " + module2.getName());
+            return;
+        }
+
+        enrollment.removeModule(module1);
+        enrollment.addModule(module2);
+        System.out.println("Successfully swapped " + module1.getName() + " with " + module2.getName() + " for Student " + student.getName());
     }
+
 
     //Delete module from all enrollments
     public void deleteModuleFromEnrollments(Module module) {
-        if (enrollments != null) {
-            for (Enrollment enrollment : enrollments) {
-                if (enrollment.moduleExists(module)) {
-                    enrollment.removeModule(module);
-                }
-            }
-        }else{
+        if (enrollments == null || enrollments.isEmpty()) {
             System.err.println("No enrollments");
+            return;
         }
+
+        enrollments.stream()
+                .filter(enrollment -> enrollment.moduleExists(module))
+                .forEach(enrollment -> enrollment.removeModule(module));
     }
+
 
     //Getter for all the modules that the student can enroll in
     public ArrayList<Module> getCompatibleModules(User user) {
-        Student student = (Student) user;
-        ArrayList<Module> compatibleModules = new ArrayList<>();
-        if (!modules.isEmpty()) {
-            for (Module module : modules) {
-                boolean enrolled = false;
-                Enrollment enrollment = getEnrollmentByStudentId(user.getId());
-                if (enrollment != null) {
-                    enrolled = enrollment.moduleExists(module);
-                }
-                if (module.getSection().equals(student.getSection()) && !enrolled) {
-                    compatibleModules.add(module);
-                }
-            }
+        if (user instanceof Student student) {
+            Enrollment enrollment = getEnrollmentByStudentId(student.getId());
+
+            return (ArrayList<Module>) modules.stream()
+                    .filter(module -> module.checkCompatibility(student) &&
+                            (enrollment == null || !enrollment.moduleExists(module)))
+                    .collect(Collectors.toList());
         }
-        return compatibleModules;
+        return null;
     }
 
     //Prints all the modules that the student can enroll in
@@ -376,145 +412,158 @@ public class School {
 
     //Prints all the Users Enrolled modules
     public void printEnrolledModules(User user) {
-        if (getUser(user.getId()) instanceof Student) {
-            Student student = (Student) user;
-            Enrollment enrollment = getEnrollmentByStudentId(student.getId());
+        if (user instanceof Student) {
+            Enrollment enrollment = getEnrollmentByStudentId(user.getId());
             if (enrollment != null) {
                 enrollment.printModules();
             }
         }
     }
 
-    //Getter for a Grade
+    // Retrieves the grade for a given student in a specific module
     public Grade getGrade(Student student, Module module) {
-        for (Grade grade : grades) {
-            if (grade.getStudent().equals(student) && grade.getModule().equals(module)) {
-                return grade;
-            }
-        }
-        return null;
+        return grades.stream()
+                .filter(grade -> grade.getStudent().equals(student) && grade.getModule().equals(module))
+                .findFirst()
+                .orElse(null);
     }
 
-    //Checks if the Grade exists
+    // Checks if a grade exists for the student in the given module
     public boolean gradeExists(Student student, Module module) {
         return getGrade(student, module) != null;
     }
 
-    //Clamps the Grade in a range from [0,100] and returns it's value
-    public int checkGrade(int grade){
-        if (grade >=100) {
-            return 100;
-        }else if (grade <=0) {
-            return 0;
-        }
-        return grade;
+    // Clamps the grade within the range [0, 100] and returns its value
+    public int checkGrade(int grade) {
+        return Math.max(0, Math.min(100, grade));
     }
 
     //Adds a grade for a student in a certain module
     public void addGradetoStudent(int studentId, int moduleId,int grade) {
         int mark = checkGrade(grade);
         User user = getUser(studentId);
+
+        if (!(user instanceof Student student)) {
+            System.err.println("Student not found");
+            return;
+        }
+
         Module module = getModule(moduleId);
-        if (user instanceof Student) {
-            Enrollment enrollment = getEnrollmentByStudentId(studentId);
-            if (enrollment != null && !enrollment.isEmpty()) {
-                if (module != null) {
-                    if (!gradeExists((Student) user,module)){
-                        grades.add(new Grade((Student) user,module,mark));
-                        System.out.println("Added grade " + mark + " in " + module.getName() + " for Student " + user.getName());
-                    }else{
-                        editGrade(studentId, moduleId, grade);
-                    }
-                }else{
-                    System.err.println("Module not found");
-                }
-            }else {
-                System.err.println("Enrollment not found");
-            }
-        }else {
-            System.err.println("User not found");
+        if (module == null) {
+            System.err.println("Module not found");
+            return;
+        }
+
+        Enrollment enrollment = getEnrollmentByStudentId(studentId);
+        if (enrollment == null || enrollment.isEmpty()) {
+            System.err.println("Enrollment not found");
+            return;
+        }
+
+        if (!gradeExists(student, module)) {
+            grades.add(new Grade(student, module, mark));
+            System.out.println("Added grade " + mark + " in " + module.getName() + " for Student " + student.getName());
+        } else {
+            editGrade(studentId, moduleId, grade);
         }
     }
 
     //Removes a grade for a student in a certain module
     public void removeGradeFromStudent(int studentId, int moduleId) {
         User user = getUser(studentId);
+
+        if (!(user instanceof Student student)) {
+            System.err.println("Student not found");
+            return;
+        }
+
         Module module = getModule(moduleId);
-        if (user instanceof Student) {
-            Enrollment enrollment = getEnrollmentByStudentId(studentId);
-            if (enrollment != null && !enrollment.isEmpty()) {
-                if (module != null) {
-                    Grade grade =getGrade((Student) user,module);
-                    if (grade != null) {
-                        grades.remove(grade);
-                        System.out.println("Removed grade from " + module.getName() + " for Student " + user.getName());
-                    }else{
-                        System.err.println("Grade not found");
-                    }
-                }else{
-                    System.err.println("Module not found");
-                }
-            }else {
-                System.err.println("Enrollment not found");
-            }
-        }else {
-            System.err.println("User not found");
+        if (module == null) {
+            System.err.println("Module not found");
+            return;
+        }
+
+        Enrollment enrollment = getEnrollmentByStudentId(studentId);
+        if (enrollment == null || enrollment.isEmpty()) {
+            System.err.println("Enrollment not found");
+            return;
+        }
+
+        Grade grade = getGrade(student,module);
+        if (grade != null) {
+            grades.remove(grade);
+            System.out.println("Removed grade from " + module.getName() + " for Student " + user.getName());
+        } else {
+            System.err.println("Grade not found");
         }
     }
+
 
     //Edits a grade for a student in a certain module
     public void editGrade(int studentId, int moduleId, int mark) {
         int newgrade = checkGrade(mark);
         User user = getUser(studentId);
+
+        if (!(user instanceof Student student)) {
+            System.err.println("Student not found");
+            return;
+        }
+
         Module module = getModule(moduleId);
-        if (user instanceof Student) {
-            Enrollment enrollment = getEnrollmentByStudentId(studentId);
-            if (enrollment != null && !enrollment.isEmpty()) {
-                if (module != null) {
-                    Grade grade = getGrade((Student) user,module);
-                    if (grade != null) {
-                        int oldgrade = grade.getGrade();
-                        grade.setGrade(newgrade);
-                        System.out.println("Grade updated from " + oldgrade + " to "+ newgrade + " in " + module.getName() + " for Student " + user.getName());
-                    }else{
-                        System.err.println("Grade not found");
-                    }
-                }else{
-                    System.err.println("Module not found");
-                }
-            }else {
-                System.err.println("Enrollment not found");
-            }
+        if (module == null) {
+            System.err.println("Module not found");
+            return;
+        }
+
+        Enrollment enrollment = getEnrollmentByStudentId(studentId);
+        if (enrollment == null || enrollment.isEmpty()) {
+            System.err.println("Enrollment not found");
+            return;
+        }
+
+        Grade grade = getGrade(student,module);
+        if (grade != null) {
+            int oldgrade = grade.getGrade();
+            grade.setGrade(newgrade);
+            System.out.println("Grade updated from " + oldgrade + " to "+ newgrade + " in " + module.getName() + " for Student " + user.getName());
         }else {
-            System.err.println("User not found");
+            System.err.println("Grade not found");
         }
     }
 
-    //View student grades using his id
+    public void PrintFGrade(Grade grade) {
+        System.out.printf("%-10d %-30s %-10d %-10C\n", grade.getModule().getId(),grade.getModule().getName() , grade, grade.getGradeChar());
+    }
+
+    // View student grades using their ID
     public void viewGrades(int studentId) {
         User user = getUser(studentId);
+
+        if (!(user instanceof Student student)) {
+            System.err.println("Student not Found");
+            return;
+        }
+
+        if (grades.isEmpty()) {
+            System.err.println("No grades available");
+            return;
+        }
+
         boolean foundAGrade = false;
-        if (user instanceof Student) {
-            if (!grades.isEmpty()) {
-                for (Grade grade : grades) {
-                    if(!foundAGrade){
-                        foundAGrade = grade.getStudent().equals((Student) user);
-                        if (foundAGrade){
-                            System.out.println("Grades for Student " + user.getName());
-                        }
-                    }
-                    if (grade.getStudent().equals((Student) user)) {
-                        System.out.println(grade.getGradeString());
-                    }
+        for (Grade grade : grades) {
+            if (grade.getStudent().equals(student)) {
+                if (!foundAGrade) {
+                    System.out.println("Grades for Student " + student.getName() + ":");
+                    System.out.println("---------------------------------------------");
+                    System.out.printf("%-10s %-30s %-10s %-10s\n", "Code", "Module Name", "Mark", "Grade");
+                    foundAGrade = true;
                 }
-                if(!foundAGrade){
-                    System.out.println("No grade found");
-                }
-            }else {
-                System.err.println("No grades");
+                PrintFGrade(grade);
             }
-        }else{
-            System.err.println("User not found");
+        }
+
+        if (!foundAGrade) {
+            System.out.println("No grades found for student " + student.getName());
         }
     }
 }
