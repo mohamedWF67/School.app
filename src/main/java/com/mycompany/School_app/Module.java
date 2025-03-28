@@ -80,9 +80,11 @@ public class Module {
     public void setMaxstudents(int maxstudents) {
         if (maxstudents > numstudents) {
             if (maxstudents <= 0) {
-                maxstudents = 1;
+                this.maxstudents = 1;
             }
             this.maxstudents = maxstudents;
+        }else{
+            this.maxstudents = numstudents;
         }
     }
 
@@ -112,13 +114,8 @@ public class Module {
     }
 
     //Check if the student and the module are from the same section
-    public boolean checkCompatability(Student student) {
-        if (student.getSection().equals(section)) {
-            //System.out.println("Student " + student.getName() + " is compatible with this module");
-            return true;
-        }
-        //System.err.println("Student " + student.getName() + " isn't compatible with this module");
-        return false;
+    public boolean checkCompatibility(Student student) {
+        return student.getSection().equals(section);
     }
 
     @Override

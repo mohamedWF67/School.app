@@ -18,11 +18,10 @@ public class School_app {
     
     public static void main(String[] args) {
         
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {GoodBye();}));
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> GoodBye()));
         
         Data_Handler dataHandler = new Data_Handler("BSE").Init_School();
         CLI_interface.CLI_selection(dataHandler.getSchool());
-        
-        
+
     }
 }
