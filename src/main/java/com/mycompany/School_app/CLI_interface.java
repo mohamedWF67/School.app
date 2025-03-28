@@ -1,6 +1,7 @@
 package com.mycompany.School_app;
 
 import com.mycompany.School_app.LibrarySystem.Book;
+import com.mycompany.School_app.LibrarySystem.Librarian;
 import com.mycompany.School_app.LibrarySystem.Library;
 
 import java.text.ParseException;
@@ -167,6 +168,7 @@ public class CLI_interface {
             System.err.println("Failed to modify Module");
         }
     }
+
     //Method for Deleting Module using id
     public static void deleteModule(School school,int id){
         Module module = school.getModule(id);
@@ -177,6 +179,18 @@ public class CLI_interface {
             System.err.println("Failed to delete Module");
         }
     }
+
+    //Method for Adding a new Librarian object to the Arraylist in Library
+    public static void addLibrarian(School school,String name,String Email,String password,String experience){
+        if (!school.emailExists(Email) && !school.getLibrary().emailExists(Email)) {
+            school.getLibrary().addLibrarian(new Librarian(name, Email, password, experience));
+
+            System.out.println("Added Librarian successfully");
+        }else {
+            System.err.println("This Email already exists");
+        }
+    }
+
     //interface for Admin
     private static void Cli_Admin(School school) {
         int choice = 0;
@@ -932,6 +946,117 @@ public class CLI_interface {
         }
     }
 
+    private static void Cli_Librarian(School school){
+        int choice = 0;
+        while (choice != -1) {
+            System.out.println("Choose your choice");
+            System.out.println("1. Add Librarian");
+            System.out.println("2. Modify Librarian");
+            System.out.println("3. Delete Librarian");
+            System.out.println("4. List Librarians");
+            System.out.println("-1. Exit");
+            Scanner in = new Scanner(System.in);
+            choice = in.nextInt();
+            in.nextLine();
+            int id;
+            String name;
+            String Email;
+            String password;
+            String experience;
+            switch (choice) {
+                case 1:
+                    System.out.println("Enter Librarian Name:");
+                    name = in.nextLine();
+                    if (name.isEmpty()) {System.err.println("Invalid");continue;}
+
+                    System.out.println("Enter Librarian Email:");
+                    Email = in.nextLine();
+                    if (Email.isEmpty() || !(isValidEmail(Email))) {System.err.println("Invalid");continue;}
+
+                    System.out.println("Enter Librarian Password:");
+                    password = in.nextLine();
+                    if (password.isEmpty()) {System.err.println("Invalid");continue;}
+
+                    System.out.println("Enter Librarian Experience:");
+                    experience = in.nextLine();
+                    if (experience.isEmpty()) {System.err.println("Invalid");continue;}
+
+                    addLibrarian(school,name,Email,password,experience);
+                    break;
+                case 2:
+                    System.out.println("Enter Librarian id to modify");
+                    id = in.nextInt();
+                    in.nextLine();
+                    Librarian librarian = school.getLibrary().getLibrarian(id);
+                    if (librarian != null) {
+                        String checklist;
+                        System.out.println("type the numbers of what you want to modify");
+                        System.out.println("1. Name");
+                        System.out.println("2. Email");
+                        System.out.println("3. Password");
+                        System.out.println("4. Experience");
+                        System.out.println("0. Cancel");
+                        checklist = in.nextLine();
+                        if(checklist.contains("0")){
+                            System.out.println("Exiting..");
+                            break;
+                        }
+                        if (checklist.contains("1")){
+                            System.out.println("Enter New Name:");
+                            name = in.nextLine();
+                            if (name.isEmpty()) {System.err.println("Invalid");continue;}
+                        }else {
+                            name = librarian.getName();
+                        }
+                        if (checklist.contains("2")){
+                            System.out.println("Enter New Email:");
+                            Email = in.nextLine();
+                            if (Email.isEmpty() || !(isValidEmail(Email))) {System.err.println("Invalid");continue;}
+                        }else{
+                            Email = librarian.getEmail();
+                        }
+                        if (checklist.contains("3")){
+                            System.out.println("Enter New Password:");
+                            password = in.nextLine();
+                            if (password.isEmpty()) {System.err.println("Invalid");continue;}
+                        }else{
+                            password = null;
+                        }
+                        if (checklist.contains("4")){
+                            System.out.println("Enter New Experience:");
+                            experience = in.nextLine();
+                            if (experience.isEmpty()) {System.err.println("Invalid");continue;}
+                        }else {
+                            experience = librarian.getExperience();
+                        }
+
+                        school.getLibrary().editLibrarian(id, name, Email, password, experience);
+                    }else{
+                        System.err.println("Librarian not found");
+                    }
+                    break;
+                case 3:
+                    System.out.println("Enter Librarian id to delete");
+                    id = in.nextInt();
+                    in.nextLine();
+
+                    if (school.getLibrary().removeLibrarian(id)){
+                        System.out.println("Librarian deleted successfully");
+                    }else{
+                        System.err.println("Librarian not found");
+                    }
+                    break;
+                case 4:
+                    school.getLibrary().getLibrarians().stream().forEach(l -> System.out.println(l));
+                    break;
+                case -1:
+                    break;
+                default:
+                    System.err.println("Invalid choice");
+            }
+        }
+    }
+
     //Interface for Library
     private static void Cli_Library(School school) {
         int choice = 0;
@@ -1013,7 +1138,7 @@ public class CLI_interface {
     //Selector if the user is Admin
     public static void CLI_Admin_select(School school) {
         int choice = 0;
-        String[] choices = {"Manage Admin", "Manage Student", "Manage Teacher", "Manage Module","Manage Enrollment","Manage Grade"};
+        String[] choices = {"Manage Admin", "Manage Student", "Manage Teacher", "Manage Module","Manage Enrollment","Manage Grade","Manage librarian","Manage Library"};
         while(choice != -1) {
             System.out.println("Choose your choice");
             for (int i = 0; i < choices.length; i++) {
@@ -1040,6 +1165,12 @@ public class CLI_interface {
                     break;
                 case 6:
                     Cli_Grade(school);
+                    break;
+                case 7:
+                    Cli_Librarian(school);
+                    break;
+                case 8:
+                    Cli_Library(school);
                     break;
                 case -1:
                     break;
