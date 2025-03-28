@@ -51,6 +51,7 @@ public class Book {
                 "ISBN='" + ISBN + '\'' +
                 ", name='" + name + '\'' +
                 ", author='" + author + '\'' +
+                ", isAvailable=" + isAvailable +
                 '}';
     }
 }

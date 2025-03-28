@@ -1,5 +1,8 @@
 package com.mycompany.School_app;
 
+import com.mycompany.School_app.LibrarySystem.Book;
+import com.mycompany.School_app.LibrarySystem.Library;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -929,6 +932,84 @@ public class CLI_interface {
         }
     }
 
+    //Interface for Library
+    private static void Cli_Library(School school) {
+        int choice = 0;
+        String[] choices = {"Add Book","Remove Book","Lend Book","Return Book","View Books"};
+        while(choice != -1) {
+            System.out.println("Choose your choice");
+            for (int i = 0; i < choices.length; i++) {
+                System.out.println( (i+1) + ". " + choices[i]);
+            }
+            System.out.println("-1. Exit");
+            Scanner in = new Scanner(System.in);
+            choice = Integer.parseInt(in.nextLine());
+            String ISBN;
+            String name;
+            String author;
+            switch (choice) {
+                case 1:
+                    System.out.println("Enter ISBN :");
+                    ISBN = in.nextLine();
+                    if (ISBN.isEmpty()) {System.err.println("Invalid");continue;}
+                    if (school.getLibrary().getBook(CleanString(ISBN)) != null) {System.err.println("Book Already in Library");continue;}
+
+                    System.out.println("Enter the Book's name :");
+                    name = in.nextLine();
+                    if (name.isEmpty()) {System.err.println("Invalid");continue;}
+
+                    System.out.println("Enter the Author's name :");
+                    author = in.nextLine();
+                    if (author.isEmpty()) {System.err.println("Invalid");continue;}
+
+                    if (school.getLibrary().addBook(new Book(CleanString(ISBN), name, author))) {
+                        System.out.println("Book Added");
+                    }else {
+                        System.err.println("Book insertion failed");
+                    }
+                    break;
+                case 2:
+                    System.out.println("Enter ISBN :");
+                    ISBN = in.nextLine();
+                    if (ISBN.isEmpty()) {System.err.println("Invalid");continue;}
+                    if(school.getLibrary().removeBook(CleanString(ISBN))){
+                        System.out.println("Book Removed");
+                    }else {
+                        System.err.println("Book Cannot be removed");
+                    }
+                    break;
+                case 3:
+                    System.out.println("Enter ISBN :");
+                    ISBN = in.nextLine();
+                    if (ISBN.isEmpty()) {System.err.println("Invalid");continue;}
+                    if(school.getLibrary().lendBook(CleanString(ISBN))){
+                        System.out.println("Book Lent");
+                    }else {
+                        System.err.println("Book Cannot be Lent");
+                    }
+                    break;
+                case 4:
+                    System.out.println("Enter ISBN :");
+                    ISBN = in.nextLine();
+                    if (ISBN.isEmpty()) {System.err.println("Invalid");continue;}
+                    if(school.getLibrary().returnBook(CleanString(ISBN))){
+                        System.out.println("Book Returned");
+                    }else {
+                        System.err.println("Book Taken");
+                    }
+                    break;
+                case 5:
+                    school.getLibrary().getBooks().stream().forEach(book -> System.out.println(book));
+                    break;
+                case -1:
+                    break;
+                default:
+                    System.err.println("Invalid choice");
+                    break;
+            }
+        }
+    }
+
     //Selector if the user is Admin
     public static void CLI_Admin_select(School school) {
         int choice = 0;
@@ -1025,9 +1106,9 @@ public class CLI_interface {
         }
     }
 
-    private static void CLI_Librarian_select() {
+    private static void CLI_Librarian_select(School school) {
         int choice = 0;
-        String[] choices = {"Teacher","Grade"};
+        String[] choices = {"Library"};
         while(choice != -1) {
             System.out.println("Choose your choice");
             for (int i = 0; i < choices.length; i++) {
@@ -1038,10 +1119,7 @@ public class CLI_interface {
             choice = Integer.parseInt(in.nextLine());
             switch (choice) {
                 case 1:
-                    //Cli_Teacher(school);
-                    break;
-                case 2:
-                    //Cli_Grade(school);
+                    Cli_Library(school);
                     break;
                 case -1:
                     break;
@@ -1076,7 +1154,7 @@ public class CLI_interface {
                     CLI_Teacher_select(school);
                     break;
                 case 4:
-                    CLI_Librarian_select();
+                    CLI_Librarian_select(school);
                 case -1:
                     break;
                 default:
@@ -1099,6 +1177,11 @@ public class CLI_interface {
             }
         }
         return Integer.parseInt(CleanString);
+    }
+
+    //Return as string
+    public static String CleanString(String str) {
+        return removeString(str)+"";
     }
 
     //Checks the validity of the Email

@@ -1,5 +1,7 @@
 package com.mycompany.School_app;
 
+import com.mycompany.School_app.LibrarySystem.Library;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -12,6 +14,7 @@ public class School {
     private ArrayList<Module> modules;
     private HashSet<Enrollment> enrollments;
     private HashSet<Grade> grades;
+    private Library library;
 
     //Empty Constructor
     public School() {
@@ -19,6 +22,7 @@ public class School {
         users = new ArrayList<>();
         enrollments = new HashSet<>();
         grades = new HashSet<>();
+        library = new Library();
     }
 
     //Constructor with name
@@ -28,15 +32,17 @@ public class School {
         users = new ArrayList<>();
         enrollments = new HashSet<>();
         grades = new HashSet<>();
+        library = new Library();
     }
 
     //Constructor with all data
-    public School(String name, ArrayList<User> users, ArrayList<Module> modules, HashSet<Enrollment> enrollments, HashSet<Grade> grades) {
+    public School(String name, ArrayList<User> users, ArrayList<Module> modules, HashSet<Enrollment> enrollments, HashSet<Grade> grades, Library library) {
         this.name = name;
         this.users = users;
         this.modules = modules;
         this.enrollments = enrollments;
         this.grades = grades;
+        this.library = library;
     }
 
     //Getter for name
@@ -79,12 +85,24 @@ public class School {
         return enrollments;
     }
 
+    //Getter for Grades
     public HashSet<Grade> getGrades() {
         return grades;
     }
 
+    //Setter for Grades
     public void setGrades(HashSet<Grade> grades) {
         this.grades = grades;
+    }
+
+    //Getter for Library
+    public Library getLibrary() {
+        return library;
+    }
+
+    //Setter for library
+    public void setLibrary(Library library) {
+        this.library = library;
     }
 
     //Adds user to users
