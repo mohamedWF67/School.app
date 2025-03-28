@@ -28,7 +28,7 @@ public class CLI_interface {
             user.setName(name);
             user.setEmail(Email);
             if (password != null) {
-                user.setHahedPassword(password);
+                user.setHashedPassword(password);
             }
 
             System.out.println("Admin modified successfully");
@@ -68,7 +68,7 @@ public class CLI_interface {
             student.setName(name);
             student.setEmail(Email);
             if (password != null) {
-                student.setHahedPassword(password);
+                student.setHashedPassword(password);
             }
             student.setParentName(parentName);
             student.setDOB(DOB);
@@ -115,7 +115,7 @@ public class CLI_interface {
             teacher.setName(name);
             teacher.setEmail(Email);
             if (password != null) {
-                teacher.setHahedPassword(password);
+                teacher.setHashedPassword(password);
             }
             teacher.setQualification(qualification);
             if (salary != 0) {
@@ -200,7 +200,7 @@ public class CLI_interface {
 
                     System.out.println("Enter Admin Email:");
                     Email = in.nextLine();
-                    if (Email.isEmpty() || isValidEmail(Email)) {System.err.println("Invalid");continue;}
+                    if (Email.isEmpty() || !(isValidEmail(Email))) {System.err.println("Invalid");continue;}
 
                     System.out.println("Enter Admin Password:");
                     password = in.nextLine();
@@ -235,7 +235,7 @@ public class CLI_interface {
                         if (checklist.contains("2")){
                             System.out.println("Enter New Email:");
                             Email = in.nextLine();
-                            if (Email.isEmpty() || isValidEmail(Email)) {System.err.println("Invalid");continue;}
+                            if (Email.isEmpty() || !(isValidEmail(Email))) {System.err.println("Invalid");continue;}
                         }else{
                             Email = user.getEmail();
                         }
@@ -306,7 +306,7 @@ public class CLI_interface {
 
                     System.out.println("Enter Student Email:");
                     Email = in.nextLine();
-                    if (Email.isEmpty() || isValidEmail(Email)) {System.err.println("Invalid");continue;}
+                    if (Email.isEmpty() || !(isValidEmail(Email))) {System.err.println("Invalid");continue;}
 
                     System.out.println("Enter Student password:");
                     password = in.nextLine();
@@ -375,7 +375,7 @@ public class CLI_interface {
                         if (checklist.contains("2")) {
                             System.out.println("Enter Student Email:");
                             Email = in.nextLine();
-                            if (Email.isEmpty() || isValidEmail(Email)) {System.err.println("Invalid");continue;}
+                            if (Email.isEmpty() || !(isValidEmail(Email))) {System.err.println("Invalid");continue;}
                         }else {
                             Email = user.getEmail();
                         }
@@ -490,7 +490,7 @@ public class CLI_interface {
 
                     System.out.println("Enter Teacher's Email:");
                     Email = in.nextLine();
-                    if (Email.isEmpty() || isValidEmail(Email)) {System.err.println("Invalid");continue;}
+                    if (Email.isEmpty() || !(isValidEmail(Email))) {System.err.println("Invalid");continue;}
 
                     System.out.println("Enter Teacher's password:");
                     password = in.nextLine();
@@ -545,7 +545,7 @@ public class CLI_interface {
                         if (checklist.contains("2")) {
                             System.out.println("Enter Teacher Email:");
                             Email = in.nextLine();
-                            if (Email.isEmpty() || isValidEmail(Email)) {System.err.println("Invalid");continue;}
+                            if (Email.isEmpty() || !(isValidEmail(Email))) {System.err.println("Invalid");continue;}
                         }else {
                             Email = user.getEmail();
                         }
@@ -1025,11 +1025,38 @@ public class CLI_interface {
         }
     }
 
+    private static void CLI_Librarian_select() {
+        int choice = 0;
+        String[] choices = {"Teacher","Grade"};
+        while(choice != -1) {
+            System.out.println("Choose your choice");
+            for (int i = 0; i < choices.length; i++) {
+                System.out.println( (i+1) + ". " + choices[i]);
+            }
+            System.out.println("-1. Exit");
+            Scanner in = new Scanner(System.in);
+            choice = Integer.parseInt(in.nextLine());
+            switch (choice) {
+                case 1:
+                    //Cli_Teacher(school);
+                    break;
+                case 2:
+                    //Cli_Grade(school);
+                    break;
+                case -1:
+                    break;
+                default:
+                    System.err.println("Invalid choice");
+                    break;
+            }
+        }
+    }
+
     //Main Selector for every Class
     public static void CLI_selection(School school) {
         System.out.println("Welcome to " + school.getName());
         int choice = 0;
-        String[] choices = {"Admin", "Student", "Teacher"};
+        String[] choices = {"Admin", "Student", "Teacher","Librarian"};
         while(choice != -1) {
             System.out.println("Choose your choice");
             for (int i = 0; i < choices.length; i++) {
@@ -1048,6 +1075,8 @@ public class CLI_interface {
                 case 3:
                     CLI_Teacher_select(school);
                     break;
+                case 4:
+                    CLI_Librarian_select();
                 case -1:
                     break;
                 default:

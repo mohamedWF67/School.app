@@ -8,6 +8,7 @@ package com.mycompany.School_app;
  *
  * @author mohamed waleed
  */
+
 public abstract class User {
     //Attributes and collections
     private static int counter = 0;//Counter for number of objects from user
@@ -29,7 +30,7 @@ public abstract class User {
         this.password = password;
     }
 
-    //Constructor with password encryption
+    //Constructor Auto id with password encryption
     public User(String name, String email, String password) {
         id = ++counter;
         this.name = name;
@@ -92,7 +93,7 @@ public abstract class User {
     }
 
     //Setter for password with Hashing
-    public void setHahedPassword(String password) {
+    public void setHashedPassword(String password) {
         try {
             this.password = Encryption.Encrypt(password);
         }catch (Exception e) {
