@@ -101,4 +101,8 @@ public class Library {
         return false;
     }
 
+    public boolean emailExists(String Email) {
+        return librarians.stream().anyMatch(librarian -> librarian.getEmail().equals(Email));
+    }
+
 }
