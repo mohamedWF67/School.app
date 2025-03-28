@@ -744,7 +744,7 @@ public class CLI_interface {
                     }
                 }
                 case 2 -> {
-                    System.out.print("Enter Student ID: ");
+                    System.out.println("Enter Student ID: ");
                     studentId = in.nextInt();
                     in.nextLine();
 
@@ -762,7 +762,7 @@ public class CLI_interface {
 
                     school.printEnrolledModules(student);
 
-                    System.out.print("Enter Module ID to cancel enrollment: ");
+                    System.out.println("Enter Module ID to cancel enrollment: ");
                     moduleId = in.nextInt();
                     in.nextLine();
 
@@ -770,7 +770,7 @@ public class CLI_interface {
                 }
 
                 case 3 -> {
-                    System.out.print("Enter Student ID: ");
+                    System.out.println("Enter Student ID: ");
                     studentId = in.nextInt();
                     in.nextLine();
 
@@ -788,7 +788,7 @@ public class CLI_interface {
 
                     school.printEnrolledModules(student);
 
-                    System.out.print("Enter Module ID to swap from: ");
+                    System.out.println("Enter Module ID to swap from: ");
                     int oldModuleId = in.nextInt();
                     in.nextLine();
                     Module oldModule = school.getModule(oldModuleId);
@@ -800,7 +800,7 @@ public class CLI_interface {
 
                     school.printCompatibleModules(student);
 
-                    System.out.print("Enter New Module ID to swap into: ");
+                    System.out.println("Enter New Module ID to swap into: ");
                     int newModuleId = in.nextInt();
                     in.nextLine();
                     Module newModule = school.getModule(newModuleId);

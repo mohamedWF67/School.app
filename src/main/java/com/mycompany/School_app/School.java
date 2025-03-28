@@ -532,7 +532,7 @@ public class School {
     }
 
     public void PrintFGrade(Grade grade) {
-        System.out.printf("%-10d %-30s %-10d %-10C\n", grade.getModule().getId(),grade.getModule().getName() , grade, grade.getGradeChar());
+        System.out.printf("%-10d %-30s %-10d %-10C\n", grade.getModule().getId(),grade.getModule().getName() , grade.getGrade(), grade.getGradeChar());
     }
 
     // View student grades using their ID
