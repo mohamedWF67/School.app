@@ -88,15 +88,14 @@ public class CLI_interface {
     }
 
     //Method for Deleting Student using id
-    public static void deleteStudent(School school, int id) {
+    public static boolean deleteStudent(School school, int id) {
         User user = school.getUser(id);
         if (user instanceof Student) {
             school.removeUser(id);
 
-            System.out.println("Removed student successfully");
-        }else{
-            System.err.println("Failed to remove student");
+            return true;
         }
+        return false;
     }
 
     //Method for Adding a new Teacher object to the Arraylist in School
@@ -182,7 +181,7 @@ public class CLI_interface {
 
     //Method for Adding a new Librarian object to the Arraylist in Library
     public static void addLibrarian(School school,String name,String Email,String password,String experience){
-        if (!school.emailExists(Email) && !school.getLibrary().emailExists(Email)) {
+        if (!school.emailExists(Email)) {
             school.getLibrary().addLibrarian(new Librarian(name, Email, password, experience));
 
             System.out.println("Added Librarian successfully");
@@ -458,7 +457,11 @@ public class CLI_interface {
                     System.out.println("Enter Student id to delete:");
                     id = in.nextInt();
                     in.nextLine();
-                    deleteStudent(school, id);
+                    if (deleteStudent(school, id)){
+                        System.out.println("Removed student successfully");
+                    }else{
+                        System.err.println("Failed to remove student");
+                    }
                     break;
                 case 4:
                     school.printStudents();
@@ -946,6 +949,7 @@ public class CLI_interface {
         }
     }
 
+    //interface for Librarian
     private static void Cli_Librarian(School school){
         int choice = 0;
         while (choice != -1) {
@@ -1030,7 +1034,11 @@ public class CLI_interface {
                             experience = librarian.getExperience();
                         }
 
-                        school.getLibrary().editLibrarian(id, name, Email, password, experience);
+                        if(school.getLibrary().editLibrarian(id, name, Email, password, experience)){
+                            System.out.println("Librarian updated");
+                        }else {
+                            System.err.println("Failed to update librarian");
+                        }
                     }else{
                         System.err.println("Librarian not found");
                     }
@@ -1120,7 +1128,7 @@ public class CLI_interface {
                     if(school.getLibrary().returnBook(CleanString(ISBN))){
                         System.out.println("Book Returned");
                     }else {
-                        System.err.println("Book Taken");
+                        System.err.println("Book Not Available");
                     }
                     break;
                 case 5:
