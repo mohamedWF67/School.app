@@ -226,8 +226,8 @@ public class School {
 
     //Checks if this Email already exists
     public boolean emailExists(String email) {
-        return users.stream()
-                .anyMatch(user -> user.getEmail().equals(email));
+        return (users.stream()
+                .anyMatch(user -> user.getEmail().equals(email))|| library.emailExists(email));
     }
 
 

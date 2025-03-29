@@ -13,7 +13,7 @@ import java.util.Date;
 public class School_app {
 
     private static void GoodBye(){
-        System.out.println("Good Bye..");
+        System.out.println("\nGood Bye..");
     }
     
     public static void main(String[] args) {
