@@ -9,6 +9,8 @@ A School management system made to be quick and intuative to use.
 - Manage Modules
 - Manage Enrollment
 - Manage Student Grades
+- Manage Librarian
+- Manage Library
 
 ## Features
 
@@ -23,6 +25,7 @@ A School management system made to be quick and intuative to use.
 - Add Authentication
 - Integrate FileSystem 2.0
 - Add more exception Handling
+- Add An ISBN Checker
 
 ## Screenshots
 
