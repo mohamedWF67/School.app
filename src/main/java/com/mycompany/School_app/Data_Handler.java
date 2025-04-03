@@ -1,18 +1,27 @@
 package com.mycompany.School_app;
 
+import com.mycompany.School_app.AuthSystem.AuthManager;
+import com.mycompany.School_app.LibrarySystem.Librarian;
+
 import java.util.Date;
 import java.util.Random;
 
 //A class made to add data to the collections
 public class Data_Handler {
     private School school;
+    private AuthManager authManager;
 
     public Data_Handler(String name) {
         this.school = new School(name);
+        this.authManager = null;
     }
 
     public School getSchool() {
         return school;
+    }
+
+    public AuthManager getAuthManager() {
+        return authManager;
     }
 
     public Data_Handler Init_School() {
@@ -49,6 +58,17 @@ public class Data_Handler {
         school.addUser(new Admin("Sarah", "sarah.admin@example.com", "adminpass1"));
         school.addUser(new Admin("Omar", "omar.admin@example.com", "secureadmin2"));
         school.addUser(new Admin("Layla", "layla.admin@example.com", "password123"));
+
+        //Adds Librarians
+        Librarian librarian1 = new Librarian("Amina El-Sayed", "amina@example.com", "lib123", "5 years");
+        Librarian librarian2 = new Librarian("Tarek Mahfouz", "tarek@example.com", "pass456", "8 years");
+        Librarian librarian3 = new Librarian("Noura Hassan", "noura@example.com", "secure789", "2 years");
+        school.getLibrary().addLibrarian(librarian1);
+        school.getLibrary().addLibrarian(librarian2);
+        school.getLibrary().addLibrarian(librarian3);
+
+        //starts AuthManager
+        AuthManager am = new AuthManager(school,school.getLibrary());
         return this;
     }
 }
