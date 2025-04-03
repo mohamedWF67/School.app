@@ -4,6 +4,8 @@
  */
 package com.mycompany.School_app.AuthSystem;
 
+import com.mycompany.School_app.StatusSystem.Status;
+
 import javax.swing.*;
 import java.io.PrintStream;
 import java.util.Enumeration;
@@ -260,7 +262,12 @@ public class AuthManagerUI extends javax.swing.JFrame {
         int mode = getCurrentSelectionIndex(UserSelectorRadioGroup);
         System.out.println(mode);
         AuthManager.Authenticate(email,password,mode);
-        Status_Login_Label.setText(AuthManager.getStatus());
+        Status status = AuthManager.getStatus();
+        Status_Login_Label.setText(status.getErrorMessage());
+        switch (status.getErrorCode()) {
+            case 1->{Email_Login_txt.requestFocus();}
+            case 2->{Password_Login_txt.requestFocus();}
+        }
     }//GEN-LAST:event_Login_btnActionPerformed
 
     private void Password_Login_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Password_Login_txtActionPerformed
@@ -282,7 +289,14 @@ public class AuthManagerUI extends javax.swing.JFrame {
         int mode = UserTypeSelector_Register.getSelectedIndex();
         System.out.println(mode);
         AuthManager.Register(username,email,password,mode);
-        Status_Register_Label.setText(AuthManager.getStatus());
+        Status status = AuthManager.getStatus();
+        Status_Register_Label.setText(status.getErrorMessage());
+        switch (status.getErrorCode()) {
+            case 1->{Name_Register_txt.requestFocus();}
+            case 2->{Email_Register_txt.requestFocus();}
+            case 3->{Password_Register_txt.requestFocus();}
+        }
+
     }//GEN-LAST:event_Register_btnActionPerformed
 
     private void User_Radio_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_User_Radio_LoginActionPerformed

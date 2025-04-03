@@ -4,6 +4,7 @@ import com.mycompany.School_app.Encryption;
 import com.mycompany.School_app.LibrarySystem.Librarian;
 import com.mycompany.School_app.LibrarySystem.Library;
 import com.mycompany.School_app.School;
+import com.mycompany.School_app.StatusSystem.Status;
 import com.mycompany.School_app.User;
 
 import java.io.ByteArrayOutputStream;
@@ -14,7 +15,7 @@ import java.util.Date;
 public class AuthManager {
     static School school;
     static Library library;
-    static String status;
+    static Status status;
 
     public AuthManager(School school, Library library) {
         this.school = school;
@@ -28,44 +29,46 @@ public class AuthManager {
             User user = users.stream().filter(u -> u.getEmail().equals(email)).findFirst().orElse(null);
             if (user != null) {
                 if(Encryption.CheckCorrectness(password,user.getPassword())){
-                    setStatus("User Authenticated");
+                    setStatus(-1,"User Authenticated");
                 }else{
-                    setStatus("Incorrect Password");
+                    setStatus(2,"Incorrect Password");
                 }
             }else {
-                setStatus("Invalid Email");
+                setStatus(1,"Invalid Email");
             }
         } else if (mode == 1) {
             ArrayList<Librarian> users = library.getLibrarians();
             User user = users.stream().filter(u -> u.getEmail().equals(email)).findFirst().orElse(null);
             if (user != null) {
                 if(Encryption.CheckCorrectness(password,user.getPassword())){
-                    setStatus("Librarian Authenticated");
+                    setStatus(-1,"Librarian Authenticated");
                 }else{
-                    setStatus("Incorrect Password");
+                    setStatus(2,"Incorrect Password");
                 }
             }else {
-                setStatus("Invalid Email");
+                setStatus(1,"Invalid Email");
             }
         }
     }
 
-    protected static void setStatus(String status) {
-        AuthManager.status = status;
-        System.out.println(status);
+    protected static void setStatus(int errorCode,String errorMessage) {
+        AuthManager.status = new Status(errorCode,errorMessage);
+        System.out.println(errorMessage);
     }
 
-    protected static String getStatus() {
+    protected static Status getStatus() {
         return AuthManager.status;
     }
 
     protected static void Register(String username,String email, String password,int mode) {
         if (!school.emailExists(email)) {
             switch (mode) {
-                case 0 ->{setStatus("Register a Student");}
-                case 1 ->{setStatus("Register a Teacher");}
-                case 2 ->{setStatus("Register a Librarian");}
+                case 0 ->{setStatus(-1,"Register a Student");}
+                case 1 ->{setStatus(-1,"Register a Teacher");}
+                case 2 ->{setStatus(-1,"Register a Librarian");}
             }
+        }else{
+            setStatus(2,"Email Already Exists");
         }
     }
 
