@@ -33,6 +33,7 @@ public class ThemeMangerUI extends JFrame {
         });
         setLocationRelativeTo(null);
         setVisible(true);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     /**

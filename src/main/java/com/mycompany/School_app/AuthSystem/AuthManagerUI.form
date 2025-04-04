@@ -4,12 +4,40 @@
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="UserSelectorRadioGroup">
     </Component>
+    <Menu class="javax.swing.JMenuBar" name="MenuBar">
+      <SubComponents>
+        <Menu class="javax.swing.JMenu" name="File_Menu">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="File"/>
+          </Properties>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="View_Menu">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="View"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="Theme_Menu_Item">
+              <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Shift+Ctrl+T"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Themes"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Theme_Menu_ItemActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+      </SubComponents>
+    </Menu>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="Authentication"/>
   </Properties>
   <SyntheticProperties>
+    <SyntheticProperty name="menuBar" type="java.lang.String" value="MenuBar"/>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
@@ -30,8 +58,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="AuthTabbedPanel" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <Component id="AuthTabbedPanel" pref="352" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -67,7 +94,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="Status_Login_Label" min="-2" pref="258" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="Login_btn" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
@@ -76,10 +103,10 @@
                                   <Component id="Password_Login_Label" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="Type_Register_Label1" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="Password_Login_txt" pref="231" max="32767" attributes="0"/>
-                                  <Component id="Email_Login_txt" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="Email_Login_txt" alignment="1" min="-2" pref="231" max="-2" attributes="0"/>
+                                  <Component id="Password_Login_txt" alignment="1" min="-2" pref="231" max="-2" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Component id="User_Radio_Login" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
@@ -88,7 +115,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -102,21 +129,21 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="Password_Login_txt" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="Password_Login_Label" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                          <Component id="Password_Login_txt" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="Type_Register_Label1" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
-                          <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                               <Component id="User_Radio_Login" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="Librarian_Radio_Login" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="Type_Register_Label1" min="-2" pref="27" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="38" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="Login_btn" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="Status_Login_Label" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                      <EmptySpace pref="65" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="Login_btn" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="Status_Login_Label" min="-2" pref="27" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -132,11 +159,6 @@
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="Email_Login_txt">
-            </Component>
-            <Component class="javax.swing.JTextField" name="Password_Login_txt">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Password_Login_txtActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="Email_Login_Label">
               <Properties>
@@ -178,6 +200,8 @@
                 <Property name="text" type="java.lang.String" value="Type"/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JPasswordField" name="Password_Login_txt">
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="Register_Panel">
@@ -196,26 +220,25 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="Status_Register_Label" max="32767" attributes="0"/>
+                              <Component id="Status_Register_Label" pref="258" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="Register_btn" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="Email_Register_Label" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="80" max="32767" attributes="0"/>
-                              <Component id="Email_Register_txt" min="-2" pref="231" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="Email_Register_Label" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="Name_Register_Label" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="Password_Register_Label" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="Type_Register_Label" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="UserTypeSelector_Register" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="Name_Register_txt" alignment="1" pref="231" max="32767" attributes="0"/>
-                                  <Component id="Password_Register_txt" alignment="1" pref="231" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="Email_Register_txt" alignment="0" min="-2" pref="231" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="UserTypeSelector_Register" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="Name_Register_txt" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="Password_Register_txt" alignment="0" min="-2" pref="231" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
@@ -238,18 +261,18 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="Password_Register_txt" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="Password_Register_Label" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                          <Component id="Password_Register_txt" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="UserTypeSelector_Register" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="Type_Register_Label" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
+                      <EmptySpace pref="33" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="Register_btn" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="Status_Register_Label" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                          <Component id="Status_Register_Label" min="-2" pref="27" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -275,23 +298,7 @@
                 <Property name="text" type="java.lang.String" value="Password"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="Password_Register_txt">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Password_Register_txtActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="Register_btn">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Login"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Register_btnActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JLabel" name="Status_Register_Label">
-              <Properties>
-                <Property name="horizontalAlignment" type="int" value="11"/>
-              </Properties>
+            <Component class="javax.swing.JPasswordField" name="Password_Register_txt">
             </Component>
             <Component class="javax.swing.JComboBox" name="UserTypeSelector_Register">
               <Properties>
@@ -314,6 +321,19 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Type"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="Status_Register_Label">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="11"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="Register_btn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Register"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Register_btnActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

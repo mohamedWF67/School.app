@@ -1,12 +1,16 @@
 package com.mycompany.School_app.StatusSystem;
 
+import java.util.Date;
+
 public class Status {
     int errorCode;
-    String errorMessage;
+    String statusMessage;
+    Date statusDate;
 
-    public Status(int errorCode, String errorMessage) {
+    public Status(int errorCode, String statusMessage) {
         this.errorCode = errorCode;
-        this.errorMessage = errorMessage;
+        this.statusMessage = statusMessage;
+        this.statusDate = new Date();
     }
 
     public int getErrorCode() {
@@ -17,11 +21,20 @@ public class Status {
         this.errorCode = errorCode;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
+    public String getstatusMessage() {
+        return statusMessage;
     }
 
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
+    public void setstatusMessage(String statusMessage) {
+        this.statusMessage = statusMessage;
+    }
+
+    @Override
+    public String toString() {
+        return "Status{" +
+                "errorCode=" + errorCode +
+                ", statusMessage='" + statusMessage + '\'' +
+                ", statusDate=" + statusDate +
+                '}';
     }
 }
