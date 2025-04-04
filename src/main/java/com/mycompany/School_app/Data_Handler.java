@@ -2,6 +2,8 @@ package com.mycompany.School_app;
 
 import com.mycompany.School_app.AuthSystem.AuthManager;
 import com.mycompany.School_app.LibrarySystem.Librarian;
+import com.mycompany.School_app.User.Student;
+import com.mycompany.School_app.User.Teacher;
 
 import java.util.Date;
 import java.util.Random;

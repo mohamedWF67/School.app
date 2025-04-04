@@ -1,6 +1,9 @@
 package com.mycompany.School_app;
 
 import com.mycompany.School_app.LibrarySystem.Library;
+import com.mycompany.School_app.User.Student;
+import com.mycompany.School_app.User.Teacher;
+import com.mycompany.School_app.User.User;
 
 import java.util.ArrayList;
 import java.util.HashSet;

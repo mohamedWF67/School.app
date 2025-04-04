@@ -3,8 +3,12 @@ package com.mycompany.School_app.AuthSystem;
 import com.mycompany.School_app.*;
 import com.mycompany.School_app.LibrarySystem.Librarian;
 import com.mycompany.School_app.LibrarySystem.Library;
+import com.mycompany.School_app.MainApp.MainApp;
 import com.mycompany.School_app.StatusSystem.Status;
 import com.mycompany.School_app.StatusSystem.StatusManager;
+import com.mycompany.School_app.User.Student;
+import com.mycompany.School_app.User.Teacher;
+import com.mycompany.School_app.User.User;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -40,6 +44,8 @@ public class AuthManager {
 
                 if(Encryption.CheckCorrectness(password,user.getPassword())){
                     setStatus(-1,"User Authenticated");
+                    new MainApp(user);
+                    authManagerUI.dispose();
                 }else{
                     setStatus(2,"Incorrect Password");
                 }
@@ -47,6 +53,7 @@ public class AuthManager {
             case 1->{
                 ArrayList<Librarian> users = library.getLibrarians();
                 User user = users.stream().filter(u -> u.getEmail().equals(email)).findFirst().orElse(null);
+
                 if (user == null) {
                     setStatus(1,"Invalid Email");
                     return;
@@ -54,6 +61,8 @@ public class AuthManager {
 
                 if(Encryption.CheckCorrectness(password,user.getPassword())){
                     setStatus(-1,"Librarian Authenticated");
+                    new MainApp(user);
+                    authManagerUI.dispose();
                 }else{
                     setStatus(2,"Incorrect Password");
                 }

@@ -1,4 +1,4 @@
-package com.mycompany.School_app;
+package com.mycompany.School_app.User;
 
 public class Teacher extends User{
 

@@ -27,6 +27,7 @@ public class LibrarianCreatorUI extends javax.swing.JFrame {
     }
 
     private void custominit(String name, String email, String password) {
+        setLocationRelativeTo(null);
         ArrayList<String> Experiencelvls = new ArrayList<>();
         for (int i = 1; i <= 10; i++) {
             if (i == 1) {Experiencelvls.add(i + " Year"); continue;}

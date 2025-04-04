@@ -29,6 +29,7 @@ public class TeacherCreatorUI extends javax.swing.JFrame {
     }
 
     private void custominit(String name, String email, String password) {
+        setLocationRelativeTo(null);
         setVisible(true);
         this.name=name;
         this.email=email;

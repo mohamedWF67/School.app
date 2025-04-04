@@ -1,8 +1,6 @@
 package com.mycompany.School_app.LibrarySystem;
 
-import com.mycompany.School_app.User;
-
-import java.util.Objects;
+import com.mycompany.School_app.User.User;
 
 public class Librarian extends User {
 

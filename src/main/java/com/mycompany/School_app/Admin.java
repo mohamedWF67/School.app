@@ -1,5 +1,7 @@
 package com.mycompany.School_app;
 
+import com.mycompany.School_app.User.User;
+
 public class Admin extends User {
 
     //Empty Constructor

@@ -25,6 +25,7 @@ public class AuthManagerUI extends javax.swing.JFrame {
     }
 
     private void custominit() {
+        setLocationRelativeTo(null);
         setVisible(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     }

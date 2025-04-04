@@ -1,5 +1,7 @@
 package com.mycompany.School_app;
 
+import com.mycompany.School_app.User.Student;
+
 import java.util.HashSet;
 import java.util.Objects;
 
