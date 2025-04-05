@@ -10,23 +10,31 @@ import java.util.Random;
 
 //A class made to add data to the collections
 public class Data_Handler {
-    private School school;
-    private AuthManager authManager;
+    private static School school;
+    private static AuthManager authManager;
 
     public Data_Handler(String name) {
         this.school = new School(name);
-        this.authManager = null;
+        StartAuthManager();
     }
 
-    public School getSchool() {
+    public static School getSchool() {
         return school;
     }
 
-    public AuthManager getAuthManager() {
+    public static AuthManager getAuthManager() {
         return authManager;
     }
 
-    public Data_Handler Init_School() {
+    public static void StartAuthManager() {
+        if (authManager == null) {
+            Data_Handler.authManager = new AuthManager(Data_Handler.school,Data_Handler.school.getLibrary());
+        }else{
+            AuthManager.Start();
+        }
+    }
+
+    public static void Init_School() {
         Random random = new Random();
 
         //Names for Modules
@@ -69,8 +77,5 @@ public class Data_Handler {
         school.getLibrary().addLibrarian(librarian2);
         school.getLibrary().addLibrarian(librarian3);
 
-        //starts AuthManager
-        AuthManager am = new AuthManager(school,school.getLibrary());
-        return this;
     }
 }

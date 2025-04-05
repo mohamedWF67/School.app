@@ -23,8 +23,12 @@ public class AuthManager {
     public AuthManager(School school, Library library) {
         this.school = school;
         this.library = library;
-        authManagerUI = new AuthManagerUI();
+        Start();
         this.statusManager = new StatusManager();
+    }
+
+    public static void Start() {
+        authManagerUI = new AuthManagerUI();
     }
 
     protected static void Authenticate(String email, String password,int mode) {

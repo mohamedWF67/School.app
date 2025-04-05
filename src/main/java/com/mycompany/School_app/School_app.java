@@ -17,7 +17,5 @@ public class School_app {
     
     public static void main(String[] args) {
         InitConfig instance = InitConfig.INSTANCE;
-        Data_Handler dataHandler = new Data_Handler("BSE").Init_School();
-        CLI_interface.CLI_selection(dataHandler.getSchool());
     }
 }
