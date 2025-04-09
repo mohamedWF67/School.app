@@ -1,24 +1,29 @@
 package com.mycompany.School_app.MainApp;
 
-import com.mycompany.School_app.Admin;
+import com.mycompany.School_app.*;
 import com.mycompany.School_app.AuthSystem.AuthManager;
-import com.mycompany.School_app.Data_Handler;
 import com.mycompany.School_app.LibrarySystem.Librarian;
+import com.mycompany.School_app.Module;
 import com.mycompany.School_app.StatusSystem.Status;
 import com.mycompany.School_app.StatusSystem.StatusManager;
 import com.mycompany.School_app.User.Student;
 import com.mycompany.School_app.User.Teacher;
 import com.mycompany.School_app.User.User;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 
 public class MainApp {
     static StatusManager statusManager = new StatusManager();
     static Status status;
     static User user;
+    static School school;
 
     public MainApp(User user){
         this.user = user;
+        //TODO fix the handler
+        this.school = Data_Handler.getSchool();
         if (user instanceof Admin){
             new AdminAppUI().setVisible(true);
         } else if (user instanceof Student) {
@@ -94,5 +99,24 @@ public class MainApp {
         setStatus(-1,"Student Updated Successfully");
     }
 
+    protected static ArrayList<Grade> getStudentGrades(Student student) {
+       return school.getStudentGrades(student.getId());
+    }
+
+    protected static ArrayList<Module> getCompatibleModules(Student student) {
+        return school.getCompatibleModules(student);
+    }
+
+    protected static HashSet<Module> getStudentModules(Student student) {
+        return school.getStudentModules(student);
+    }
+
+    protected static boolean addModule(Student student, int moduleIndex) {
+        return school.enrollStudent(student, moduleIndex);
+    }
+
+    protected static boolean cancelModule(Student student, String moduleName) {
+        return school.cancelEnrollment(student, moduleName);
+    }
 
 }

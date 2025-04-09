@@ -311,6 +311,15 @@ public class School {
     }
 
 
+    public boolean enrollStudent(Student student, int moduleindex) {
+        Module module = getCompatibleModules(student).get(moduleindex);
+        if (module != null) {
+            enrollStudent(student.getId(), module.getId());
+            return true;
+        }
+        return false;
+    }
+
     //Cancels Enrollment of student from a module
     public void cancelEnrollment(int studentId, int moduleId) {
         User user = getUser(studentId);
@@ -343,6 +352,18 @@ public class School {
         } else {
             System.err.println("Failed to remove module");
         }
+    }
+
+    public boolean cancelEnrollment(Student student, String moduleName) {
+        Module module = getEnrollmentByStudentId(student.getId())
+                .getModuleList()
+                .stream()
+                .filter(m -> m.getName().equals(moduleName))
+                .findFirst()
+                .orElse(null);
+        cancelEnrollment(student.getId(), module.getId());
+        if (module != null) return true;
+        return false;
     }
 
     //Swaps an enrolled module with a new one
@@ -428,6 +449,18 @@ public class School {
                 System.out.println(module);
             }
         }
+    }
+
+    //getter all the Users Enrolled modules
+    public HashSet<Module> getStudentModules(User user) {
+        if (user instanceof Student student) {
+            Enrollment enrollment = getEnrollmentByStudentId(student.getId());
+
+            if (enrollment != null) {
+                return getEnrollmentByStudentId(student.getId()).getModules();
+            }
+        }
+        return null;
     }
 
     //Prints all the Users Enrolled modules
@@ -553,6 +586,16 @@ public class School {
 
     public void PrintFGrade(Grade grade) {
         System.out.printf("%-10d %-30s %-10d %-10C\n", grade.getModule().getId(),grade.getModule().getName() , grade.getGrade(), grade.getGradeChar());
+    }
+
+    public ArrayList<Grade> getStudentGrades(int id){
+        Student student = (Student) getUser(id);
+        if (student != null) {
+          ArrayList<Grade> studentGrades = new ArrayList<>();
+          grades.stream().filter(grade -> grade.getStudent().equals(student)).forEach(grade -> {studentGrades.add(grade);});
+          return studentGrades;
+        }
+        return null;
     }
 
     // View student grades using their ID

@@ -7,12 +7,21 @@ package com.mycompany.School_app.MainApp;
 import com.mycompany.School_app.AuthSystem.AuthManager;
 import com.mycompany.School_app.AuthSystem.AuthManagerUI;
 import com.mycompany.School_app.Data_Handler;
+import com.mycompany.School_app.Grade;
+import com.mycompany.School_app.Module;
+import com.mycompany.School_app.School;
 import com.mycompany.School_app.StatusSystem.Status;
 import com.mycompany.School_app.ThemeManger.ThemeMangerUI;
 import com.mycompany.School_app.User.Student;
 import com.mycompany.School_app.User.User;
 
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+
+import static com.mycompany.School_app.ThemeManger.ThemeManager.getFlatLafThemes;
 
 /**
  *
@@ -37,6 +46,9 @@ public class StudentAppUI extends javax.swing.JFrame {
         setVisible(true);
         this.user = user;
         ReloadProfileFields();
+        refreshGradesTable();
+        refreshModulesTable();
+        refreshEnrollmentsTable();
     }
 
     /**
@@ -56,9 +68,17 @@ public class StudentAppUI extends javax.swing.JFrame {
         Enrollment = new javax.swing.JButton();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         Grades_Panel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         Enrollment_Panel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList<>();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
         Profile_Panel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
@@ -150,30 +170,87 @@ public class StudentAppUI extends javax.swing.JFrame {
 
         jLayeredPane1.setLayout(new java.awt.CardLayout());
 
-        jLabel1.setText("Grades");
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Module code", "Module Name", "Mark", "Grade"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         javax.swing.GroupLayout Grades_PanelLayout = new javax.swing.GroupLayout(Grades_Panel);
         Grades_Panel.setLayout(Grades_PanelLayout);
         Grades_PanelLayout.setHorizontalGroup(
             Grades_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Grades_PanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Grades_PanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(588, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)
+                .addContainerGap())
         );
         Grades_PanelLayout.setVerticalGroup(
             Grades_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Grades_PanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(210, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jLayeredPane1.add(Grades_Panel, "card2");
 
         Enrollment_Panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel3.setText("Enrollment");
+        jLabel3.setText("Modules");
+
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(jList1);
+
+        jScrollPane3.setViewportView(jList2);
+
+        jButton5.setText("Enroll");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setText("Cancel");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("Enrollments");
 
         javax.swing.GroupLayout Enrollment_PanelLayout = new javax.swing.GroupLayout(Enrollment_Panel);
         Enrollment_Panel.setLayout(Enrollment_PanelLayout);
@@ -181,15 +258,39 @@ public class StudentAppUI extends javax.swing.JFrame {
             Enrollment_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Enrollment_PanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3)
-                .addContainerGap(564, Short.MAX_VALUE))
+                .addGroup(Enrollment_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Enrollment_PanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(Enrollment_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton5)
+                            .addComponent(jButton6)))
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addGroup(Enrollment_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addContainerGap())
         );
         Enrollment_PanelLayout.setVerticalGroup(
             Enrollment_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Enrollment_PanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Enrollment_PanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3)
-                .addContainerGap(208, Short.MAX_VALUE))
+                .addGroup(Enrollment_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(Enrollment_PanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton6)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton5))
+                    .addGroup(Enrollment_PanelLayout.createSequentialGroup()
+                        .addGroup(Enrollment_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(Enrollment_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE))))
+                .addContainerGap())
         );
 
         jLayeredPane1.add(Enrollment_Panel, "card3");
@@ -285,7 +386,7 @@ public class StudentAppUI extends javax.swing.JFrame {
                         .addGroup(Profile_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(Profile_PanelLayout.createSequentialGroup()
                                 .addGap(3, 3, 3)
-                                .addComponent(Student_Gender_Selector, 0, 223, Short.MAX_VALUE))
+                                .addComponent(Student_Gender_Selector, 0, 224, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Profile_PanelLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(Student_Address_txt))))
@@ -306,7 +407,7 @@ public class StudentAppUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(Profile_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Student_ParentName_txt)
-                            .addComponent(Student_Section_txt, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE))))
+                            .addComponent(Student_Section_txt, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         Profile_PanelLayout.setVerticalGroup(
@@ -489,6 +590,28 @@ public class StudentAppUI extends javax.swing.JFrame {
         ReloadProfileFields();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        int moduleIndex = jList1.getSelectedIndex();
+        if (moduleIndex >= 0) {
+            MainApp.addModule(user,moduleIndex);
+        }
+        refreshModulesTable();
+        refreshEnrollmentsTable();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        if (jList2.getSelectedIndex() >= 0) {
+            String modulename = jList2.getSelectedValue().toString();
+            if (!modulename.isEmpty()) {
+                MainApp.cancelModule(user,modulename);
+            }
+            refreshModulesTable();
+            refreshEnrollmentsTable();
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
 
     private void ReloadProfileFields(){
         jButton1.setText(user.getName());
@@ -506,6 +629,40 @@ public class StudentAppUI extends javax.swing.JFrame {
 
         Student_DOB_txt.setDate(user.getDOB());
         Student_Gender_Selector.setSelectedItem(user.getGender());
+    }
+
+    private void refreshGradesTable(){
+        DefaultTableModel tb = (DefaultTableModel) jTable1.getModel();
+
+        while (tb.getRowCount() > 0) {
+            tb.removeRow(tb.getRowCount()-1);
+        }
+
+        ArrayList<Grade> grades = MainApp.getStudentGrades(user);
+        grades.stream()
+                .forEach(grade ->
+                        tb.addRow(new Object[]{grade.getModule().getId(),grade.getModule().getName(),grade.getGrade(),grade.getGradeChar()})
+                );
+    }
+
+    private void refreshModulesTable(){
+        ArrayList<Module> modules = MainApp.getCompatibleModules(user);
+        jList1.setModel(new AbstractListModel<String>() {
+            String[] strings = modules.stream().map(Module::getName).toArray(String[]::new);
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+    }
+
+    private void refreshEnrollmentsTable(){
+        HashSet<Module> modules = MainApp.getStudentModules(user);
+        if (modules != null) {
+            jList2.setModel(new AbstractListModel<String>() {
+                String[] strings = modules.stream().map(Module::getName).toArray(String[]::new);
+                public int getSize() { return strings.length; }
+                public String getElementAt(int i) { return strings[i]; }
+            });
+        }
     }
     /**
      * @param args the command line arguments
@@ -567,7 +724,9 @@ public class StudentAppUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -581,7 +740,13 @@ public class StudentAppUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> jList2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

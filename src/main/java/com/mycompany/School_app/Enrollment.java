@@ -2,6 +2,7 @@ package com.mycompany.School_app;
 
 import com.mycompany.School_app.User.Student;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Objects;
 
@@ -61,6 +62,14 @@ public class Enrollment {
     //Getter for modules as a HashSet
     public HashSet<Module> getModules() {
         return modules;
+    }
+
+    public ArrayList<Module> getModuleList() {
+        ArrayList<Module> moduleList = new ArrayList<>();
+        for (Module module : modules) {
+            moduleList.add(module);
+        }
+        return moduleList;
     }
 
     //Setter for modules as a HashSet
