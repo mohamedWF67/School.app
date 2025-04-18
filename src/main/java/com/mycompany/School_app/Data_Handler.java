@@ -1,11 +1,18 @@
 package com.mycompany.School_app;
 
 import com.mycompany.School_app.AuthSystem.AuthManager;
+import com.mycompany.School_app.FileSystem.File_system;
+import com.mycompany.School_app.LibrarySystem.Book;
 import com.mycompany.School_app.LibrarySystem.Librarian;
 import com.mycompany.School_app.User.Student;
 import com.mycompany.School_app.User.Teacher;
+import com.mycompany.School_app.User.User;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Random;
 
 //A class made to add data to the collections
@@ -35,7 +42,7 @@ public class Data_Handler {
     }
 
     public static void Init_School() {
-        Random random = new Random();
+        /*Random random = new Random();
 
         //Names for Modules
         String[] module_names = {
@@ -75,7 +82,80 @@ public class Data_Handler {
         Librarian librarian3 = new Librarian("Noura Hassan", "noura@example.com", "secure789", "2 years");
         school.getLibrary().addLibrarian(librarian1);
         school.getLibrary().addLibrarian(librarian2);
-        school.getLibrary().addLibrarian(librarian3);
+        school.getLibrary().addLibrarian(librarian3);*/
+    }
 
+    public static void saveAllData(){
+        saveUsers();
+        saveLibrarians();
+        saveModules();
+        saveEnrollments();
+        saveGrades();
+        saveBooks();
+        System.out.println("💾 All data saved");
+    }
+
+    public static void saveUsers(){
+        File_system.saveObjectToFile("SchoolUsers.txt",school.getUsers());
+    }
+
+    public static void saveLibrarians(){
+        File_system.saveObjectToFile("Librarians.txt",school.getLibrary().getLibrarians());
+    }
+
+    public static void saveModules(){
+        File_system.saveObjectToFile("Modules.txt",school.getModules());
+    }
+
+    public static void saveEnrollments(){
+        File_system.saveObjectToFile("Enrollments.txt",school.getEnrollments());
+    }
+
+    public static void saveGrades(){
+        File_system.saveObjectToFile("Grades.txt",school.getGrades());
+    }
+
+    public static void saveBooks(){
+        File_system.saveObjectToFile("Books.txt",school.getLibrary().getBooks());
+    }
+
+    public static void loadAllData(){
+        loadUsers();
+        loadLibrarians();
+        loadModules();
+        loadEnrollments();
+        loadGrades();
+        loadBooks();
+        System.out.println("💾 Data Loaded");
+    }
+
+    public static void loadUsers(){
+        ArrayList<User> users = (ArrayList<User>) File_system.readObjectFromFile("SchoolUsers.txt");
+        school.setUsers(users);
+    }
+
+    public static void loadLibrarians(){
+        ArrayList<Librarian> librarians = (ArrayList<Librarian>) File_system.readObjectFromFile("Librarians.txt");
+        school.getLibrary().setLibrarians(librarians);
+    }
+
+    public static void loadModules(){
+        ArrayList<Module> modules = (ArrayList<Module>) File_system.readObjectFromFile("Modules.txt");
+        school.setModules(modules);
+    }
+
+    public static void loadEnrollments(){
+        ArrayList<Enrollment> enrollments = (ArrayList<Enrollment>) File_system.readObjectFromFile("Enrollments.txt");
+        school.setEnrollments(enrollments);
+    }
+
+    public static void loadGrades(){
+        ArrayList<Grade> grades = (ArrayList<Grade>) File_system.readObjectFromFile("Grades.txt");
+        school.setGrades(grades);
+    }
+
+    public static void loadBooks(){
+        ArrayList<Book> books = (ArrayList<Book>) File_system.readObjectFromFile("Books.txt");
+        school.getLibrary().setBooks(books);
     }
 }

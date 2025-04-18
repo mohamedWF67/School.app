@@ -2,9 +2,10 @@ package com.mycompany.School_app;
 
 import com.mycompany.School_app.User.Student;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Grade {
+public class Grade implements Serializable {
     //Attributes and collections
     private Student student;
     private Module module;

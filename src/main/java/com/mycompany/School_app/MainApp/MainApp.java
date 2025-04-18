@@ -10,6 +10,8 @@ import com.mycompany.School_app.User.Student;
 import com.mycompany.School_app.User.Teacher;
 import com.mycompany.School_app.User.User;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -64,6 +66,11 @@ public class MainApp {
         }
         if (email.isEmpty()){
             setStatus(4,"Please enter an email");
+            return;
+        }
+
+        if (school.emailExists(email) && !email.equals(student.getEmail())){
+            setStatus(4,"Email already exists");
             return;
         }
 

@@ -6,12 +6,14 @@ package com.mycompany.School_app.User;
 
 import com.mycompany.School_app.Encryption;
 
+import java.io.Serializable;
+
 /**
  *
  * @author mohamed waleed
  */
 
-public abstract class User {
+public abstract class User implements Serializable {
     //Attributes and collections
     private static int counter = 0;//Counter for number of objects from user
     private int id;

@@ -14,16 +14,16 @@ public class School {
     private String name;
     private ArrayList<User> users;
     private ArrayList<Module> modules;
-    private HashSet<Enrollment> enrollments;
-    private HashSet<Grade> grades;
+    private ArrayList<Enrollment> enrollments;
+    private ArrayList<Grade> grades;
     private Library library;
 
     //Empty Constructor
     public School() {
         modules = new ArrayList<>();
         users = new ArrayList<>();
-        enrollments = new HashSet<>();
-        grades = new HashSet<>();
+        enrollments = new ArrayList<>();
+        grades = new ArrayList<>();
         library = new Library();
     }
 
@@ -32,13 +32,13 @@ public class School {
         this.name = name;
         modules = new ArrayList<>();
         users = new ArrayList<>();
-        enrollments = new HashSet<>();
-        grades = new HashSet<>();
+        enrollments = new ArrayList<>();
+        grades = new ArrayList<>();
         library = new Library();
     }
 
     //Constructor with all data
-    public School(String name, ArrayList<User> users, ArrayList<Module> modules, HashSet<Enrollment> enrollments, HashSet<Grade> grades, Library library) {
+    public School(String name, ArrayList<User> users, ArrayList<Module> modules, ArrayList<Enrollment> enrollments, ArrayList<Grade> grades, Library library) {
         this.name = name;
         this.users = users;
         this.modules = modules;
@@ -78,22 +78,22 @@ public class School {
     }
 
     //Setter for enrollments
-    public void setEnrollments(HashSet<Enrollment> enrollments) {
+    public void setEnrollments(ArrayList<Enrollment> enrollments) {
         this.enrollments = enrollments;
     }
 
     //Getter for enrollments
-    public HashSet<Enrollment> getEnrollments() {
+    public ArrayList<Enrollment> getEnrollments() {
         return enrollments;
     }
 
     //Getter for Grades
-    public HashSet<Grade> getGrades() {
+    public ArrayList<Grade> getGrades() {
         return grades;
     }
 
     //Setter for Grades
-    public void setGrades(HashSet<Grade> grades) {
+    public void setGrades(ArrayList<Grade> grades) {
         this.grades = grades;
     }
 

@@ -580,7 +580,10 @@ public class StudentAppUI extends javax.swing.JFrame {
             case 1->{Student_Section_txt.requestFocus();}
             case 2->{Student_Name_txt.requestFocus();}
             case 3->{Student_ParentName_txt.requestFocus();}
-            case 4->{Student_Email_txt.requestFocus();}
+            case 4->{
+                Student_Email_txt.requestFocus();
+                Student_Email_txt.setText(user.getEmail());
+            }
             case 5->{Student_Password_txt.requestFocus();}
             case 6->{Student_MobileNo_txt.requestFocus();}
             case 7->{Student_Address_txt.requestFocus();}

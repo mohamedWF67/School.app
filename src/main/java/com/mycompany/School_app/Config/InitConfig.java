@@ -19,14 +19,23 @@ public class InitConfig {
 
     private InitConfig() throws FileNotFoundException {
         System.out.println("🔧 InitConfig started!");
+
         Runtime.getRuntime().addShutdownHook(new Thread(() -> onClose()));
+
         ThemeManager.InitThemeManager();
+
         new Data_Handler("BSE").Init_School();
+
+        Data_Handler.loadAllData();
+
         CLI_interface.CLI_selection(Data_Handler.getSchool());
     }
 
     private void onClose(){
         ThemeManager.CloseThemeManager();
+
+        Data_Handler.saveAllData();
+
         System.out.println("👋 Good bye..");
     }
 }

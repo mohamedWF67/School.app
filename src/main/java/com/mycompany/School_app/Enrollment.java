@@ -2,11 +2,12 @@ package com.mycompany.School_app;
 
 import com.mycompany.School_app.User.Student;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Objects;
 
-public class Enrollment {
+public class Enrollment implements Serializable {
 
     //Attributes and collections
     private static int count = 0;//Number of objects made

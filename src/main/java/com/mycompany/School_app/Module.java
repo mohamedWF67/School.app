@@ -2,9 +2,10 @@ package com.mycompany.School_app;
 
 import com.mycompany.School_app.User.Student;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Module {
+public class Module implements Serializable {
 
     //Attributes and collections
     private static int count = 0;
