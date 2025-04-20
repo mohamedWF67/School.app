@@ -660,6 +660,7 @@ public class StudentAppUI extends javax.swing.JFrame {
         Student_Name_txt.setText(user.getName());
 
         Student_Email_txt.setText(user.getEmail());
+        Student_Password_txt.setText("");
 
         Student_MobileNo_txt.setText(user.getMobileNo());
         Student_Address_txt.setText(user.getAddress());

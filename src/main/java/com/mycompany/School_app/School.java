@@ -62,6 +62,17 @@ public class School {
         return users;
     }
 
+    //Getter for Students as an ArrayList
+    public ArrayList<Student> getStudents() {
+        ArrayList<Student> students = new ArrayList<>();
+        for (User user : users) {
+            if (user instanceof Student) {
+                students.add((Student) user);
+            }
+        }
+        return students;
+    }
+
     //Setter for users
     public void setUsers(ArrayList<User> users) {
         this.users = users;

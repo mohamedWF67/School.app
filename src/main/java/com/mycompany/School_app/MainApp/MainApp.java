@@ -10,6 +10,7 @@ import com.mycompany.School_app.User.Student;
 import com.mycompany.School_app.User.Teacher;
 import com.mycompany.School_app.User.User;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class MainApp {
         //TODO fix the handler
         this.school = Data_Handler.getSchool();
         if (user instanceof Admin){
-            new AdminAppUI().setVisible(true);
+            new AdminAppUI((Admin) user).setVisible(true);
         } else if (user instanceof Student) {
             new StudentAppUI((Student) user);
         } else if (user instanceof Teacher) {
@@ -50,6 +51,13 @@ public class MainApp {
     protected static void setStatus(int errorCode,String statusMessage) {
         status = statusManager.addStatus(new Status(errorCode,statusMessage));
         System.out.println(statusMessage);
+        if (status.getErrorCode() == 0){
+            JOptionPane.showMessageDialog(null,statusMessage,"Error",JOptionPane.ERROR_MESSAGE);
+        }
+
+        if (status.getErrorCode() == -2){
+            JOptionPane.showMessageDialog(null,statusMessage,"Success",JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     public static Status getStatus() {
@@ -119,6 +127,10 @@ public class MainApp {
         return school.getCompatibleModules(student);
     }
 
+    protected static ArrayList<Student> getStudents() {
+        return school.getStudents();
+    }
+
     protected static HashSet<Module> getStudentModules(Student student) {
         return school.getStudentModules(student);
     }
@@ -129,6 +141,45 @@ public class MainApp {
 
     protected static boolean cancelModule(Student student, String moduleName) {
         return school.cancelEnrollment(student, moduleName);
+    }
+
+    protected static User getThisUser(int id) {
+        User user = school.getUser(id);
+        if (user == null){
+            user = school.getLibrary().getLibrarian(id);
+        }
+
+        return user;
+    }
+
+    protected static void editAdmin(Admin admin,String name, String email, String password){
+        if (name.isEmpty()){
+            setStatus(1,"Please enter a name");
+            return;
+        }
+
+        if (email.isEmpty()){
+            setStatus(2,"Please enter an email");
+            return;
+        }
+        if (school.emailExists(email) && !email.equals(admin.getEmail())){
+            setStatus(2,"Email already exists");
+            return;
+        }
+
+        if (!password.isEmpty()){
+            admin.setHashedPassword(password);
+        }
+
+        admin.setName(name);
+        admin.setEmail(email);
+
+        setStatus(-1,"Admin Updated Successfully");
+    }
+
+    public static void deleteUser(int id) {
+        school.removeUser(id);
+        setStatus(-2,"Deleted Successfully");
     }
 
 }
