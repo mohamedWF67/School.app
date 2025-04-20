@@ -8,15 +8,20 @@ import com.mycompany.School_app.User.Student;
 import com.mycompany.School_app.User.Teacher;
 import com.mycompany.School_app.User.User;
 
-import java.io.IOException;
+import javax.swing.*;
+import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Random;
+import java.util.prefs.Preferences;
 
 //A class made to add data to the collections
 public class Data_Handler {
+
+    private static Preferences prefs1 = Preferences.userRoot().node("ObjectDatabase");
+
     private static School school;
     private static AuthManager authManager;
 
@@ -92,11 +97,13 @@ public class Data_Handler {
         saveEnrollments();
         saveGrades();
         saveBooks();
+        //saveStaticIDs();
         System.out.println("💾 All data saved");
     }
 
     public static void saveUsers(){
         File_system.saveObjectToFile("SchoolUsers.txt",school.getUsers());
+        prefs1.putInt("UsersID", User.getCounter());
     }
 
     public static void saveLibrarians(){
@@ -105,10 +112,12 @@ public class Data_Handler {
 
     public static void saveModules(){
         File_system.saveObjectToFile("Modules.txt",school.getModules());
+        prefs1.putInt("ModulesID", Module.getCount());
     }
 
     public static void saveEnrollments(){
         File_system.saveObjectToFile("Enrollments.txt",school.getEnrollments());
+        prefs1.putInt("EnrollmentsID", Enrollment.getCount());
     }
 
     public static void saveGrades(){
@@ -126,12 +135,14 @@ public class Data_Handler {
         loadEnrollments();
         loadGrades();
         loadBooks();
+        //loadStaticIDs();
         System.out.println("💾 Data Loaded");
     }
 
     public static void loadUsers(){
         ArrayList<User> users = (ArrayList<User>) File_system.readObjectFromFile("SchoolUsers.txt");
         school.setUsers(users);
+        User.setCounter(prefs1.getInt("UsersID", User.getCounter()));
     }
 
     public static void loadLibrarians(){
@@ -142,11 +153,13 @@ public class Data_Handler {
     public static void loadModules(){
         ArrayList<Module> modules = (ArrayList<Module>) File_system.readObjectFromFile("Modules.txt");
         school.setModules(modules);
+        Module.setCount(prefs1.getInt("ModulesID", Module.getCount()));
     }
 
     public static void loadEnrollments(){
         ArrayList<Enrollment> enrollments = (ArrayList<Enrollment>) File_system.readObjectFromFile("Enrollments.txt");
         school.setEnrollments(enrollments);
+        Enrollment.setCount(prefs1.getInt("EnrollmentsID", Enrollment.getCount()));
     }
 
     public static void loadGrades(){
@@ -158,4 +171,13 @@ public class Data_Handler {
         ArrayList<Book> books = (ArrayList<Book>) File_system.readObjectFromFile("Books.txt");
         school.getLibrary().setBooks(books);
     }
+
+    /*public static void fixnumbers(){
+        User.setCounter(school.getUsers().size() + school.getLibrary().getLibrarians().size());
+        Module.setCount(school.getModules().size());
+        Enrollment.setCount(school.getEnrollments().size());
+        System.out.println(User.getCounter());
+        System.out.println(Module.getCount());
+        System.out.println(Enrollment.getCount());
+    }*/
 }

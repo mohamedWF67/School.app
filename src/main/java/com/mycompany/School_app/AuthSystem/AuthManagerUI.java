@@ -4,6 +4,7 @@
  */
 package com.mycompany.School_app.AuthSystem;
 
+import com.mycompany.School_app.Data_Handler;
 import com.mycompany.School_app.MainApp.MainApp;
 import com.mycompany.School_app.StatusSystem.Status;
 import com.mycompany.School_app.ThemeManger.ThemeMangerUI;
@@ -345,6 +346,7 @@ public class AuthManagerUI extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        //Data_Handler.fixnumbers();
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

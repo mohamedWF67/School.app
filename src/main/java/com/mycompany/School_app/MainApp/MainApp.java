@@ -31,15 +31,20 @@ public class MainApp {
         } else if (user instanceof Student) {
             new StudentAppUI((Student) user);
         } else if (user instanceof Teacher) {
-            new StudentAppUI().setVisible(true);
+            new TeacherAppUI().setVisible(true);
         } else if (user instanceof Librarian) {
-            new StudentAppUI().setVisible(true);
+            new LibrarianAppUI().setVisible(true);
         }
     }
 
     public static void logout() {
         MainApp.user = null;
         Data_Handler.StartAuthManager();
+    }
+
+    public static void deleteAccount() {
+        school.removeUser(user.getId());
+        logout();
     }
 
     protected static void setStatus(int errorCode,String statusMessage) {

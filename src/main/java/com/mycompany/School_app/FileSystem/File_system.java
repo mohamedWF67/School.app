@@ -223,7 +223,7 @@ public class File_system {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("Saved to " + filename);
+        //System.out.println("Saved to " + filename);
     }
 
     public static void saveObjectToFile(String filename, HashSet<?> values) {
@@ -236,7 +236,7 @@ public class File_system {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("Saved to " + filename);
+        //System.out.println("Saved to " + filename);
     }
 
     public static ArrayList<?> readObjectFromFile(String filename) {
@@ -255,7 +255,7 @@ public class File_system {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("Read from "+filename);
+        //System.out.println("Read from "+filename);
         return studentList2;
     }
 }

@@ -152,8 +152,11 @@ public class AuthManager {
             return;
         }
 
-        school.addUser(new Student(username,email,password,parentname,dob,gender,mobileNo,address,section.toUpperCase()));
+        Student student = new Student(username,email,password,parentname,dob,gender,mobileNo,address,section.toUpperCase());
+        school.addUser(student);
+
         setStatus(-1,"Student Registered");
+        new MainApp(student);
     }
 
     protected static void RegisterTeacher(String username, String email, String password,String qualification,int salary,String mobileNo,String address) {
@@ -177,13 +180,18 @@ public class AuthManager {
             setStatus(4, "Address is Empty");
             return;
         }
+        Teacher teacher = new Teacher(username,email,password,qualification,salary,mobileNo,address);
+        school.addUser(teacher);
 
-        school.addUser(new Teacher(username,email,password,qualification,salary,mobileNo,address));
         setStatus(-1,"Teacher Registered");
+        new MainApp(teacher);
     }
 
     protected static void RegisterLibrarian(String username, String email, String password,String experience) {
-        school.getLibrary().addLibrarian(new Librarian(username,email,password,experience));
+        Librarian librarian = new Librarian(username,email,password,experience);
+        school.getLibrary().addLibrarian(librarian);
+
         setStatus(-1,"Librarian Registered");
+        new MainApp(librarian);
     }
 }

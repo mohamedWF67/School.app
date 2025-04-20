@@ -123,9 +123,15 @@ public class School {
     //Removes user from users by it's id
     public void removeUser(int id) {
         User user = getUser(id);
-        if (user != null) {
-            users.remove(user);
+        if (user == null) {
+            return;
         }
+
+        if (user instanceof Student) {
+            Student student = (Student) user;
+            cancelEnrollments(student);
+        }
+        users.remove(user);
     }
 
     //Print Admins
@@ -352,6 +358,19 @@ public class School {
         } else {
             System.err.println("Failed to remove module");
         }
+    }
+
+    public void cancelEnrollments(Student student) {
+        Enrollment enrollment = getEnrollmentByStudentId(student.getId());
+        if (enrollment == null) {
+            return;
+        }
+
+        ArrayList<Module> enrolledModules = enrollment.getModuleList();
+
+        enrolledModules.stream().forEach((module) -> {cancelEnrollment(student.getId(), module.getId());});
+
+        System.out.println("All enrolled modules for " + student.getName() + " are deleted");
     }
 
     public boolean cancelEnrollment(Student student, String moduleName) {

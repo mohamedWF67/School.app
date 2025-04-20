@@ -4,6 +4,7 @@
  */
 package com.mycompany.School_app.AuthSystem;
 
+import com.mycompany.School_app.MainApp.MainApp;
 import com.mycompany.School_app.StatusSystem.Status;
 
 import java.util.Date;
@@ -207,13 +208,14 @@ public class StudentCreatorUI extends javax.swing.JFrame {
             case 4->{Student_MobileNo_txt.requestFocus();}
             case 5->{Student_Address_txt.requestFocus();}
             case 6->{Student_Section_txt.requestFocus();}
+            case -1->{this.dispose();}
         }
     }//GEN-LAST:event_Create_btnActionPerformed
 
     private void Cancel_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cancel_btnActionPerformed
         // TODO add your handling code here:
+        MainApp.logout();
         this.dispose();
-        new AuthManagerUI();
     }//GEN-LAST:event_Cancel_btnActionPerformed
 
     private void Student_MobileNo_txtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Student_MobileNo_txtKeyTyped
