@@ -73,6 +73,17 @@ public class School {
         return students;
     }
 
+    //Getter for Teachers as an ArrayList
+    public ArrayList<Teacher> getTeachers() {
+        ArrayList<Teacher> teachers = new ArrayList<>();
+        for (User user : users) {
+            if (user instanceof Teacher) {
+                teachers.add((Teacher) user);
+            }
+        }
+        return teachers;
+    }
+
     //Setter for users
     public void setUsers(ArrayList<User> users) {
         this.users = users;
@@ -474,6 +485,7 @@ public class School {
     //Prints all the modules that the student can enroll in
     public void printCompatibleModules(User user) {
         ArrayList<Module> compatibleModules = getCompatibleModules(user);
+
         if (compatibleModules != null) {
             for (Module module : compatibleModules) {
                 System.out.println(module);
@@ -493,6 +505,18 @@ public class School {
         return null;
     }
 
+    //getter all the Users Enrolled modules as a List
+    public ArrayList<Module> getStudentModulesAsList(User user) {
+        if (user instanceof Student student) {
+            Enrollment enrollment = getEnrollmentByStudentId(student.getId());
+
+            if (enrollment != null) {
+                return new ArrayList<>(getEnrollmentByStudentId(student.getId()).getModules());
+            }
+        }
+        return null;
+    }
+
     //Prints all the Users Enrolled modules
     public void printEnrolledModules(User user) {
         if (user instanceof Student) {
@@ -506,7 +530,7 @@ public class School {
     // Retrieves the grade for a given student in a specific module
     public Grade getGrade(Student student, Module module) {
         return grades.stream()
-                .filter(grade -> grade.getStudent().equals(student) && grade.getModule().equals(module))
+                .filter(grade -> grade.getStudent().getId() == student.getId() && grade.getModule().getId() == module.getId())
                 .findFirst()
                 .orElse(null);
     }
@@ -622,7 +646,7 @@ public class School {
         Student student = (Student) getUser(id);
         if (student != null) {
           ArrayList<Grade> studentGrades = new ArrayList<>();
-          grades.stream().filter(grade -> grade.getStudent().equals(student)).forEach(grade -> {studentGrades.add(grade);});
+          grades.stream().filter(grade -> grade.getStudent().getId() == student.getId()).forEach(grade -> {studentGrades.add(grade);});
           return studentGrades;
         }
         return null;

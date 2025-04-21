@@ -143,6 +143,7 @@ public class Data_Handler {
         ArrayList<User> users = (ArrayList<User>) File_system.readObjectFromFile("SchoolUsers.txt");
         school.setUsers(users);
         User.setCounter(prefs1.getInt("UsersID", User.getCounter()));
+        System.out.println(User.getCounter());
     }
 
     public static void loadLibrarians(){
@@ -154,17 +155,21 @@ public class Data_Handler {
         ArrayList<Module> modules = (ArrayList<Module>) File_system.readObjectFromFile("Modules.txt");
         school.setModules(modules);
         Module.setCount(prefs1.getInt("ModulesID", Module.getCount()));
+        System.out.println(Module.getCount());
     }
 
     public static void loadEnrollments(){
         ArrayList<Enrollment> enrollments = (ArrayList<Enrollment>) File_system.readObjectFromFile("Enrollments.txt");
         school.setEnrollments(enrollments);
         Enrollment.setCount(prefs1.getInt("EnrollmentsID", Enrollment.getCount()));
+        System.out.println(Enrollment.getCount());
     }
 
     public static void loadGrades(){
         ArrayList<Grade> grades = (ArrayList<Grade>) File_system.readObjectFromFile("Grades.txt");
-        school.setGrades(grades);
+        if (grades != null) {
+            school.setGrades(grades);
+        }
     }
 
     public static void loadBooks(){
@@ -172,12 +177,12 @@ public class Data_Handler {
         school.getLibrary().setBooks(books);
     }
 
-    /*public static void fixnumbers(){
+    public static void fixnumbers(){
         User.setCounter(school.getUsers().size() + school.getLibrary().getLibrarians().size());
         Module.setCount(school.getModules().size());
         Enrollment.setCount(school.getEnrollments().size());
         System.out.println(User.getCounter());
         System.out.println(Module.getCount());
         System.out.println(Enrollment.getCount());
-    }*/
+    }
 }

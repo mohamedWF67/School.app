@@ -182,32 +182,32 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTabbedPane1" min="-2" pref="238" max="-2" attributes="0"/>
+                          <Component id="Student_Tabbed_Panel" min="-2" pref="238" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" pref="744" max="32767" attributes="0"/>
+                          <Component id="Student_Table_Scroll" pref="744" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" max="32767" attributes="0"/>
+                      <Component id="Student_Table_Scroll" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jTabbedPane1" max="32767" attributes="0"/>
+                          <Component id="Student_Tabbed_Panel" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+                <Container class="javax.swing.JScrollPane" name="Student_Table_Scroll">
                   <AuxValues>
                     <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
                   </AuxValues>
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="jTable1">
+                    <Component class="javax.swing.JTable" name="Student_Table">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="10" rowCount="0">
@@ -217,7 +217,7 @@
                             <Column editable="false" title="Parent Name" type="java.lang.String"/>
                             <Column editable="false" title="Email" type="java.lang.String"/>
                             <Column editable="false" title="Password" type="java.lang.String"/>
-                            <Column editable="true" title="Gender" type="java.lang.String"/>
+                            <Column editable="false" title="Gender" type="java.lang.String"/>
                             <Column editable="false" title="DOB" type="java.lang.String"/>
                             <Column editable="false" title="Mobile Number" type="java.lang.String"/>
                             <Column editable="false" title="Address" type="java.lang.String"/>
@@ -231,7 +231,7 @@
                               <Renderer/>
                             </Column>
                             <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                              <Title/>
+                              <Title value="Section"/>
                               <Editor/>
                               <Renderer/>
                             </Column>
@@ -241,7 +241,7 @@
                               <Renderer/>
                             </Column>
                             <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                              <Title/>
+                              <Title value="Parent Name"/>
                               <Editor/>
                               <Renderer/>
                             </Column>
@@ -282,16 +282,16 @@
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable1MouseClicked"/>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Student_TableMouseClicked"/>
                       </Events>
                     </Component>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
+                <Container class="javax.swing.JTabbedPane" name="Student_Tabbed_Panel">
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
                   <SubComponents>
-                    <Container class="javax.swing.JPanel" name="jPanel1">
+                    <Container class="javax.swing.JPanel" name="Student_Info_Tab">
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                           <JTabbedPaneConstraints tabName="Info">
@@ -406,7 +406,7 @@
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="Student_Delete_btn" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="36" max="32767" attributes="0"/>
+                                  <EmptySpace pref="38" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -488,6 +488,9 @@
                           </Events>
                         </Component>
                         <Component class="javax.swing.JTextField" name="Student_Section_txt">
+                          <Events>
+                            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="Student_Section_txtKeyTyped"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="Student_Save_btn">
                           <Properties>
@@ -517,6 +520,9 @@
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Delete"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Student_Delete_btnActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="Student_Reset_btn">
                           <Properties>
@@ -528,7 +534,7 @@
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Container class="javax.swing.JPanel" name="jPanel2">
+                    <Container class="javax.swing.JPanel" name="Student_Grade_Tab">
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                           <JTabbedPaneConstraints tabName="Grades">
@@ -540,17 +546,106 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="238" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="Student_Grades_Table_Scroll" alignment="0" pref="226" max="32767" attributes="0"/>
+                                      <Component id="Student_Grade_txt" max="32767" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="Student_Grade_Label" min="-2" max="-2" attributes="0"/>
+                                              <Component id="Student_SaveGrade_btn" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="621" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="Student_Grades_Table_Scroll" min="-2" pref="196" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="Student_Grade_Label" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="Student_Grade_txt" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="334" max="32767" attributes="0"/>
+                                  <Component id="Student_SaveGrade_btn" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
+                      <SubComponents>
+                        <Container class="javax.swing.JScrollPane" name="Student_Grades_Table_Scroll">
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JTable" name="Student_Grades_Table">
+                              <Properties>
+                                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                                  <Table columnCount="3" rowCount="4">
+                                    <Column editable="false" title="Name" type="java.lang.String"/>
+                                    <Column editable="false" title="Mark" type="java.lang.String"/>
+                                    <Column editable="false" title="Grade" type="java.lang.String"/>
+                                  </Table>
+                                </Property>
+                                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                                  <TableColumnModel selectionModel="0">
+                                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                      <Title/>
+                                      <Editor/>
+                                      <Renderer/>
+                                    </Column>
+                                    <Column maxWidth="50" minWidth="-1" prefWidth="-1" resizable="true">
+                                      <Title/>
+                                      <Editor/>
+                                      <Renderer/>
+                                    </Column>
+                                    <Column maxWidth="40" minWidth="-1" prefWidth="-1" resizable="true">
+                                      <Title/>
+                                      <Editor/>
+                                      <Renderer/>
+                                    </Column>
+                                  </TableColumnModel>
+                                </Property>
+                                <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                                  <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                                </Property>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Student_Grades_TableMouseClicked"/>
+                              </Events>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JLabel" name="Student_Grade_Label">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Grade"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="Student_Grade_txt">
+                          <Events>
+                            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="Student_Grade_txtKeyTyped"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="Student_SaveGrade_btn">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Save"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Student_SaveGrade_btnActionPerformed"/>
+                          </Events>
+                        </Component>
+                      </SubComponents>
                     </Container>
-                    <Container class="javax.swing.JPanel" name="jPanel3">
+                    <Container class="javax.swing.JPanel" name="Student_Enrollments_Tab">
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                           <JTabbedPaneConstraints tabName="Enrollments">
@@ -562,21 +657,123 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="238" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="Modules_Scroll" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="Enroll_Btn" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="Cancel_Enrollment_btn" pref="150" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" attributes="0">
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="Modules_Label" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Component id="Enrollment_Label" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Component id="EnrolledModules_Scroll" alignment="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="621" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="Modules_Label" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="Modules_Scroll" min="-2" pref="235" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="Enrollment_Label" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="EnrolledModules_Scroll" pref="293" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="Enroll_Btn" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="Cancel_Enrollment_btn" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
+                      <SubComponents>
+                        <Container class="javax.swing.JScrollPane" name="Modules_Scroll">
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JList" name="Modules_List">
+                              <Properties>
+                                <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+                                  <StringArray count="0"/>
+                                </Property>
+                              </Properties>
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                              </AuxValues>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JLabel" name="Modules_Label">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Available Modules"/>
+                          </Properties>
+                        </Component>
+                        <Container class="javax.swing.JScrollPane" name="EnrolledModules_Scroll">
+                          <AuxValues>
+                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                          </AuxValues>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JList" name="EnrolledModules_List">
+                              <Properties>
+                                <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+                                  <StringArray count="0"/>
+                                </Property>
+                              </Properties>
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                              </AuxValues>
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Component class="javax.swing.JLabel" name="Enrollment_Label">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Enrollments"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="Cancel_Enrollment_btn">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Cancel"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Cancel_Enrollment_btnActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="Enroll_Btn">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Enroll"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Enroll_BtnActionPerformed"/>
+                          </Events>
+                        </Component>
+                      </SubComponents>
                     </Container>
                   </SubComponents>
                 </Container>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="Enrollment_Panel">
+            <Container class="javax.swing.JPanel" name="Teacher_Panel">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -593,15 +790,315 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="998" max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="Teacher_Tabbed_Panel" min="-2" pref="238" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="Teacher_Table_Scroll" pref="742" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="660" max="32767" attributes="0"/>
+                      <Component id="Teacher_Table_Scroll" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="Teacher_Tabbed_Panel" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
+              <SubComponents>
+                <Container class="javax.swing.JTabbedPane" name="Teacher_Tabbed_Panel">
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
+                  <SubComponents>
+                    <Container class="javax.swing.JPanel" name="Teacher_Info_Tab">
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                          <JTabbedPaneConstraints tabName="Info">
+                            <Property name="tabTitle" type="java.lang.String" value="Info"/>
+                          </JTabbedPaneConstraints>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="Teacher_Name_Label" max="32767" attributes="0"/>
+                                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="Teacher_Email_Label" max="32767" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="Teacher_Password_Label" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="Teacher_Password_txt" alignment="0" pref="232" max="32767" attributes="0"/>
+                                      <Component id="Teacher_Email_txt" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="Teacher_Name_txt" alignment="0" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="Teacher_Save_btn" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="Teacher_Clear_btn" max="32767" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="Teacher_Create_btn" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="Teacher_Reset_btn" max="32767" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="Teacher_Delete_btn" max="32767" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="Teacher_Qualification_Label" max="32767" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="Teacher_Salary_Label" max="32767" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="Teacher_Qualification_txt" max="32767" attributes="0"/>
+                                      <Component id="Teacher_Salary_txt" max="32767" attributes="0"/>
+                                      <Component id="Teacher_MobileNo_Label" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="Teacher_Address_Label" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="Teacher_Address_txt" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="Teacher_MobileNo_txt" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="Teacher_Name_Label" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="Teacher_Name_txt" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="Teacher_Email_Label" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="Teacher_Email_txt" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="Teacher_Password_Label" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="Teacher_Password_txt" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="Teacher_Qualification_Label" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="Teacher_Qualification_txt" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="Teacher_Salary_Label" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="Teacher_Salary_txt" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="Teacher_MobileNo_Label" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="Teacher_MobileNo_txt" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="Teacher_Address_Label" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="Teacher_Address_txt" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="Teacher_Save_btn" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="Teacher_Clear_btn" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="Teacher_Create_btn" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="Teacher_Reset_btn" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="Teacher_Delete_btn" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="36" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="Teacher_Name_Label">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Teacher Name"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="Teacher_Name_txt">
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="Teacher_Email_Label">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Email"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="Teacher_Email_txt">
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="Teacher_Password_Label">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Password"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="Teacher_Password_txt">
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="Teacher_Qualification_Label">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Qualification"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="Teacher_Qualification_txt">
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="Teacher_Salary_Label">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Salary"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="Teacher_Salary_txt">
+                          <Events>
+                            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="Teacher_Salary_txtKeyTyped"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="Teacher_MobileNo_Label">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Mobile Number"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="Teacher_MobileNo_txt">
+                          <Events>
+                            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="Teacher_MobileNo_txtKeyTyped"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="Teacher_Address_Label">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Address"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="Teacher_Address_txt">
+                        </Component>
+                        <Component class="javax.swing.JButton" name="Teacher_Save_btn">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Save"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Teacher_Save_btnActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="Teacher_Clear_btn">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Clear"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Teacher_Clear_btnActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="Teacher_Create_btn">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Create"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Teacher_Create_btnActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="Teacher_Delete_btn">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Delete"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Teacher_Delete_btnActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="Teacher_Reset_btn">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Reset"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Teacher_Reset_btnActionPerformed"/>
+                          </Events>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                  </SubComponents>
+                </Container>
+                <Container class="javax.swing.JScrollPane" name="Teacher_Table_Scroll">
+                  <AuxValues>
+                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                  </AuxValues>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                  <SubComponents>
+                    <Component class="javax.swing.JTable" name="Teacher_Table">
+                      <Properties>
+                        <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                          <Table columnCount="8" rowCount="0">
+                            <Column editable="false" title="ID" type="java.lang.Integer"/>
+                            <Column editable="false" title="Name" type="java.lang.String"/>
+                            <Column editable="false" title="Email" type="java.lang.String"/>
+                            <Column editable="false" title="Password" type="java.lang.String"/>
+                            <Column editable="false" title="Qualification" type="java.lang.String"/>
+                            <Column editable="false" title="Salary" type="java.lang.String"/>
+                            <Column editable="false" title="Mobile Number" type="java.lang.String"/>
+                            <Column editable="false" title="Address" type="java.lang.String"/>
+                          </Table>
+                        </Property>
+                        <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                          <TableColumnModel selectionModel="0">
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
+                          </TableColumnModel>
+                        </Property>
+                        <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                          <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Teacher_TableMouseClicked"/>
+                      </Events>
+                    </Component>
+                  </SubComponents>
+                </Container>
+              </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="Profile_Panel">
               <Constraints>
@@ -679,7 +1176,7 @@
                               <Component id="Admin_Password_Label" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="Admin_Password_txt" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="532" max="32767" attributes="0"/>
+                          <EmptySpace pref="534" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="Status_Profile_Label" alignment="0" max="32767" attributes="0"/>
                               <Component id="Save_Profile_btn" alignment="0" max="32767" attributes="0"/>

@@ -2,9 +2,12 @@ package com.mycompany.School_app.Config;
 
 import com.mycompany.School_app.CLI_interface;
 import com.mycompany.School_app.Data_Handler;
+import com.mycompany.School_app.StatusSystem.StatusManager;
 import com.mycompany.School_app.ThemeManger.ThemeManager;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class InitConfig {
     public static final InitConfig INSTANCE;
@@ -35,6 +38,8 @@ public class InitConfig {
         ThemeManager.CloseThemeManager();
 
         Data_Handler.saveAllData();
+
+        StatusManager.createLogFile();
 
         System.out.println("👋 Good bye..");
     }
