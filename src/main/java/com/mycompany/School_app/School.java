@@ -145,15 +145,18 @@ public class School {
     //Removes user from users by it's id
     public void removeUser(int id) {
         User user = getUser(id);
-        if (user == null) {
-            return;
+        if (user != null) {
+            if (user instanceof Student) {
+                Student student = (Student) user;
+                cancelEnrollments(student);
+            }
+            users.remove(user);
+        }else{
+            user = getLibrary().getLibrarian(id);
+            if (user != null) {
+                getLibrary().getLibrarians().remove(user);
+            }
         }
-
-        if (user instanceof Student) {
-            Student student = (Student) user;
-            cancelEnrollments(student);
-        }
-        users.remove(user);
     }
 
     //Print Admins

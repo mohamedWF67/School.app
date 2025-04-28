@@ -11,7 +11,9 @@ public class StatusManager {
     File statusFile;
 
     public StatusManager() {
-        statusList = new ArrayList<>();
+        if(statusList == null) {
+            statusList = new ArrayList<>();
+        }
         statusFile = new File("StatusFile.txt");
     }
 

@@ -25,7 +25,6 @@ public class AuthManager {
         this.library = library;
         Start();
         this.statusManager = new StatusManager();
-        statusManager.clearFile();
     }
 
     public static void Start() {

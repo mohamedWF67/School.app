@@ -1,0 +1,9 @@
+Status{errorCode=1, statusMessage='Invalid Email Address', statusDate=Sun Apr 27 23:16:13 EEST 2025}
+Status{errorCode=-1, statusMessage='User Authenticated', statusDate=Mon Apr 28 23:37:52 EEST 2025}
+Status{errorCode=-2, statusMessage='librarian Updated Successfully', statusDate=Mon Apr 28 23:42:03 EEST 2025}
+Status{errorCode=-2, statusMessage='librarian Created Successfully', statusDate=Mon Apr 28 23:42:21 EEST 2025}
+Status{errorCode=-3, statusMessage='Please Select a Module', statusDate=Mon Apr 28 23:43:04 EEST 2025}
+Status{errorCode=-1, statusMessage='User Authenticated', statusDate=Mon Apr 28 23:44:11 EEST 2025}
+Status{errorCode=-2, statusMessage='librarian Created Successfully', statusDate=Mon Apr 28 23:45:03 EEST 2025}
+Status{errorCode=-3, statusMessage='Please Select a Module', statusDate=Mon Apr 28 23:45:32 EEST 2025}
+Status{errorCode=-3, statusMessage='Please Select a Module', statusDate=Mon Apr 28 23:45:44 EEST 2025}

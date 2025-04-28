@@ -25,7 +25,6 @@ public class MainApp {
 
     public MainApp(User user){
         this.user = user;
-        //TODO fix the handler
         this.school = Data_Handler.getSchool();
         if (user instanceof Admin){
             new AdminAppUI((Admin) user).setVisible(true);
@@ -315,6 +314,11 @@ public class MainApp {
             return;
         }
 
+        if (password.isEmpty()){
+            setStatus(3,"Please enter a password");
+            return;
+        }
+
         if (qualification.isEmpty()){
             setStatus(4,"Please enter a qualification");
             return;
@@ -339,4 +343,72 @@ public class MainApp {
         setStatus(-2,"Teacher Created Successfully");
     }
 
+    protected static ArrayList<Librarian> getLibrarians() {
+        return school.getLibrary().getLibrarians();
+    }
+
+    protected static void editLibrarian(Librarian librarian, String name, String email, String password, String Exp) {
+        if (name.isEmpty()){
+            setStatus(1,"Please enter a name");
+            return;
+        }
+
+        if (email.isEmpty()){
+            setStatus(2,"Please enter an email");
+            return;
+        }
+
+        if (school.emailExists(email) && !email.equals(librarian.getEmail())){
+            setStatus(2,"Email already exists");
+            return;
+        }
+
+        if (Exp.isEmpty()){
+            setStatus(4,"Please enter a Experience");
+            return;
+        }
+
+
+        librarian.setName(name);
+
+        librarian.setEmail(email);
+        if (!password.isEmpty()){
+            librarian.setHashedPassword(password);
+        }
+
+        librarian.setExperience(Exp);
+
+        setStatus(-2,"librarian Updated Successfully");
+    }
+
+    protected static void createLibrarian(String name, String email, String password, String Exp) {
+        if (name.isEmpty()){
+            setStatus(1,"Please enter a name");
+            return;
+        }
+
+        if (email.isEmpty()){
+            setStatus(2,"Please enter an email");
+            return;
+        }
+
+        if (school.emailExists(email)){
+            setStatus(2,"Email already exists");
+            return;
+        }
+
+        if (password.isEmpty()){
+            setStatus(3,"Please enter a password");
+            return;
+        }
+
+        if (Exp.isEmpty()){
+            setStatus(4,"Please enter a Experience");
+            return;
+        }
+
+
+
+        setStatus(-2,"librarian Created Successfully");
+    }
 }

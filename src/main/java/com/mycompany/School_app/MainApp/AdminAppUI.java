@@ -6,6 +6,7 @@ package com.mycompany.School_app.MainApp;
 
 import com.mycompany.School_app.Admin;
 import com.mycompany.School_app.Grade;
+import com.mycompany.School_app.LibrarySystem.Librarian;
 import com.mycompany.School_app.Module;
 import com.mycompany.School_app.StatusSystem.Status;
 import com.mycompany.School_app.ThemeManger.ThemeMangerUI;
@@ -39,12 +40,19 @@ public class AdminAppUI extends javax.swing.JFrame {
     }
     
     public void custominit(Admin user){
+        ArrayList<String> Experiencelvls = new ArrayList<>();
+        for (int i = 1; i <= 10; i++) {
+            if (i == 1) {Experiencelvls.add(i + " Year"); continue;}
+            Experiencelvls.add(i + " Years");
+        }
+        Librarian_Exp_Selector.setModel(new javax.swing.DefaultComboBoxModel<>(Experiencelvls.stream().toArray(String[]::new)));
         setLocationRelativeTo(null);
         setVisible(true);
         this.user = user;
         ReloadProfileFields();
         refreshStudentsTable();
         refreshTeacherTable();
+        refreshLibrarianTable();
     }
 
     /**
@@ -131,6 +139,24 @@ public class AdminAppUI extends javax.swing.JFrame {
         Teacher_Reset_btn = new javax.swing.JButton();
         Teacher_Table_Scroll = new javax.swing.JScrollPane();
         Teacher_Table = new javax.swing.JTable();
+        Librarian_Panel = new javax.swing.JPanel();
+        Librarian_Tabbed_Panel = new javax.swing.JTabbedPane();
+        Librarian_Info_Tab = new javax.swing.JPanel();
+        Student_Name_Label1 = new javax.swing.JLabel();
+        Librarian_Name_txt = new javax.swing.JTextField();
+        Librarian_Email_Label = new javax.swing.JLabel();
+        Librarian_Email_txt = new javax.swing.JTextField();
+        Librarian_Password_txt = new javax.swing.JTextField();
+        Librarian_Password_Label = new javax.swing.JLabel();
+        Librarian_Save_btn = new javax.swing.JButton();
+        Librarian_Clear_btn = new javax.swing.JButton();
+        Librarian_Create_btn = new javax.swing.JButton();
+        Librarian_Delete_btn = new javax.swing.JButton();
+        Librarian_Reset_btn = new javax.swing.JButton();
+        Librarian_Exp_Label = new javax.swing.JLabel();
+        Librarian_Exp_Selector = new javax.swing.JComboBox<>();
+        Librarian_Table_Scroll = new javax.swing.JScrollPane();
+        Librarian_Table = new javax.swing.JTable();
         Profile_Panel = new javax.swing.JPanel();
         Profile_Label = new javax.swing.JLabel();
         Reset_Profile_btn = new javax.swing.JButton();
@@ -183,6 +209,11 @@ public class AdminAppUI extends javax.swing.JFrame {
         });
 
         Librarian_btn.setText("Librarian");
+        Librarian_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Librarian_btnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout HeaderLayout = new javax.swing.GroupLayout(Header);
         Header.setLayout(HeaderLayout);
@@ -412,7 +443,7 @@ public class AdminAppUI extends javax.swing.JFrame {
                     .addComponent(Student_Reset_btn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Student_Delete_btn)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         Student_Tabbed_Panel.addTab("Info", Student_Info_Tab);
@@ -494,7 +525,7 @@ public class AdminAppUI extends javax.swing.JFrame {
                 .addComponent(Student_Grade_Label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Student_Grade_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 334, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 336, Short.MAX_VALUE)
                 .addComponent(Student_SaveGrade_btn)
                 .addContainerGap())
         );
@@ -554,7 +585,7 @@ public class AdminAppUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Enrollment_Label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(EnrolledModules_Scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+                .addComponent(EnrolledModules_Scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(Student_Enrollments_TabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Enroll_Btn)
@@ -572,7 +603,7 @@ public class AdminAppUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(Student_Tabbed_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Student_Table_Scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE)
+                .addComponent(Student_Table_Scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE)
                 .addContainerGap())
         );
         Student_PanelLayout.setVerticalGroup(
@@ -662,7 +693,7 @@ public class AdminAppUI extends javax.swing.JFrame {
                         .addComponent(Teacher_Email_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addComponent(Teacher_Password_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Teacher_Password_txt, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                    .addComponent(Teacher_Password_txt)
                     .addComponent(Teacher_Email_txt)
                     .addComponent(Teacher_Name_txt)
                     .addGroup(Teacher_Info_TabLayout.createSequentialGroup()
@@ -732,7 +763,7 @@ public class AdminAppUI extends javax.swing.JFrame {
                     .addComponent(Teacher_Reset_btn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Teacher_Delete_btn)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         Teacher_Tabbed_Panel.addTab("Info", Teacher_Info_Tab);
@@ -775,7 +806,7 @@ public class AdminAppUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(Teacher_Tabbed_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Teacher_Table_Scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)
+                .addComponent(Teacher_Table_Scroll)
                 .addContainerGap())
         );
         Teacher_PanelLayout.setVerticalGroup(
@@ -787,6 +818,173 @@ public class AdminAppUI extends javax.swing.JFrame {
         );
 
         MainPanel.add(Teacher_Panel, "card3");
+
+        Student_Name_Label1.setText("Name");
+
+        Librarian_Email_Label.setText("Email");
+
+        Librarian_Password_Label.setText("Password");
+
+        Librarian_Save_btn.setText("Save");
+        Librarian_Save_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Librarian_Save_btnActionPerformed(evt);
+            }
+        });
+
+        Librarian_Clear_btn.setText("Clear");
+        Librarian_Clear_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Librarian_Clear_btnActionPerformed(evt);
+            }
+        });
+
+        Librarian_Create_btn.setText("Create");
+        Librarian_Create_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Librarian_Create_btnActionPerformed(evt);
+            }
+        });
+
+        Librarian_Delete_btn.setText("Delete");
+        Librarian_Delete_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Librarian_Delete_btnActionPerformed(evt);
+            }
+        });
+
+        Librarian_Reset_btn.setText("Reset");
+        Librarian_Reset_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Librarian_Reset_btnActionPerformed(evt);
+            }
+        });
+
+        Librarian_Exp_Label.setText("Experience");
+
+        Librarian_Exp_Selector.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Librarian_Exp_SelectorActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout Librarian_Info_TabLayout = new javax.swing.GroupLayout(Librarian_Info_Tab);
+        Librarian_Info_Tab.setLayout(Librarian_Info_TabLayout);
+        Librarian_Info_TabLayout.setHorizontalGroup(
+            Librarian_Info_TabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Librarian_Info_TabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Librarian_Info_TabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Librarian_Info_TabLayout.createSequentialGroup()
+                        .addComponent(Librarian_Exp_Selector, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(Librarian_Info_TabLayout.createSequentialGroup()
+                        .addComponent(Student_Name_Label1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(16, 16, 16))
+                    .addGroup(Librarian_Info_TabLayout.createSequentialGroup()
+                        .addComponent(Librarian_Email_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addComponent(Librarian_Password_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Librarian_Password_txt, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                    .addComponent(Librarian_Email_txt)
+                    .addComponent(Librarian_Name_txt)
+                    .addGroup(Librarian_Info_TabLayout.createSequentialGroup()
+                        .addComponent(Librarian_Save_btn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Librarian_Clear_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(Librarian_Info_TabLayout.createSequentialGroup()
+                        .addComponent(Librarian_Create_btn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Librarian_Reset_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Librarian_Info_TabLayout.createSequentialGroup()
+                        .addComponent(Librarian_Delete_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addComponent(Librarian_Exp_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        Librarian_Info_TabLayout.setVerticalGroup(
+            Librarian_Info_TabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Librarian_Info_TabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Student_Name_Label1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Librarian_Name_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Librarian_Email_Label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Librarian_Email_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Librarian_Password_Label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Librarian_Password_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Librarian_Exp_Label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Librarian_Exp_Selector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(276, 276, 276)
+                .addGroup(Librarian_Info_TabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Librarian_Save_btn)
+                    .addComponent(Librarian_Clear_btn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(Librarian_Info_TabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Librarian_Create_btn)
+                    .addComponent(Librarian_Reset_btn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Librarian_Delete_btn)
+                .addContainerGap(46, Short.MAX_VALUE))
+        );
+
+        Librarian_Tabbed_Panel.addTab("Info", Librarian_Info_Tab);
+
+        Librarian_Table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Name", "Email", "Password", "Exp."
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        Librarian_Table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Librarian_TableMouseClicked(evt);
+            }
+        });
+        Librarian_Table_Scroll.setViewportView(Librarian_Table);
+
+        javax.swing.GroupLayout Librarian_PanelLayout = new javax.swing.GroupLayout(Librarian_Panel);
+        Librarian_Panel.setLayout(Librarian_PanelLayout);
+        Librarian_PanelLayout.setHorizontalGroup(
+            Librarian_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Librarian_PanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Librarian_Tabbed_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Librarian_Table_Scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        Librarian_PanelLayout.setVerticalGroup(
+            Librarian_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Librarian_Table_Scroll)
+            .addComponent(Librarian_Tabbed_Panel)
+        );
+
+        MainPanel.add(Librarian_Panel, "card2");
 
         Profile_Label.setText("Profile");
 
@@ -858,7 +1056,7 @@ public class AdminAppUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(Profile_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Admin_Name_txt)
-                            .addComponent(Admin_Password_txt, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE))))
+                            .addComponent(Admin_Password_txt, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         Profile_PanelLayout.setVerticalGroup(
@@ -881,7 +1079,7 @@ public class AdminAppUI extends javax.swing.JFrame {
                     .addComponent(Admin_Email_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Admin_Password_Label)
                     .addComponent(Admin_Password_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 534, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 536, Short.MAX_VALUE)
                 .addGroup(Profile_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Status_Profile_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Save_Profile_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -968,6 +1166,7 @@ public class AdminAppUI extends javax.swing.JFrame {
         Profile_Panel.setVisible(true);
         Teacher_Panel.setVisible(false);
         Student_Panel.setVisible(false);
+        Librarian_Panel.setVisible(false);
     }
 
     private void switchToTeacherPanel(){
@@ -975,6 +1174,7 @@ public class AdminAppUI extends javax.swing.JFrame {
         Profile_Panel.setVisible(false);
         Teacher_Panel.setVisible(true);
         Student_Panel.setVisible(false);
+        Librarian_Panel.setVisible(false);
         clearTeacherFields();
     }
 
@@ -983,7 +1183,26 @@ public class AdminAppUI extends javax.swing.JFrame {
         Profile_Panel.setVisible(false);
         Teacher_Panel.setVisible(false);
         Student_Panel.setVisible(true);
+        Librarian_Panel.setVisible(false);
         clearStudentFields();
+    }
+    
+        private void switchToLibrarianPanel(){
+        SelectedUser = null;
+        Profile_Panel.setVisible(false);
+        Teacher_Panel.setVisible(false);
+        Student_Panel.setVisible(false);
+        Librarian_Panel.setVisible(true);
+        clearLibrarianFields();
+    }
+
+    private void clearLibrarianFields() {
+        Librarian_Name_txt.setText("");
+
+        Librarian_Email_txt.setText("");
+        Librarian_Password_txt.setText("");
+
+        Librarian_Exp_Selector.setSelectedIndex(0);
     }
 
     private void Reset_Profile_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Reset_Profile_btnActionPerformed
@@ -1340,16 +1559,17 @@ public class AdminAppUI extends javax.swing.JFrame {
         }
         if (status.getErrorCode() == -1){
             JOptionPane.showMessageDialog(null,status.getstatusMessage(),"Success",JOptionPane.INFORMATION_MESSAGE);
+            refreshTeacherTable();
+            refreshTeacherFields();
         }else{
             JOptionPane.showMessageDialog(null,status.getstatusMessage(),"Error",JOptionPane.ERROR_MESSAGE);
         }
-        refreshTeacherTable();
-        refreshTeacherFields();
     }//GEN-LAST:event_Teacher_Save_btnActionPerformed
 
     private void Teacher_Clear_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Teacher_Clear_btnActionPerformed
         // TODO add your handling code here:
         clearTeacherFields();
+        SelectedUser = null;
     }//GEN-LAST:event_Teacher_Clear_btnActionPerformed
 
     private void Teacher_Create_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Teacher_Create_btnActionPerformed
@@ -1437,6 +1657,117 @@ public class AdminAppUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_Teacher_Salary_txtKeyTyped
 
+    private void Librarian_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Librarian_btnActionPerformed
+        // TODO add your handling code here:
+        switchToLibrarianPanel();
+    }//GEN-LAST:event_Librarian_btnActionPerformed
+
+    private void Librarian_TableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Librarian_TableMouseClicked
+        // TODO add your handling code here:
+        DefaultTableModel tb = (DefaultTableModel) Librarian_Table.getModel();
+        String id = tb.getValueAt(Librarian_Table.getSelectedRow(), 0).toString();
+        SelectedUser = MainApp.getThisUser(Integer.parseInt(id));
+        refreshLibrarianFields();
+    }//GEN-LAST:event_Librarian_TableMouseClicked
+
+    private void refreshLibrarianFields() {
+        Librarian librarian = (Librarian) SelectedUser;
+        Librarian_Name_txt.setText(librarian.getName());
+
+        Librarian_Email_txt.setText(librarian.getEmail());
+
+        Librarian_Exp_Selector.setSelectedItem(librarian.getExperience());
+    }
+
+    private void Librarian_Save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Librarian_Save_btnActionPerformed
+        // TODO add your handling code here:
+        if (SelectedUser == null) {
+            MainApp.setStatus(0,"Please Select a Librarian");
+            return;
+        }
+        String name = Librarian_Name_txt.getText();
+        String email = Librarian_Email_txt.getText();
+        String password = Librarian_Password_txt.getText();
+        String exp = Librarian_Exp_Selector.getSelectedItem().toString();
+
+        MainApp.editLibrarian((Librarian) SelectedUser,name, email, password, exp);
+
+        Status status = MainApp.getStatus();
+
+        switch (status.getErrorCode()){
+            case 1->{Librarian_Name_txt.requestFocus();}
+            case 2->{Librarian_Email_txt.requestFocus();}
+            case 3->{Librarian_Password_txt.requestFocus();}
+            case 4->{Librarian_Exp_Selector.requestFocus();}
+        }
+        if (status.getErrorCode() != -2){
+            JOptionPane.showMessageDialog(null,status.getstatusMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+        }
+        refreshLibrarianTable();
+
+    }//GEN-LAST:event_Librarian_Save_btnActionPerformed
+
+    private void Librarian_Clear_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Librarian_Clear_btnActionPerformed
+        // TODO add your handling code here:
+        clearLibrarianFields();
+    }//GEN-LAST:event_Librarian_Clear_btnActionPerformed
+
+    private void Librarian_Create_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Librarian_Create_btnActionPerformed
+        // TODO add your handling code here:
+        if (SelectedUser == null) {
+            MainApp.setStatus(0,"Please Select a Librarian");
+            return;
+        }
+        String name = Librarian_Name_txt.getText();
+        String email = Librarian_Email_txt.getText();
+        String password = Librarian_Password_txt.getText();
+        String exp = Librarian_Exp_Selector.getSelectedItem().toString();
+
+        MainApp.createLibrarian(name, email, password, exp);
+
+        Status status = MainApp.getStatus();
+
+        switch (status.getErrorCode()){
+            case 1->{Librarian_Name_txt.requestFocus();}
+            case 2->{Librarian_Email_txt.requestFocus();}
+            case 3->{Librarian_Password_txt.requestFocus();}
+            case 4->{Librarian_Exp_Selector.requestFocus();}
+        }
+        if (status.getErrorCode() != -2){
+            JOptionPane.showMessageDialog(null,status.getstatusMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+        }
+        refreshLibrarianTable();
+    }//GEN-LAST:event_Librarian_Create_btnActionPerformed
+
+    private void Librarian_Delete_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Librarian_Delete_btnActionPerformed
+        // TODO add your handling code here:
+        if (SelectedUser == null) {
+            MainApp.setStatus(0,"Please Select a Librarian");
+            return;
+        }
+
+        int ans = JOptionPane.showConfirmDialog(this, "Are you a Sure you want to delete " + SelectedUser.getName(),
+                "confirmation", JOptionPane.YES_NO_OPTION);
+
+        if (ans == JOptionPane.YES_OPTION) {
+            MainApp.deleteUser(SelectedUser.getId());
+        }
+
+        refreshLibrarianTable();
+        clearLibrarianFields();
+
+        SelectedUser = null;
+    }//GEN-LAST:event_Librarian_Delete_btnActionPerformed
+
+    private void Librarian_Reset_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Librarian_Reset_btnActionPerformed
+        // TODO add your handling code here:
+        refreshLibrarianFields();
+    }//GEN-LAST:event_Librarian_Reset_btnActionPerformed
+
+    private void Librarian_Exp_SelectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Librarian_Exp_SelectorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Librarian_Exp_SelectorActionPerformed
+
     private void refreshModulesTable(){
         ArrayList<com.mycompany.School_app.Module> modules = MainApp.getCompatibleModules((Student) SelectedUser);
         Modules_List.setModel(new AbstractListModel<String>() {
@@ -1520,6 +1851,17 @@ public class AdminAppUI extends javax.swing.JFrame {
         Teacher_Address_txt.setText("");
     }
 
+    private void refreshLibrarianTable(){
+        DefaultTableModel tb = (DefaultTableModel) Librarian_Table.getModel();
+        while (tb.getRowCount() > 0) {
+            tb.removeRow(tb.getRowCount()-1);
+        }
+        ArrayList<Librarian> librarians = MainApp.getLibrarians();
+        for (Librarian librarian : librarians) {
+            tb.addRow(new Object[]{librarian.getId(),librarian.getName(),librarian.getEmail(),librarian.getPassword(),librarian.getExperience()});
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -1575,6 +1917,23 @@ public class AdminAppUI extends javax.swing.JFrame {
     private javax.swing.JLabel Enrollment_Label;
     private javax.swing.JMenu File_Menu;
     private javax.swing.JPanel Header;
+    private javax.swing.JButton Librarian_Clear_btn;
+    private javax.swing.JButton Librarian_Create_btn;
+    private javax.swing.JButton Librarian_Delete_btn;
+    private javax.swing.JLabel Librarian_Email_Label;
+    private javax.swing.JTextField Librarian_Email_txt;
+    private javax.swing.JLabel Librarian_Exp_Label;
+    private javax.swing.JComboBox<String> Librarian_Exp_Selector;
+    private javax.swing.JPanel Librarian_Info_Tab;
+    private javax.swing.JTextField Librarian_Name_txt;
+    private javax.swing.JPanel Librarian_Panel;
+    private javax.swing.JLabel Librarian_Password_Label;
+    private javax.swing.JTextField Librarian_Password_txt;
+    private javax.swing.JButton Librarian_Reset_btn;
+    private javax.swing.JButton Librarian_Save_btn;
+    private javax.swing.JTabbedPane Librarian_Tabbed_Panel;
+    private javax.swing.JTable Librarian_Table;
+    private javax.swing.JScrollPane Librarian_Table_Scroll;
     private javax.swing.JButton Librarian_btn;
     private javax.swing.JButton Logout_btn;
     private javax.swing.JLayeredPane MainPanel;
@@ -1608,6 +1967,7 @@ public class AdminAppUI extends javax.swing.JFrame {
     private javax.swing.JLabel Student_MobileNo_Label;
     private javax.swing.JTextField Student_MobileNo_txt;
     private javax.swing.JLabel Student_Name_Label;
+    private javax.swing.JLabel Student_Name_Label1;
     private javax.swing.JTextField Student_Name_txt;
     private javax.swing.JPanel Student_Panel;
     private javax.swing.JLabel Student_ParentName_Label;
