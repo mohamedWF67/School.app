@@ -7,3 +7,66 @@ Status{errorCode=-1, statusMessage='User Authenticated', statusDate=Mon Apr 28 2
 Status{errorCode=-2, statusMessage='librarian Created Successfully', statusDate=Mon Apr 28 23:45:03 EEST 2025}
 Status{errorCode=-3, statusMessage='Please Select a Module', statusDate=Mon Apr 28 23:45:32 EEST 2025}
 Status{errorCode=-3, statusMessage='Please Select a Module', statusDate=Mon Apr 28 23:45:44 EEST 2025}
+Status{errorCode=-1, statusMessage='User Authenticated', statusDate=Tue Apr 29 01:02:44 EEST 2025}
+Status{errorCode=-2, statusMessage='librarian Created Successfully', statusDate=Tue Apr 29 01:02:59 EEST 2025}
+Status{errorCode=-2, statusMessage='Deleted Successfully', statusDate=Tue Apr 29 01:03:19 EEST 2025}
+Status{errorCode=-3, statusMessage='Please Select a Module', statusDate=Tue Apr 29 01:05:09 EEST 2025}
+Status{errorCode=-3, statusMessage='Please Select a Module', statusDate=Tue Apr 29 01:05:11 EEST 2025}
+Status{errorCode=-3, statusMessage='Please Select a Module', statusDate=Tue Apr 29 01:05:21 EEST 2025}
+Status{errorCode=5, statusMessage='Please enter a password', statusDate=Tue Apr 29 01:05:41 EEST 2025}
+Status{errorCode=5, statusMessage='Please enter a salary', statusDate=Tue Apr 29 01:05:53 EEST 2025}
+Status{errorCode=-1, statusMessage='User Authenticated', statusDate=Tue Apr 29 01:18:36 EEST 2025}
+Status{errorCode=-2, statusMessage='librarian Created Successfully', statusDate=Tue Apr 29 01:19:06 EEST 2025}
+Status{errorCode=-1, statusMessage='User Authenticated', statusDate=Tue Apr 29 01:19:32 EEST 2025}
+Status{errorCode=-1, statusMessage='User Authenticated', statusDate=Tue Apr 29 10:40:32 EEST 2025}
+Status{errorCode=-1, statusMessage='User Authenticated', statusDate=Tue Apr 29 11:49:38 EEST 2025}
+Status{errorCode=1, statusMessage='Invalid Email', statusDate=Tue Apr 29 12:13:39 EEST 2025}
+Status{errorCode=-1, statusMessage='User Authenticated', statusDate=Tue Apr 29 12:13:44 EEST 2025}
+Status{errorCode=-1, statusMessage='User Authenticated', statusDate=Tue Apr 29 12:20:12 EEST 2025}
+Status{errorCode=1, statusMessage='Invalid Email', statusDate=Tue Apr 29 14:32:22 EEST 2025}
+Status{errorCode=-1, statusMessage='User Authenticated', statusDate=Tue Apr 29 14:32:27 EEST 2025}
+Status{errorCode=-1, statusMessage='User Authenticated', statusDate=Tue Apr 29 20:26:29 EEST 2025}
+Status{errorCode=-1, statusMessage='User Authenticated', statusDate=Tue Apr 29 20:27:55 EEST 2025}
+Status{errorCode=-1, statusMessage='User Authenticated', statusDate=Tue Apr 29 20:38:50 EEST 2025}
+Status{errorCode=-1, statusMessage='User Authenticated', statusDate=Tue Apr 29 20:40:44 EEST 2025}
+Status{errorCode=-1, statusMessage='User Authenticated', statusDate=Tue Apr 29 20:44:21 EEST 2025}
+Status{errorCode=-1, statusMessage='User Authenticated', statusDate=Tue Apr 29 20:46:32 EEST 2025}
+Status{errorCode=-1, statusMessage='User Authenticated', statusDate=Tue Apr 29 20:47:01 EEST 2025}
+Status{errorCode=-1, statusMessage='User Authenticated', statusDate=Tue Apr 29 21:14:09 EEST 2025}
+Status{errorCode=-1, statusMessage='User Authenticated', statusDate=Tue Apr 29 21:36:10 EEST 2025}
+Status{errorCode=3, statusMessage='Please enter a Student Limit', statusDate=Tue Apr 29 21:39:35 EEST 2025}
+Status{errorCode=0, statusMessage='Please Select a Module', statusDate=Tue Apr 29 21:39:46 EEST 2025}
+Status{errorCode=0, statusMessage='Please Select a Module', statusDate=Tue Apr 29 21:39:49 EEST 2025}
+Status{errorCode=-1, statusMessage='User Authenticated', statusDate=Wed Apr 30 22:00:11 EEST 2025}
+Status{errorCode=3, statusMessage='Please enter a Student Limit', statusDate=Wed Apr 30 22:00:33 EEST 2025}
+Status{errorCode=3, statusMessage='Please enter a Student Limit', statusDate=Wed Apr 30 22:00:37 EEST 2025}
+Status{errorCode=3, statusMessage='Please enter a Student Limit', statusDate=Wed Apr 30 22:00:41 EEST 2025}
+Status{errorCode=-1, statusMessage='User Authenticated', statusDate=Wed Apr 30 22:01:58 EEST 2025}
+Status{errorCode=-2, statusMessage='Module Created Successfully', statusDate=Wed Apr 30 22:02:09 EEST 2025}
+Status{errorCode=-1, statusMessage='User Authenticated', statusDate=Wed Apr 30 22:09:08 EEST 2025}
+Status{errorCode=-3, statusMessage='Please Select a Module', statusDate=Wed Apr 30 22:13:49 EEST 2025}
+Status{errorCode=-2, statusMessage='Module Updated Successfully', statusDate=Wed Apr 30 22:14:14 EEST 2025}
+Status{errorCode=0, statusMessage='Please Select a Module', statusDate=Wed Apr 30 22:14:18 EEST 2025}
+Status{errorCode=-2, statusMessage='Module Updated Successfully', statusDate=Wed Apr 30 22:14:24 EEST 2025}
+Status{errorCode=-1, statusMessage='User Authenticated', statusDate=Wed Apr 30 22:15:55 EEST 2025}
+Status{errorCode=-2, statusMessage='Module Updated Successfully', statusDate=Wed Apr 30 22:16:07 EEST 2025}
+Status{errorCode=-2, statusMessage='Deleted Successfully', statusDate=Wed Apr 30 22:17:18 EEST 2025}
+Status{errorCode=-2, statusMessage='Deleted Successfully', statusDate=Wed Apr 30 22:17:21 EEST 2025}
+Status{errorCode=-1, statusMessage='Librarian Authenticated', statusDate=Wed Apr 30 22:51:15 EEST 2025}
+Status{errorCode=-1, statusMessage='User Authenticated', statusDate=Wed Apr 30 22:51:37 EEST 2025}
+Status{errorCode=-3, statusMessage='Please Select a Module', statusDate=Wed Apr 30 22:51:40 EEST 2025}
+Status{errorCode=-3, statusMessage='Please Select a Module', statusDate=Wed Apr 30 22:51:43 EEST 2025}
+Status{errorCode=-1, statusMessage='Teacher Updated Successfully', statusDate=Wed Apr 30 22:51:48 EEST 2025}
+Status{errorCode=-1, statusMessage='Teacher Updated Successfully', statusDate=Wed Apr 30 22:52:00 EEST 2025}
+Status{errorCode=-1, statusMessage='Teacher Updated Successfully', statusDate=Wed Apr 30 22:52:10 EEST 2025}
+Status{errorCode=-3, statusMessage='Please Select a Module', statusDate=Wed Apr 30 22:52:17 EEST 2025}
+Status{errorCode=-3, statusMessage='Please Select a Module', statusDate=Wed Apr 30 22:52:19 EEST 2025}
+Status{errorCode=-1, statusMessage='User Authenticated', statusDate=Wed Apr 30 22:52:32 EEST 2025}
+Status{errorCode=-1, statusMessage='User Authenticated', statusDate=Wed Apr 30 22:52:57 EEST 2025}
+Status{errorCode=-1, statusMessage='Teacher Updated Successfully', statusDate=Wed Apr 30 22:53:09 EEST 2025}
+Status{errorCode=-1, statusMessage='User Authenticated', statusDate=Wed Apr 30 22:57:29 EEST 2025}
+Status{errorCode=-1, statusMessage='Teacher Updated Successfully', statusDate=Wed Apr 30 22:57:46 EEST 2025}
+Status{errorCode=2, statusMessage='Invalid Email Address', statusDate=Wed Apr 30 22:59:32 EEST 2025}
+Status{errorCode=-1, statusMessage='Register a Teacher', statusDate=Wed Apr 30 22:59:38 EEST 2025}
+Status{errorCode=-1, statusMessage='Teacher Registered', statusDate=Wed Apr 30 22:59:54 EEST 2025}
+Status{errorCode=-3, statusMessage='Please Select a Module', statusDate=Wed Apr 30 23:00:02 EEST 2025}

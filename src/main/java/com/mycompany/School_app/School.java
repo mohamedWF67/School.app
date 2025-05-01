@@ -686,4 +686,10 @@ public class School {
             System.out.println("No grades found for student " + student.getName());
         }
     }
+
+    public ArrayList<Grade> mayan(){
+
+        return (ArrayList<Grade>)grades.stream().filter(grade->grade.getGrade()>=90 && grade.getGrade()<=100);
+
+    }
 }

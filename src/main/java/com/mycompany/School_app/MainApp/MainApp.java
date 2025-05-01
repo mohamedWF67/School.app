@@ -31,7 +31,7 @@ public class MainApp {
         } else if (user instanceof Student) {
             new StudentAppUI((Student) user);
         } else if (user instanceof Teacher) {
-            new TeacherAppUI().setVisible(true);
+            new TeacherAppUI((Teacher) user).setVisible(true);
         } else if (user instanceof Librarian) {
             new LibrarianAppUI().setVisible(true);
         }
@@ -407,8 +407,77 @@ public class MainApp {
             return;
         }
 
-
+        school.getLibrary().addLibrarian(new Librarian(name,email,password,Exp));
 
         setStatus(-2,"librarian Created Successfully");
+    }
+
+    protected static ArrayList<Module> getModules() {
+        return school.getModules();
+    }
+
+    protected static void editModule(Module module, String name,String Section, int maxStudents) {
+        if (name.isEmpty()){
+            setStatus(1,"Please enter a name");
+            return;
+        }
+
+        if (Section.isEmpty()){
+            setStatus(2,"Please enter a Section");
+            return;
+        }
+
+        if (maxStudents == 0){
+            setStatus(3,"Please enter a Student Limit");
+            return;
+        }
+
+
+        module.setName(name);
+        module.setSection(Section);
+        module.setMaxstudents(maxStudents);
+
+        setStatus(-2,"Module Updated Successfully");
+    }
+
+    protected static void createModule(String name,String Section, int maxStudents) {
+        if (name.isEmpty()){
+            setStatus(1,"Please enter a name");
+            return;
+        }
+
+        if (Section.isEmpty()){
+            setStatus(2,"Please enter a Section");
+            return;
+        }
+
+        if (maxStudents == 0){
+            setStatus(3,"Please enter a Student Limit");
+            return;
+        }
+
+        school.addModule(new Module(name,Section,maxStudents));
+
+        setStatus(-2,"Module Created Successfully");
+    }
+
+    protected static Module getModule(int ModuleID) {
+        return school.getModule(ModuleID);
+    }
+
+    protected static void deleteModule(int ModuleID) {
+        school.deleteModule(ModuleID);
+    }
+
+    protected static ArrayList<Student> getModuleStudents(int ModuleID) {
+        ArrayList<Student> studentsInModule = new ArrayList<>();
+
+        for (Enrollment enrollment : school.getEnrollments()) {
+            if (enrollment.getModules().contains(school.getModule(ModuleID))) {
+                studentsInModule.add(enrollment.getStudent());
+            }
+        }
+
+        return studentsInModule;
     }
 }
