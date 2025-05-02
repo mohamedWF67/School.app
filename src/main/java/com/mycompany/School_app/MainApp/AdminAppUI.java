@@ -6,6 +6,7 @@ package com.mycompany.School_app.MainApp;
 
 import com.mycompany.School_app.Admin;
 import com.mycompany.School_app.Grade;
+import com.mycompany.School_app.LibrarySystem.Book;
 import com.mycompany.School_app.LibrarySystem.Librarian;
 import com.mycompany.School_app.Module;
 import com.mycompany.School_app.StatusSystem.Status;
@@ -27,6 +28,7 @@ import java.util.HashSet;
 public class AdminAppUI extends javax.swing.JFrame {
     private Admin user;
     private User SelectedUser;
+    private Book SelectedBook;
     /**
      * Creates new form AdminAppView
      */
@@ -54,6 +56,7 @@ public class AdminAppUI extends javax.swing.JFrame {
         refreshTeacherTable();
         refreshLibrarianTable();
         refreshModuleTable();
+        refreshBooksTable();
     }
 
     /**
@@ -194,12 +197,30 @@ public class AdminAppUI extends javax.swing.JFrame {
         Admin_Password_txt = new javax.swing.JPasswordField();
         Status_Profile_Label = new javax.swing.JLabel();
         Save_Profile_btn = new javax.swing.JButton();
+        Book_Panel = new javax.swing.JPanel();
+        Book_Table_Scroll = new javax.swing.JScrollPane();
+        Book_Table = new javax.swing.JTable();
+        Book_Tabbed_Panel = new javax.swing.JTabbedPane();
+        Book_Info_Tab = new javax.swing.JPanel();
+        Book_ISBN_Label = new javax.swing.JLabel();
+        Book_Name_Label = new javax.swing.JLabel();
+        Book_Name_txt = new javax.swing.JTextField();
+        Book_Save_btn = new javax.swing.JButton();
+        Book_Clear_btn = new javax.swing.JButton();
+        Book_Create_btn = new javax.swing.JButton();
+        Book_Delete_btn = new javax.swing.JButton();
+        Book_Reset_btn = new javax.swing.JButton();
+        Book_ISBN_txt = new javax.swing.JTextField();
+        Book_Author_txt = new javax.swing.JTextField();
+        Book_Author_Label = new javax.swing.JLabel();
+        Book_Status_Checkbox = new javax.swing.JCheckBox();
         App_MenuBar = new javax.swing.JMenuBar();
         File_Menu = new javax.swing.JMenu();
         View_Menu = new javax.swing.JMenu();
         Theme_Menu_Item = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("School.app(Admin)");
 
         Header.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -232,6 +253,11 @@ public class AdminAppUI extends javax.swing.JFrame {
         });
 
         Book_btn.setText("Book");
+        Book_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Book_btnActionPerformed(evt);
+            }
+        });
 
         Profile_btn.setText("Mohamed Waleed");
         Profile_btn.addActionListener(new java.awt.event.ActionListener() {
@@ -1362,11 +1388,182 @@ public class AdminAppUI extends javax.swing.JFrame {
 
         MainPanel.add(Profile_Panel, "card4");
 
+        Book_Table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ISBN", "Name", "Author", "Status"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        Book_Table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Book_TableMouseClicked(evt);
+            }
+        });
+        Book_Table_Scroll.setViewportView(Book_Table);
+
+        Book_ISBN_Label.setText("ISBN");
+
+        Book_Name_Label.setText("Name");
+
+        Book_Save_btn.setText("Save");
+        Book_Save_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Book_Save_btnActionPerformed(evt);
+            }
+        });
+
+        Book_Clear_btn.setText("Clear");
+        Book_Clear_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Book_Clear_btnActionPerformed(evt);
+            }
+        });
+
+        Book_Create_btn.setText("Create");
+        Book_Create_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Book_Create_btnActionPerformed(evt);
+            }
+        });
+
+        Book_Delete_btn.setText("Delete");
+        Book_Delete_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Book_Delete_btnActionPerformed(evt);
+            }
+        });
+
+        Book_Reset_btn.setText("Reset");
+        Book_Reset_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Book_Reset_btnActionPerformed(evt);
+            }
+        });
+
+        Book_ISBN_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Book_ISBN_txtActionPerformed(evt);
+            }
+        });
+
+        Book_Author_Label.setText("Author");
+
+        Book_Status_Checkbox.setText("Available");
+        Book_Status_Checkbox.setEnabled(false);
+        Book_Status_Checkbox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Book_Status_CheckboxActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout Book_Info_TabLayout = new javax.swing.GroupLayout(Book_Info_Tab);
+        Book_Info_Tab.setLayout(Book_Info_TabLayout);
+        Book_Info_TabLayout.setHorizontalGroup(
+            Book_Info_TabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Book_Info_TabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Book_Info_TabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Book_Info_TabLayout.createSequentialGroup()
+                        .addGroup(Book_Info_TabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Book_ISBN_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Book_Name_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(16, 16, 16))
+                    .addComponent(Book_Name_txt)
+                    .addGroup(Book_Info_TabLayout.createSequentialGroup()
+                        .addComponent(Book_Save_btn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Book_Clear_btn, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(Book_Info_TabLayout.createSequentialGroup()
+                        .addComponent(Book_Create_btn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Book_Reset_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Book_Info_TabLayout.createSequentialGroup()
+                        .addComponent(Book_Delete_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addComponent(Book_ISBN_txt)
+                    .addGroup(Book_Info_TabLayout.createSequentialGroup()
+                        .addComponent(Book_Author_Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(16, 16, 16))
+                    .addComponent(Book_Author_txt)
+                    .addComponent(Book_Status_Checkbox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        Book_Info_TabLayout.setVerticalGroup(
+            Book_Info_TabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Book_Info_TabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Book_ISBN_Label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Book_ISBN_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Book_Name_Label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Book_Name_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Book_Author_Label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Book_Author_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Book_Status_Checkbox, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(286, 286, 286)
+                .addGroup(Book_Info_TabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Book_Save_btn)
+                    .addComponent(Book_Clear_btn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(Book_Info_TabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Book_Create_btn)
+                    .addComponent(Book_Reset_btn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Book_Delete_btn)
+                .addContainerGap(39, Short.MAX_VALUE))
+        );
+
+        Book_Tabbed_Panel.addTab("Info", Book_Info_Tab);
+
+        javax.swing.GroupLayout Book_PanelLayout = new javax.swing.GroupLayout(Book_Panel);
+        Book_Panel.setLayout(Book_PanelLayout);
+        Book_PanelLayout.setHorizontalGroup(
+            Book_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Book_PanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Book_Tabbed_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Book_Table_Scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        Book_PanelLayout.setVerticalGroup(
+            Book_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Book_Table_Scroll)
+            .addGroup(Book_PanelLayout.createSequentialGroup()
+                .addComponent(Book_Tabbed_Panel)
+                .addContainerGap())
+        );
+
+        MainPanel.add(Book_Panel, "card2");
+
         javax.swing.GroupLayout AppPanelLayout = new javax.swing.GroupLayout(AppPanel);
         AppPanel.setLayout(AppPanelLayout);
         AppPanelLayout.setHorizontalGroup(
             AppPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(MainPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1014, Short.MAX_VALUE)
+            .addComponent(MainPanel, javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(Header, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         AppPanelLayout.setVerticalGroup(
@@ -1442,6 +1639,7 @@ public class AdminAppUI extends javax.swing.JFrame {
         Student_Panel.setVisible(false);
         Librarian_Panel.setVisible(false);
         Module_Panel.setVisible(false);
+        Book_Panel.setVisible(false);
     }
 
     private void switchToTeacherPanel(){
@@ -1451,6 +1649,7 @@ public class AdminAppUI extends javax.swing.JFrame {
         Student_Panel.setVisible(false);
         Librarian_Panel.setVisible(false);
         Module_Panel.setVisible(false);
+        Book_Panel.setVisible(false);
         clearTeacherFields();
     }
 
@@ -1461,6 +1660,7 @@ public class AdminAppUI extends javax.swing.JFrame {
         Student_Panel.setVisible(true);
         Librarian_Panel.setVisible(false);
         Module_Panel.setVisible(false);
+        Book_Panel.setVisible(false);
         clearStudentFields();
     }
     
@@ -1471,6 +1671,7 @@ public class AdminAppUI extends javax.swing.JFrame {
         Student_Panel.setVisible(false);
         Librarian_Panel.setVisible(true);
         Module_Panel.setVisible(false);
+        Book_Panel.setVisible(false);
         clearLibrarianFields();
     }
 
@@ -1481,6 +1682,18 @@ public class AdminAppUI extends javax.swing.JFrame {
         Student_Panel.setVisible(false);
         Librarian_Panel.setVisible(false);
         Module_Panel.setVisible(true);
+        Book_Panel.setVisible(false);
+        clearModuleFields();
+    }
+
+    private void switchToBookPanel(){
+        SelectedUser = null;
+        Profile_Panel.setVisible(false);
+        Teacher_Panel.setVisible(false);
+        Student_Panel.setVisible(false);
+        Librarian_Panel.setVisible(false);
+        Module_Panel.setVisible(false);
+        Book_Panel.setVisible(true);
         clearModuleFields();
     }
 
@@ -2234,6 +2447,124 @@ public class AdminAppUI extends javax.swing.JFrame {
         Module_StudentLimit_Slider_Label.setText(Module_StudentLimit_Slider.getValue()+"");
     }//GEN-LAST:event_Module_StudentLimit_SliderStateChanged
 
+    private void Book_TableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Book_TableMouseClicked
+        // TODO add your handling code here:
+        DefaultTableModel tb = (DefaultTableModel) Book_Table.getModel();
+        String ISBN = tb.getValueAt(Book_Table.getSelectedRow(), 0).toString();
+        SelectedBook = MainApp.getBook(ISBN);
+        refreshBookFields();
+        Book_ISBN_txt.setEditable(false);
+        Book_Status_Checkbox.setEnabled(true);
+    }//GEN-LAST:event_Book_TableMouseClicked
+
+    private void Book_Save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Book_Save_btnActionPerformed
+        // TODO add your handling code here:
+        SaveAction();
+    }//GEN-LAST:event_Book_Save_btnActionPerformed
+
+    private void Book_Clear_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Book_Clear_btnActionPerformed
+        // TODO add your handling code here:
+        clearBookFields();
+        SelectedBook = null;
+        Book_ISBN_txt.setEditable(true);
+        Book_Status_Checkbox.setEnabled(false);
+    }//GEN-LAST:event_Book_Clear_btnActionPerformed
+
+    private void Book_Create_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Book_Create_btnActionPerformed
+        // TODO add your handling code here:
+
+        String ISBN = Book_ISBN_txt.getText();
+        String name = Book_Name_txt.getText();
+        String Author = Book_Author_txt.getText();
+
+        MainApp.createBook(ISBN,name,Author);
+        Status status = MainApp.getStatus();
+
+        switch (status.getErrorCode()){
+            case 1->{Book_ISBN_txt.requestFocus();}
+            case 2->{Book_Name_txt.requestFocus();}
+            case 3->{Book_Author_txt.requestFocus();}
+            case 4->{Book_Status_Checkbox.requestFocus();}
+        }
+        if (status.getErrorCode() == -2){
+            Book_ISBN_txt.setEditable(false);
+            Book_Status_Checkbox.setEnabled(true);
+            clearBookFields();
+        }else{
+            JOptionPane.showMessageDialog(null,status.getstatusMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+        }
+        refreshBooksTable();
+        SelectedBook = null;
+    }//GEN-LAST:event_Book_Create_btnActionPerformed
+
+    private void Book_Delete_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Book_Delete_btnActionPerformed
+        // TODO add your handling code here:
+        if (SelectedBook == null) {
+            MainApp.setStatus(0,"Please Select a Book");
+            return;
+        }
+
+        int ans = JOptionPane.showConfirmDialog(this, "Are you a Sure you want to delete " + SelectedBook.getName(),
+            "confirmation", JOptionPane.YES_NO_OPTION);
+
+        if (ans == JOptionPane.YES_OPTION) {
+            MainApp.deleteBook(SelectedBook.getISBN());
+            clearBookFields();
+        }
+        refreshBooksTable();
+        SelectedBook = null;
+    }//GEN-LAST:event_Book_Delete_btnActionPerformed
+
+    private void Book_Reset_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Book_Reset_btnActionPerformed
+        // TODO add your handling code here:
+        if (SelectedBook == null) {
+            MainApp.setStatus(0,"Please Select a Book");
+            return;
+        }
+        refreshBooksTable();
+        refreshBookFields();
+    }//GEN-LAST:event_Book_Reset_btnActionPerformed
+
+    private void Book_ISBN_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Book_ISBN_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Book_ISBN_txtActionPerformed
+
+    private void Book_Status_CheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Book_Status_CheckboxActionPerformed
+        // TODO add your handling code here:
+        SaveAction();
+    }//GEN-LAST:event_Book_Status_CheckboxActionPerformed
+
+    private void Book_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Book_btnActionPerformed
+        // TODO add your handling code here:
+        switchToBookPanel();
+    }//GEN-LAST:event_Book_btnActionPerformed
+
+    private void SaveAction(){
+        if (SelectedBook == null) {
+            MainApp.setStatus(0,"Please Select a Book");
+            return;
+        }
+
+        String name = Book_Name_txt.getText();
+        String Author = Book_Author_txt.getText();
+        Boolean isAvailable = Book_Status_Checkbox.isSelected();
+
+        MainApp.editBook(SelectedBook,name,Author,isAvailable);
+
+        Status status = MainApp.getStatus();
+
+        switch (status.getErrorCode()){
+            case 1->{Book_ISBN_txt.requestFocus();}
+            case 2->{Book_Name_txt.requestFocus();}
+            case 3->{Book_Author_txt.requestFocus();}
+            case 4->{Book_Status_Checkbox.requestFocus();}
+        }
+        if (status.getErrorCode() == -2){
+            refreshBooksTable();
+        }else{
+            JOptionPane.showMessageDialog(null,status.getstatusMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     private void refreshModuleStudentsTable(Module module){
         DefaultTableModel tb = (DefaultTableModel) ModuleStudents_Table.getModel();
@@ -2301,6 +2632,34 @@ public class AdminAppUI extends javax.swing.JFrame {
         }
     }
 
+    private void refreshBooksTable(){
+        DefaultTableModel tb = (DefaultTableModel) Book_Table.getModel();
+        while (tb.getRowCount() > 0) {
+            tb.removeRow(tb.getRowCount()-1);
+        }
+        ArrayList<Book> books = MainApp.getBooks();
+        for (Book book : books) {
+            tb.addRow(new Object[]{book.getISBN(),book.getName(),book.getAuthor(),(book.getAvailable()?"Available":"Not Available")});
+        }
+    }
+
+    private void refreshBookFields(){
+
+        Book_ISBN_txt.setText(SelectedBook.getISBN());
+
+        Book_Name_txt.setText(SelectedBook.getName());
+
+        Book_Author_txt.setText(SelectedBook.getAuthor());
+        Book_Status_Checkbox.setSelected(SelectedBook.getAvailable());
+    }
+
+    private void clearBookFields() {
+        Book_ISBN_txt.setText("");
+        Book_Name_txt.setText("");
+        Book_Author_txt.setText("");
+        Book_Status_Checkbox.setSelected(false);
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -2348,6 +2707,23 @@ public class AdminAppUI extends javax.swing.JFrame {
     private javax.swing.JPasswordField Admin_Password_txt;
     private javax.swing.JPanel AppPanel;
     private javax.swing.JMenuBar App_MenuBar;
+    private javax.swing.JLabel Book_Author_Label;
+    private javax.swing.JTextField Book_Author_txt;
+    private javax.swing.JButton Book_Clear_btn;
+    private javax.swing.JButton Book_Create_btn;
+    private javax.swing.JButton Book_Delete_btn;
+    private javax.swing.JLabel Book_ISBN_Label;
+    private javax.swing.JTextField Book_ISBN_txt;
+    private javax.swing.JPanel Book_Info_Tab;
+    private javax.swing.JLabel Book_Name_Label;
+    private javax.swing.JTextField Book_Name_txt;
+    private javax.swing.JPanel Book_Panel;
+    private javax.swing.JButton Book_Reset_btn;
+    private javax.swing.JButton Book_Save_btn;
+    private javax.swing.JCheckBox Book_Status_Checkbox;
+    private javax.swing.JTabbedPane Book_Tabbed_Panel;
+    private javax.swing.JTable Book_Table;
+    private javax.swing.JScrollPane Book_Table_Scroll;
     private javax.swing.JButton Book_btn;
     private javax.swing.JButton Cancel_Enrollment_btn;
     private javax.swing.JButton Delete_Acc_btn;

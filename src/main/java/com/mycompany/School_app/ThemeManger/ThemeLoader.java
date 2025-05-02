@@ -45,7 +45,6 @@ public class ThemeLoader {
         themes.add(new FlatMonokaiProIJTheme());
         themes.add(new FlatMoonlightIJTheme());
         themes.add(new FlatNightOwlIJTheme());
-        themes.add(new FlatOneDarkIJTheme());
         themes.add(new FlatSolarizedDarkIJTheme());
         themes.add(new FlatSolarizedLightIJTheme());
         return themes;

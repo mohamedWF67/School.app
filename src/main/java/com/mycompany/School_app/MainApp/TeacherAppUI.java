@@ -97,6 +97,7 @@ public class TeacherAppUI extends javax.swing.JFrame {
         Theme_Menu_Item = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("School.app(Teacher)");
 
         Header.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 

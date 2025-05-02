@@ -4,6 +4,7 @@
  */
 package com.mycompany.School_app.AuthSystem;
 
+import com.mycompany.School_app.Config.InitConfig;
 import com.mycompany.School_app.Data_Handler;
 import com.mycompany.School_app.MainApp.MainApp;
 import com.mycompany.School_app.StatusSystem.Status;
@@ -27,6 +28,7 @@ public class AuthManagerUI extends javax.swing.JFrame {
     }
 
     private void custominit() {
+        Fix_BTN_DEV.setVisible(InitConfig.DEVMODE);
         setLocationRelativeTo(null);
         setVisible(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -53,8 +55,7 @@ public class AuthManagerUI extends javax.swing.JFrame {
         Status_Login_Label = new javax.swing.JLabel();
         Type_Register_Label1 = new javax.swing.JLabel();
         Password_Login_txt = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Fix_BTN_DEV = new javax.swing.JButton();
         Register_Panel = new javax.swing.JPanel();
         Name_Register_Label = new javax.swing.JLabel();
         Name_Register_txt = new javax.swing.JTextField();
@@ -66,6 +67,7 @@ public class AuthManagerUI extends javax.swing.JFrame {
         Type_Register_Label = new javax.swing.JLabel();
         Status_Register_Label = new javax.swing.JLabel();
         Register_btn = new javax.swing.JButton();
+        jPanel1 = new TypingPanel();
         MenuBar = new javax.swing.JMenuBar();
         File_Menu = new javax.swing.JMenu();
         View_Menu = new javax.swing.JMenu();
@@ -101,17 +103,10 @@ public class AuthManagerUI extends javax.swing.JFrame {
 
         Type_Register_Label1.setText("Type");
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Fix_BTN_DEV.setText("Fix_BTN_DEV");
+        Fix_BTN_DEV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("jButton1");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                Fix_BTN_DEVActionPerformed(evt);
             }
         });
 
@@ -142,9 +137,7 @@ public class AuthManagerUI extends javax.swing.JFrame {
                                 .addComponent(Librarian_Radio_Login))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Login_PanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(Fix_BTN_DEV)))
                 .addContainerGap())
         );
         Login_PanelLayout.setVerticalGroup(
@@ -164,10 +157,8 @@ public class AuthManagerUI extends javax.swing.JFrame {
                         .addComponent(User_Radio_Login)
                         .addComponent(Librarian_Radio_Login))
                     .addComponent(Type_Register_Label1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addGroup(Login_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addComponent(Fix_BTN_DEV)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(Login_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Status_Login_Label, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -245,13 +236,24 @@ public class AuthManagerUI extends javax.swing.JFrame {
                 .addGroup(Register_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(UserTypeSelector_Register, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Type_Register_Label, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(Register_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Register_btn)
                     .addComponent(Status_Register_Label, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         AuthTabbedPanel.addTab("Register", Register_Panel);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 39, Short.MAX_VALUE)
+        );
 
         File_Menu.setText("File");
         MenuBar.add(File_Menu);
@@ -278,12 +280,14 @@ public class AuthManagerUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(AuthTabbedPanel))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(AuthTabbedPanel)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(AuthTabbedPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -340,14 +344,9 @@ public class AuthManagerUI extends javax.swing.JFrame {
         new ThemeMangerUI();
     }//GEN-LAST:event_Theme_Menu_ItemActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void Fix_BTN_DEVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Fix_BTN_DEVActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        Data_Handler.fixnumbers();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_Fix_BTN_DEVActionPerformed
 
 
     private int getCurrentSelectionIndex(ButtonGroup buttonGroup) {
@@ -404,6 +403,7 @@ public class AuthManagerUI extends javax.swing.JFrame {
     private javax.swing.JLabel Email_Register_Label;
     private javax.swing.JTextField Email_Register_txt;
     private javax.swing.JMenu File_Menu;
+    private javax.swing.JButton Fix_BTN_DEV;
     private javax.swing.JRadioButton Librarian_Radio_Login;
     private javax.swing.JPanel Login_Panel;
     private javax.swing.JButton Login_btn;
@@ -425,7 +425,6 @@ public class AuthManagerUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> UserTypeSelector_Register;
     private javax.swing.JRadioButton User_Radio_Login;
     private javax.swing.JMenu View_Menu;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

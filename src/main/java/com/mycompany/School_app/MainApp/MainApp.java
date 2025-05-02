@@ -2,6 +2,7 @@ package com.mycompany.School_app.MainApp;
 
 import com.mycompany.School_app.*;
 import com.mycompany.School_app.AuthSystem.AuthManager;
+import com.mycompany.School_app.LibrarySystem.Book;
 import com.mycompany.School_app.LibrarySystem.Librarian;
 import com.mycompany.School_app.Module;
 import com.mycompany.School_app.StatusSystem.Status;
@@ -33,7 +34,7 @@ public class MainApp {
         } else if (user instanceof Teacher) {
             new TeacherAppUI((Teacher) user).setVisible(true);
         } else if (user instanceof Librarian) {
-            new LibrarianAppUI().setVisible(true);
+            new LibrarianAppUI((Librarian) user).setVisible(true);
         }
     }
 
@@ -467,6 +468,7 @@ public class MainApp {
 
     protected static void deleteModule(int ModuleID) {
         school.deleteModule(ModuleID);
+        setStatus(-2,"Module Deleted Successfully");
     }
 
     protected static ArrayList<Student> getModuleStudents(int ModuleID) {
@@ -479,5 +481,58 @@ public class MainApp {
         }
 
         return studentsInModule;
+    }
+
+    protected static ArrayList<Book> getBooks() {
+        return school.getLibrary().getBooks();
+    }
+
+    protected static void editBook(Book book, String name,String Author, boolean status) {
+        if (name.isEmpty()){
+            setStatus(2,"Please enter a name");
+            return;
+        }
+
+        if (Author.isEmpty()){
+            setStatus(3,"Please enter a Author");
+            return;
+        }
+
+
+        book.setName(name);
+        book.setAuthor(Author);
+        book.setAvailable(status);
+
+        setStatus(-2,"Book Updated Successfully");
+    }
+
+    protected static void createBook(String ISBN,String name,String Author) {
+        if (ISBN.isEmpty()){
+            setStatus(1,"Please enter a ISBN");
+            return;
+        }
+
+        if (name.isEmpty()){
+            setStatus(2,"Please enter a name");
+            return;
+        }
+
+        if (Author.isEmpty()){
+            setStatus(3,"Please enter a Author");
+            return;
+        }
+
+        school.getLibrary().addBook(new Book(ISBN,name,Author));
+
+        setStatus(-2,"Book Created Successfully");
+    }
+
+    protected static Book getBook(String ISBN) {
+        return school.getLibrary().getBook(ISBN);
+    }
+
+    protected static void deleteBook(String ISBN) {
+        school.getLibrary().removeBook(ISBN);
+        setStatus(-2,"Book Deleted Successfully");
     }
 }

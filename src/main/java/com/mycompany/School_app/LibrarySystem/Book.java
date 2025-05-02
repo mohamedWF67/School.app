@@ -1,6 +1,8 @@
 package com.mycompany.School_app.LibrarySystem;
 
-public class Book {
+import java.io.Serializable;
+
+public class Book implements Serializable {
     String ISBN;
     String name;
     String author;

@@ -70,3 +70,88 @@ Status{errorCode=2, statusMessage='Invalid Email Address', statusDate=Wed Apr 30
 Status{errorCode=-1, statusMessage='Register a Teacher', statusDate=Wed Apr 30 22:59:38 EEST 2025}
 Status{errorCode=-1, statusMessage='Teacher Registered', statusDate=Wed Apr 30 22:59:54 EEST 2025}
 Status{errorCode=-3, statusMessage='Please Select a Module', statusDate=Wed Apr 30 23:00:02 EEST 2025}
+Status{errorCode=1, statusMessage='Invalid Email', statusDate=Fri May 02 14:27:50 EEST 2025}
+Status{errorCode=-1, statusMessage='Librarian Authenticated', statusDate=Fri May 02 14:27:52 EEST 2025}
+Status{errorCode=0, statusMessage='Please Select a Book', statusDate=Fri May 02 14:29:15 EEST 2025}
+Status{errorCode=4, statusMessage='Please enter the book's status', statusDate=Fri May 02 14:29:18 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Created Successfully', statusDate=Fri May 02 14:29:21 EEST 2025}
+Status{errorCode=1, statusMessage='Invalid Email', statusDate=Fri May 02 14:33:54 EEST 2025}
+Status{errorCode=-1, statusMessage='Librarian Authenticated', statusDate=Fri May 02 14:33:55 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Created Successfully', statusDate=Fri May 02 14:34:52 EEST 2025}
+Status{errorCode=1, statusMessage='Invalid Email', statusDate=Fri May 02 14:36:03 EEST 2025}
+Status{errorCode=-1, statusMessage='Librarian Authenticated', statusDate=Fri May 02 14:36:05 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Created Successfully', statusDate=Fri May 02 14:36:28 EEST 2025}
+Status{errorCode=-1, statusMessage='Librarian Authenticated', statusDate=Fri May 02 14:37:06 EEST 2025}
+Status{errorCode=2, statusMessage='Please enter a name', statusDate=Fri May 02 14:37:15 EEST 2025}
+Status{errorCode=1, statusMessage='Invalid Email', statusDate=Fri May 02 14:38:13 EEST 2025}
+Status{errorCode=1, statusMessage='Invalid Email', statusDate=Fri May 02 14:38:18 EEST 2025}
+Status{errorCode=-1, statusMessage='Librarian Authenticated', statusDate=Fri May 02 14:38:20 EEST 2025}
+Status{errorCode=2, statusMessage='Incorrect Password', statusDate=Fri May 02 14:39:21 EEST 2025}
+Status{errorCode=-1, statusMessage='Librarian Authenticated', statusDate=Fri May 02 14:39:28 EEST 2025}
+Status{errorCode=4, statusMessage='Please enter the book's status', statusDate=Fri May 02 14:39:32 EEST 2025}
+Status{errorCode=4, statusMessage='Please enter the book's status', statusDate=Fri May 02 14:39:41 EEST 2025}
+Status{errorCode=-1, statusMessage='Librarian Authenticated', statusDate=Fri May 02 14:40:30 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Updated Successfully', statusDate=Fri May 02 14:40:36 EEST 2025}
+Status{errorCode=1, statusMessage='Invalid Email', statusDate=Fri May 02 14:46:12 EEST 2025}
+Status{errorCode=-1, statusMessage='Librarian Authenticated', statusDate=Fri May 02 14:46:14 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Created Successfully', statusDate=Fri May 02 14:46:44 EEST 2025}
+Status{errorCode=-2, statusMessage='librarian Updated Successfully', statusDate=Fri May 02 14:47:01 EEST 2025}
+Status{errorCode=-1, statusMessage='Librarian Authenticated', statusDate=Fri May 02 14:50:14 EEST 2025}
+Status{errorCode=-2, statusMessage='librarian Updated Successfully', statusDate=Fri May 02 14:54:18 EEST 2025}
+Status{errorCode=1, statusMessage='Invalid Email', statusDate=Fri May 02 14:54:26 EEST 2025}
+Status{errorCode=-1, statusMessage='Librarian Authenticated', statusDate=Fri May 02 14:54:29 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Updated Successfully', statusDate=Fri May 02 14:54:35 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Updated Successfully', statusDate=Fri May 02 14:54:48 EEST 2025}
+Status{errorCode=1, statusMessage='Invalid Email', statusDate=Fri May 02 14:55:52 EEST 2025}
+Status{errorCode=-1, statusMessage='Librarian Authenticated', statusDate=Fri May 02 14:55:53 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Updated Successfully', statusDate=Fri May 02 14:55:57 EEST 2025}
+Status{errorCode=2, statusMessage='Please enter a name', statusDate=Fri May 02 14:56:15 EEST 2025}
+Status{errorCode=-1, statusMessage='Librarian Authenticated', statusDate=Fri May 02 14:56:54 EEST 2025}
+Status{errorCode=1, statusMessage='Please enter a ISBN', statusDate=Fri May 02 14:57:02 EEST 2025}
+Status{errorCode=1, statusMessage='Please enter a ISBN', statusDate=Fri May 02 14:57:04 EEST 2025}
+Status{errorCode=1, statusMessage='Please enter a ISBN', statusDate=Fri May 02 14:57:04 EEST 2025}
+Status{errorCode=1, statusMessage='Please enter a ISBN', statusDate=Fri May 02 14:57:05 EEST 2025}
+Status{errorCode=1, statusMessage='Please enter a ISBN', statusDate=Fri May 02 14:57:06 EEST 2025}
+Status{errorCode=1, statusMessage='Please enter a ISBN', statusDate=Fri May 02 14:57:06 EEST 2025}
+Status{errorCode=-1, statusMessage='Librarian Authenticated', statusDate=Fri May 02 14:57:45 EEST 2025}
+Status{errorCode=1, statusMessage='Please enter a ISBN', statusDate=Fri May 02 14:57:50 EEST 2025}
+Status{errorCode=-1, statusMessage='Librarian Authenticated', statusDate=Fri May 02 14:59:51 EEST 2025}
+Status{errorCode=1, statusMessage='Please enter a ISBN', statusDate=Fri May 02 14:59:59 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Created Successfully', statusDate=Fri May 02 15:00:47 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Updated Successfully', statusDate=Fri May 02 15:00:57 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Updated Successfully', statusDate=Fri May 02 15:12:12 EEST 2025}
+Status{errorCode=-1, statusMessage='Librarian Authenticated', statusDate=Fri May 02 15:13:05 EEST 2025}
+Status{errorCode=0, statusMessage='Please Select a Book', statusDate=Fri May 02 15:13:07 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Updated Successfully', statusDate=Fri May 02 15:13:11 EEST 2025}
+Status{errorCode=-1, statusMessage='Librarian Authenticated', statusDate=Fri May 02 15:14:00 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Updated Successfully', statusDate=Fri May 02 15:14:05 EEST 2025}
+Status{errorCode=-1, statusMessage='Librarian Authenticated', statusDate=Fri May 02 15:15:54 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Updated Successfully', statusDate=Fri May 02 15:16:02 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Updated Successfully', statusDate=Fri May 02 15:16:06 EEST 2025}
+Status{errorCode=-1, statusMessage='Librarian Authenticated', statusDate=Fri May 02 15:16:36 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Updated Successfully', statusDate=Fri May 02 15:17:18 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Updated Successfully', statusDate=Fri May 02 15:17:21 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Updated Successfully', statusDate=Fri May 02 15:17:27 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Updated Successfully', statusDate=Fri May 02 15:17:31 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Created Successfully', statusDate=Fri May 02 15:18:35 EEST 2025}
+Status{errorCode=1, statusMessage='Please enter a ISBN', statusDate=Fri May 02 15:18:37 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Created Successfully', statusDate=Fri May 02 15:18:40 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Updated Successfully', statusDate=Fri May 02 15:18:50 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Deleted Successfully', statusDate=Fri May 02 15:18:59 EEST 2025}
+Status{errorCode=0, statusMessage='Please Select a Book', statusDate=Fri May 02 15:19:02 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Deleted Successfully', statusDate=Fri May 02 15:19:06 EEST 2025}
+Status{errorCode=-1, statusMessage='Librarian Authenticated', statusDate=Fri May 02 15:33:22 EEST 2025}
+Status{errorCode=-1, statusMessage='User Authenticated', statusDate=Fri May 02 15:33:37 EEST 2025}
+Status{errorCode=0, statusMessage='Please Select a Book', statusDate=Fri May 02 15:33:44 EEST 2025}
+Status{errorCode=1, statusMessage='Please enter a ISBN', statusDate=Fri May 02 15:33:46 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Updated Successfully', statusDate=Fri May 02 15:33:52 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Deleted Successfully', statusDate=Fri May 02 15:34:03 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Deleted Successfully', statusDate=Fri May 02 15:34:09 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Created Successfully', statusDate=Fri May 02 15:34:11 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Deleted Successfully', statusDate=Fri May 02 15:34:15 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Deleted Successfully', statusDate=Fri May 02 15:34:21 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Updated Successfully', statusDate=Fri May 02 15:35:17 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Deleted Successfully', statusDate=Fri May 02 15:35:20 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Deleted Successfully', statusDate=Fri May 02 15:35:23 EEST 2025}
+Status{errorCode=-2, statusMessage='Book Deleted Successfully', statusDate=Fri May 02 15:35:26 EEST 2025}
+Status{errorCode=-1, statusMessage='User Authenticated', statusDate=Fri May 02 15:37:01 EEST 2025}

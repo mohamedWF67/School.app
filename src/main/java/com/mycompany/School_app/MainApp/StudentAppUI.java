@@ -112,6 +112,7 @@ public class StudentAppUI extends javax.swing.JFrame {
         Theme_Menu_Item = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("School.app(Student)");
 
         Header.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -212,14 +213,14 @@ public class StudentAppUI extends javax.swing.JFrame {
             Grades_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Grades_PanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1002, Short.MAX_VALUE)
                 .addContainerGap())
         );
         Grades_PanelLayout.setVerticalGroup(
             Grades_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Grades_PanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -268,7 +269,7 @@ public class StudentAppUI extends javax.swing.JFrame {
                             .addComponent(Enroll_Btn)
                             .addComponent(Cancel_Enrollment_btn)))
                     .addComponent(Modules_Label))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 406, Short.MAX_VALUE)
                 .addGroup(Enrollment_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(EnrolledModules_Scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Enrollment_Label))
@@ -291,7 +292,7 @@ public class StudentAppUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(Enrollment_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Modules_Scroll)
-                            .addComponent(EnrolledModules_Scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE))))
+                            .addComponent(EnrolledModules_Scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE))))
                 .addContainerGap())
         );
 
@@ -351,7 +352,6 @@ public class StudentAppUI extends javax.swing.JFrame {
         Student_Gender_Selector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F" }));
 
         Status_Profile_Label.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        Status_Profile_Label.setText("Status Message");
 
         Save_btn.setText("Save");
         Save_btn.addActionListener(new java.awt.event.ActionListener() {
@@ -402,7 +402,7 @@ public class StudentAppUI extends javax.swing.JFrame {
                         .addGroup(Profile_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(Profile_PanelLayout.createSequentialGroup()
                                 .addGap(3, 3, 3)
-                                .addComponent(Student_Gender_Selector, 0, 224, Short.MAX_VALUE))
+                                .addComponent(Student_Gender_Selector, 0, 607, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Profile_PanelLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(Student_Address_txt))))
@@ -423,7 +423,7 @@ public class StudentAppUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(Profile_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Student_ParentName_txt)
-                            .addComponent(Student_Section_txt, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))))
+                            .addComponent(Student_Section_txt, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         Profile_PanelLayout.setVerticalGroup(
