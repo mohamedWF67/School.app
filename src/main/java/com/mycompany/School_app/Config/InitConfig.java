@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 
 public class InitConfig {
     public static final InitConfig INSTANCE;
-    public static final boolean DEVMODE = false;
+    public static final boolean DEVMODE = true;
 
     static {
         try {

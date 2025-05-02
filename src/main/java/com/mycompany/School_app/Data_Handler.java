@@ -177,10 +177,41 @@ public class Data_Handler {
         school.getLibrary().setBooks(books);
     }
 
+    private static int getMaxUserID(){
+        int maxUsers = 0;
+        for (User user : school.getUsers()) {
+            maxUsers = Math.max(maxUsers, user.getId());
+        }
+        int maxlibrarians = 0;
+        for (User user : school.getLibrary().getLibrarians()) {
+            maxlibrarians = Math.max(maxlibrarians, user.getId());
+        }
+        System.out.println(maxUsers);
+        return Math.max(maxUsers, maxlibrarians);
+    }
+
+    private static int getMaxModuleID(){
+        int maxModules = 0;
+        for (Module module : school.getModules()) {
+            maxModules = Math.max(maxModules, module.getId());
+        }
+        System.out.println(maxModules);
+        return maxModules;
+    }
+
+    private static int getMaxEnrollmentID(){
+        int maxEnrollments = 0;
+        for (Enrollment enrollment : school.getEnrollments()) {
+            maxEnrollments = Math.max(maxEnrollments, enrollment.getId());
+        }
+        System.out.println(maxEnrollments);
+        return maxEnrollments;
+    }
+
     public static void fixnumbers(){
-        User.setCounter(school.getUsers().size() + school.getLibrary().getLibrarians().size());
-        Module.setCount(school.getModules().size());
-        Enrollment.setCount(school.getEnrollments().size());
+        User.setCounter(getMaxUserID());
+        Module.setCount(getMaxModuleID());
+        Enrollment.setCount(getMaxEnrollmentID());
         System.out.println(User.getCounter());
         System.out.println(Module.getCount());
         System.out.println(Enrollment.getCount());

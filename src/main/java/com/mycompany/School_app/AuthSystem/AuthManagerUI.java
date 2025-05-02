@@ -346,6 +346,7 @@ public class AuthManagerUI extends javax.swing.JFrame {
 
     private void Fix_BTN_DEVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Fix_BTN_DEVActionPerformed
         // TODO add your handling code here:
+        Data_Handler.fixnumbers();
     }//GEN-LAST:event_Fix_BTN_DEVActionPerformed
 
 

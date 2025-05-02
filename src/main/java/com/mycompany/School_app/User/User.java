@@ -20,6 +20,7 @@ public abstract class User implements Serializable {
     private String name;
     private String email;
     private String password;
+    //private int logCounter = 0;
 
     //Empty Constructor with Counter increment
     public User() {
@@ -104,6 +105,26 @@ public abstract class User implements Serializable {
             System.err.println(e);
         }
     }
+
+    /*public int getLogCounter() {
+        return logCounter;
+    }
+
+    public void setLogCounter(int logCounter) {
+        this.logCounter = logCounter;
+    }
+
+    public void incrementLogCounter() {
+        logCounter++;
+    }
+
+    public void decrementLogCounter() {
+        logCounter--;
+    }
+
+    public void resetLogCounter() {
+        logCounter = 0;
+    }*/
 
     @Override
     public String toString() {

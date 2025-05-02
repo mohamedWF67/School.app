@@ -10,8 +10,47 @@ import com.mycompany.School_app.User.Student;
 import com.mycompany.School_app.User.Teacher;
 import com.mycompany.School_app.User.User;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Date;
+
+class logCounter {
+    private User user;
+    private int logCounter = 0;
+
+    logCounter(User user) {
+        this.user = user;
+        logCounter++;
+    }
+
+    public int getLogCounter() {
+        return logCounter;
+    }
+
+    public void setLogCounter(int logCounter) {
+        this.logCounter = logCounter;
+    }
+
+    public void incrementLogCounter() {
+        logCounter++;
+    }
+
+    public void decrementLogCounter() {
+        logCounter--;
+    }
+
+    public void resetLogCounter() {
+        logCounter = 0;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+}
 
 public class AuthManager {
     static School school;
@@ -19,6 +58,7 @@ public class AuthManager {
     static Status status;
     static AuthManagerUI authManagerUI;
     static StatusManager statusManager;
+    static ArrayList<logCounter> logCounters = new ArrayList<logCounter>();
 
     public AuthManager(School school, Library library) {
         this.school = school;
@@ -31,7 +71,21 @@ public class AuthManager {
         authManagerUI = new AuthManagerUI();
     }
 
+    protected static logCounter getLogCounter(User user) {
+        return logCounters.stream().filter(logCounter -> logCounter.getUser().equals(user)).findFirst().orElse(null);
+    }
+
+    protected static void addLogCounter(User user) {
+        logCounter lc =  getLogCounter(user);
+        if (lc == null) {
+            logCounters.add(new logCounter(user));
+        }else{
+            lc.incrementLogCounter();
+        }
+    }
+
     protected static void Authenticate(String email, String password,int mode) {
+        int counter = 0;
         if (!CLI_interface.isValidEmail(email)){
             setStatus(1,"Invalid Email Address");
             return;
@@ -48,10 +102,18 @@ public class AuthManager {
 
                 if(Encryption.CheckCorrectness(password,user.getPassword())){
                     setStatus(-1,"User Authenticated");
+                    if (getLogCounter(user)!=null){
+                        getLogCounter(user).resetLogCounter();
+                    }
                     new MainApp(user);
                     authManagerUI.dispose();
                 }else{
-                    setStatus(2,"Incorrect Password");
+                    addLogCounter(user);
+                    setStatus(2,"Incorrect Password: " + getLogCounter(user).getLogCounter());
+                    if (getLogCounter(user).getLogCounter()>=3){
+                        JOptionPane.showMessageDialog(null,"That's the third time that you have logged in with the wrong password");
+                        System.exit(0);
+                    }
                 }
             }
             case 1->{
@@ -65,10 +127,18 @@ public class AuthManager {
 
                 if(Encryption.CheckCorrectness(password,user.getPassword())){
                     setStatus(-1,"Librarian Authenticated");
+                    if (getLogCounter(user)!=null){
+                        getLogCounter(user).resetLogCounter();
+                    }
                     new MainApp(user);
                     authManagerUI.dispose();
                 }else{
-                    setStatus(2,"Incorrect Password");
+                    addLogCounter(user);
+                    setStatus(2,"Incorrect Password: " + getLogCounter(user).getLogCounter());
+                    if (getLogCounter(user).getLogCounter()>=3){
+                        JOptionPane.showMessageDialog(null,"That's the third time that you have logged in with the wrong password");
+                        System.exit(0);
+                    }
                 }
             }
             default->{

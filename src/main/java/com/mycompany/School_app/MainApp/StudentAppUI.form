@@ -261,20 +261,23 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="Modules_Scroll" min="-2" pref="250" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="Modules_Scroll" min="-2" pref="455" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="Enroll_Btn" min="-2" max="-2" attributes="0"/>
                                       <Component id="Cancel_Enrollment_btn" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Component id="Modules_Label" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="Modules_Label" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="406" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="EnrolledModules_Scroll" min="-2" pref="250" max="-2" attributes="0"/>
-                              <Component id="Enrollment_Label" min="-2" max="-2" attributes="0"/>
+                              <Component id="EnrolledModules_Scroll" pref="457" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="Enrollment_Label" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
